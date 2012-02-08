@@ -1,0 +1,30 @@
+USER NODE:
+
+Definitely need:
+  psconfig - basic requirement for configuring itself from unis
+  LSRegistrationDaemon
+
+Node services needed sometimes:
+  Pinger
+  BWCTL
+  OWAMP
+  SNMPMA
+  perfSONARBUOY
+  Ganglia Monitoring Daemon (Host Monitoring)
+  gmond
+  PingerMA and Regular Tester
+  NTP
+
+
+
+ON THE MC:
+  Toolkit
+  Perfadmin
+  UNIS (?) Right now it runs persistently outside the slice
+  Host Monitoring Collector (Ganglia Meta Daemon)
+  Ganglia MA
+  Portal
+  NTP
+  Periscope
+  gmond (perhaps)
+  service watcher and psconfig (probably don't need but no harm in having)
