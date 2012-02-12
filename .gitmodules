@@ -1,0 +1,3 @@
+[submodule "contrib/lamp"]
+	path = contrib/lamp
+	url = git@github.com:GENI-GEMINI/LAMP.git
