@@ -1,0 +1,83 @@
+namespace nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+namespace nmwgr = "http://ggf.org/ns/nmwg/result/2.0/"
+
+start = element nmwg:message { MessageContent }
+
+MessageContent =
+        Identifier? &
+        MessageIdentifierRef? &
+        Type &
+        (
+                Metadata &
+                Data
+        )+
+
+Identifier =
+        attribute id { xsd:string }
+
+MessageIdentifierRef =
+        attribute messageIdRef { xsd:string }
+
+Type =
+        attribute type { "LSRegisterResponse" }
+
+Metadata =
+        element nmwg:metadata {
+                (
+                        Identifier &
+                        MetadataIdentifierRef? &
+                        (
+                                EventType &
+                                element nmwg:key
+                                {
+                                        attribute id {xsd:string}?,
+                                        Parameters
+                                }
+                        )
+                )
+        }
+
+MetadataIdentifierRef =
+        attribute metadataIdRef { xsd:string }
+
+EventType =
+        element nmwg:eventType { "success.ls.register" }
+
+Parameters =
+        element nmwg:parameters {
+                Identifier? &
+                Parameter
+        }
+
+Parameter =
+        element nmwg:parameter
+        {
+                attribute name { "lsKey" } &
+                (
+                        attribute value { xsd:string } |
+                        xsd:string
+                )
+        }
+
+Data =
+        element nmwg:data
+        {
+                Identifier &
+                MetadataIdentifierRef &
+                (
+                  Datum | 
+                  ResultDatum
+                )
+        }
+
+Datum =
+        element nmwg:datum {
+                attribute value {xsd:string} |
+                xsd:string
+        }
+        
+ResultDatum =
+        element nmwgr:datum {
+                attribute value {xsd:string} |
+                xsd:string
+        }

@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+Name:    LSDeregisterRequest
+Purpose: Test Registration to hLS/gLS instances
+Outcome: 
+	Not Regisitered
+		gLS/hLS - ignore
+	Registered
+		gLS/hLS remove all/some from either summary/regular db (depends
+		on eventType)
+-->
+
+<nmwg:message type="LSDeregisterRequest"
+              id="LSDeregisterRequest"
+              xmlns:perfsonar="http://ggf.org/ns/nmwg/tools/org/perfsonar/1.0/"
+              xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+              xmlns:psservice="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/1.0/"
+              xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/"
+              xmlns:netutil="http://ggf.org/ns/nmwg/characteristic/utilization/2.0/">
+
+  <nmwg:metadata id="deregister2">
+    <nmwg:key>
+      <nmwg:parameters id="keys2">
+        <nmwg:parameter name="lsKey">5cfb07ea7a5b840ce4f8f48b842ac9c0</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>
+  </nmwg:metadata>
+
+  <nmwg:data metadataIdRef="deregister2" id="d2">
+    <nmwg:metadata id="meta1">
+      <netutil:subject id="subj1" xmlns:netutil="http://ggf.org/ns/nmwg/characteristic/utilization/2.0/">
+        <nmwgt:interface xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/">
+          <nmwgt:hostName>localhost</nmwgt:hostName>
+          <nmwgt:ifName>eth0</nmwgt:ifName>
+          <nmwgt:ifDescription>Interface eth0 on localhost</nmwgt:ifDescription>
+          <nmwgt:ifAddress type="ipv4">127.0.0.1</nmwgt:ifAddress>
+          <nmwgt:direction>in</nmwgt:direction>
+          <nmwgt:capacity>10000000000</nmwgt:capacity>
+        </nmwgt:interface>
+      </netutil:subject>
+      <nmwg:eventType>http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:eventType>
+      <nmwg:parameters id="param1">
+        <nmwg:parameter name="eventType">http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:parameter>
+        <nmwg:parameter name="supportedEventType">http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:metadata>
+  </nmwg:data>
+
+         
+  <nmwg:metadata id="deregister1">
+    <nmwg:key>
+      <nmwg:parameters id="keys1">
+        <nmwg:parameter name="lsKey">5cfb07ea7a5b840ce4f8f48b842ac9c0</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>
+  </nmwg:metadata>
+
+  <nmwg:data metadataIdRef="deregister1" id="d1" />
+
+  <nmwg:metadata id="deregister4">
+    <nmwg:key>
+      <nmwg:parameters id="keys4">
+        <nmwg:parameter name="lsKey">5cfb07ea7a5b840ce4f8f48b842ac9c0</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>
+    <nmwg:eventType>http://ogf.org/ns/nmwg/tools/org/perfsonar/service/lookup/deregistration/summary/2.0</nmwg:eventType>
+  </nmwg:metadata>
+
+  <nmwg:data metadataIdRef="deregister4" id="d4">
+    <nmwg:metadata xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" id="metadata.932397b70e9b10deb1a19362028e4cb4">
+      <summary:subject xmlns:summary="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/lookup/summarization/2.0/" id="subject.932397b70e9b10deb1a19362028e4cb4">
+        <nmtl3:network xmlns:nmtl3="http://ogf.org/schema/network/topology/l3/20070828/">
+          <nmtl3:subnet>
+            <nmtl3:address type="ipv4">127.0.0.0</nmtl3:address>
+            <nmtl3:netmask>23</nmtl3:netmask>
+          </nmtl3:subnet>
+        </nmtl3:network>
+      </summary:subject>
+      <nmwg:eventType>http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:eventType>
+      <summary:parameters xmlns:summary="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/lookup/summarization/2.0/" id="parameters.932397b70e9b10deb1a19362028e4cb4">
+        <nmwg:parameter name="eventType" value="http://ggf.org/ns/nmwg/characteristic/utilization/2.0"/>
+      </summary:parameters>
+    </nmwg:metadata>
+  </nmwg:data>
+
+  <nmwg:metadata id="deregister3">
+    <nmwg:key>
+      <nmwg:parameters id="keys3">
+        <nmwg:parameter name="lsKey">5cfb07ea7a5b840ce4f8f48b842ac9c0</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>
+    <nmwg:eventType>http://ogf.org/ns/nmwg/tools/org/perfsonar/service/lookup/deregistration/summary/2.0</nmwg:eventType>
+  </nmwg:metadata>
+
+  <nmwg:data metadataIdRef="deregister3" id="d3" />
+
+  <nmwg:metadata id="deregister5">
+    <nmwg:key>
+      <nmwg:parameters id="keys5">
+        <nmwg:parameter name="lsKey">5cfb07ea7a5b840ce4f8f48b842ac9c0</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>
+    <nmwg:eventType>http://ogf.org/ns/nmwg/tools/org/perfsonar/service/lookup/deregistration/service/2.0</nmwg:eventType>
+  </nmwg:metadata>
+
+  <nmwg:data metadataIdRef="deregister5" id="d5" />
+
+  <nmwg:metadata id="deregister6">
+    <nmwg:key>
+      <nmwg:parameters id="keys6">
+        <nmwg:parameter name="lsKey">5cfb07ea7a5b840ce4f8f48b842ac9c0</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>
+    <nmwg:eventType>http://ogf.org/ns/nmwg/tools/org/perfsonar/service/lookup/deregistration/service/2.0</nmwg:eventType>
+  </nmwg:metadata>
+
+  <nmwg:data metadataIdRef="deregister6" id="d6">
+    <nmwg:metadata id="meta1">
+      <netutil:subject id="subj1" xmlns:netutil="http://ggf.org/ns/nmwg/characteristic/utilization/2.0/">
+        <nmwgt:interface xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/">
+          <nmwgt:hostName>localhost</nmwgt:hostName>
+          <nmwgt:ifName>eth0</nmwgt:ifName>
+          <nmwgt:ifDescription>Interface eth0 on localhost</nmwgt:ifDescription>
+          <nmwgt:ifAddress type="ipv4">127.0.0.1</nmwgt:ifAddress>
+          <nmwgt:direction>in</nmwgt:direction>
+          <nmwgt:capacity>10000000000</nmwgt:capacity>
+        </nmwgt:interface>
+      </netutil:subject>
+      <nmwg:eventType>http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:eventType>
+      <nmwg:parameters id="param1">
+        <nmwg:parameter name="eventType">http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:parameter>
+        <nmwg:parameter name="supportedEventType">http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:metadata>
+  </nmwg:data>
+
+
+
+
+
+
+  <nmwg:metadata id="deregister11">
+    <nmwg:key>
+      <nmwg:parameters id="keys11">
+        <nmwg:parameter name="lsKey">JunkKey</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>
+  </nmwg:metadata>
+
+  <nmwg:data metadataIdRef="deregister11" id="d11" />
+
+  <nmwg:metadata id="deregister12">
+    <nmwg:key>
+      <nmwg:parameters id="keys12">
+        <nmwg:parameter name="lsKey">JunkKey</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>
+  </nmwg:metadata>
+
+  <nmwg:data metadataIdRef="deregister12" id="d12">
+    <nmwg:metadata id="meta1">
+      <netutil:subject id="subj1" xmlns:netutil="http://ggf.org/ns/nmwg/characteristic/utilization/2.0/">
+        <nmwgt:interface xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/">
+          <nmwgt:hostName>localhost</nmwgt:hostName>
+          <nmwgt:ifName>eth0</nmwgt:ifName>
+          <nmwgt:ifDescription>Interface eth0 on localhost</nmwgt:ifDescription>
+          <nmwgt:ifAddress type="ipv4">127.0.0.1</nmwgt:ifAddress>
+          <nmwgt:direction>in</nmwgt:direction>
+          <nmwgt:capacity>10000000000</nmwgt:capacity>
+        </nmwgt:interface>
+      </netutil:subject>
+      <nmwg:eventType>http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:eventType>
+      <nmwg:parameters id="param1">
+        <nmwg:parameter name="eventType">http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:parameter>
+        <nmwg:parameter name="supportedEventType">http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:metadata>
+  </nmwg:data>
+
+  <nmwg:metadata id="deregister13">
+    <nmwg:key>
+      <nmwg:parameters id="keys13">
+        <nmwg:parameter name="lsKey">JunkKey</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>
+    <nmwg:eventType>http://ogf.org/ns/nmwg/tools/org/perfsonar/service/lookup/deregistration/summary/2.0</nmwg:eventType>
+  </nmwg:metadata>
+
+  <nmwg:data metadataIdRef="deregister13" id="d13" />
+
+  <nmwg:metadata id="deregister14">
+    <nmwg:key>
+      <nmwg:parameters id="keys14">
+        <nmwg:parameter name="lsKey">JunkKey</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>
+    <nmwg:eventType>http://ogf.org/ns/nmwg/tools/org/perfsonar/service/lookup/deregistration/summary/2.0</nmwg:eventType>
+  </nmwg:metadata>
+
+  <nmwg:data metadataIdRef="deregister14" id="d14">
+    <nmwg:metadata xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" id="metadata.932397b70e9b10deb1a19362028e4cb4">
+      <summary:subject xmlns:summary="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/lookup/summarization/2.0/" id="subject.932397b70e9b10deb1a19362028e4cb4">
+        <nmtl3:network xmlns:nmtl3="http://ogf.org/schema/network/topology/l3/20070828/">
+          <nmtl3:subnet>
+            <nmtl3:address type="ipv4">127.0.0.0</nmtl3:address>
+            <nmtl3:netmask>23</nmtl3:netmask>
+          </nmtl3:subnet>
+        </nmtl3:network>
+      </summary:subject>
+      <nmwg:eventType>http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:eventType>
+      <summary:parameters xmlns:summary="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/lookup/summarization/2.0/" id="parameters.932397b70e9b10deb1a19362028e4cb4">
+        <nmwg:parameter name="eventType" value="http://ggf.org/ns/nmwg/characteristic/utilization/2.0"/>
+      </summary:parameters>
+    </nmwg:metadata>
+  </nmwg:data>
+             
+</nmwg:message>

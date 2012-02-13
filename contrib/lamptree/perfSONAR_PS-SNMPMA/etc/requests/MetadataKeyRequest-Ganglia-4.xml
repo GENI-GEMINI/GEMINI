@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  perfSONAR-PS MetadataKeyRequest (Ganglia Data)
+  
+  Use: 
+    perl client.pl URL MetadataKeyRequest-Ganglia-4.xml
+    
+  Expected Response:
+
+<nmwg:message xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" messageIdRef="metadataKeyRequest1" id="message.17591304" type="MetadataKeyResponse">
+  
+  <nmwg:metadata metadataIdRef="metadata1" id="metadata.1461389">
+    <nmwg:key>
+      <nmwg:parameters id="params.0">
+        <nmwg:parameter name="maKey">8fff656abab6733f479ae32045174cb2</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>
+  </nmwg:metadata>
+  <nmwg:data metadataIdRef="metadata.1461389" id="data.12499806">
+    <nmwg:key>
+      <nmwg:parameters id="params.0">
+        <nmwg:parameter name="maKey">8fff656abab6733f479ae32045174cb2</nmwg:parameter>
+        <nmwg:parameter name="startTime">1282404700</nmwg:parameter>
+        <nmwg:parameter name="endTime">1282405420</nmwg:parameter>
+        <nmwg:parameter name="resolution">360</nmwg:parameter>
+        <nmwg:parameter name="consolidationFunction">AVERAGE</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>
+  </nmwg:data>
+
+</nmwg:message>
+
+  Error Response:
+
+<nmwg:message xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" messageIdRef="metadataKeyRequest1" id="message.2859721" type="MetadataKeyResponse"
+  
+  <nmwg:metadata metadataIdRef="metadata1" id="metadata.17159245">
+    <nmwg:eventType>error.ma.storage_result</nmwg:eventType>
+  </nmwg:metadata>
+  <nmwg:data metadataIdRef="metadata.17159245" id="data.7647184">
+    <nmwgr:datum xmlns:nmwgr="http://ggf.org/ns/nmwg/result/2.0/">Key error in metadata storage - key not found.</nmwgr:datum>
+  </nmwg:data>
+  
+</nmwg:message>
+
+-->
+
+<nmwg:message xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+              xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/"
+              xmlns:ganglia="http://ggf.org/ns/nmwg/tools/ganglia/2.0/"
+              xmlns:nmwgt3="http://ggf.org/ns/nmwg/topology/base/3.0/"
+              type="MetadataKeyRequest" id="metadataKeyRequest1">
+
+  <nmwg:metadata xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" 
+                 id="metadata1">
+    <nmwg:key>
+      <nmwg:parameters id="params.0">
+        <nmwg:parameter name="maKey">8fff656abab6733f479ae32045174cb2</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>
+  </nmwg:metadata> 
+
+  <nmwg:metadata xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+                 id="metadata1c">
+    <select:subject xmlns:select="http://ggf.org/ns/nmwg/ops/select/2.0/"
+                    id="subject1c" metadataIdRef="metadata1" /> 
+    <select:parameters id="param2c" xmlns:select="http://ggf.org/ns/nmwg/ops/select/2.0/">      
+      <nmwg:parameter name="startTime">1282404700</nmwg:parameter>
+      <nmwg:parameter name="endTime">1282405420</nmwg:parameter>
+      <nmwg:parameter name="resolution">360</nmwg:parameter>
+      <nmwg:parameter name="consolidationFunction">AVERAGE</nmwg:parameter>
+    </select:parameters>
+    <nmwg:eventType>http://ggf.org/ns/nmwg/ops/select/2.0</nmwg:eventType> 
+  </nmwg:metadata>
+
+  <nmwg:data xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+             id="data1" metadataIdRef="metadata1c"/>
+
+</nmwg:message>

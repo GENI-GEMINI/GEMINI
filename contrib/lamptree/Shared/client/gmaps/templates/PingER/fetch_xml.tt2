@@ -1,0 +1,48 @@
+[%- DEFAULT
+  eventType = "http://ggf.org/ns/nmwg/tools/pinger/2.0/"
+-%]
+<nmwg:message id="message1"
+              type="SetupDataRequest"
+              xmlns="http://ggf.org/ns/nmwg/base/2.0/" 
+              xmlns:pinger="http://ggf.org/ns/nmwg/tools/pinger/2.0/"
+              xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/"
+              xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+              xmlns:select="http://ggf.org/ns/nmwg/ops/select/2.0/">
+   
+   <nmwg:metadata id="meta">
+   
+   [%- IF key -%]
+
+     <nmwg:key id="[% key %]"/>
+
+   [%- ELSE -%]
+
+    <pinger:subject id="subject">
+      <nmwgt:endPointPair>
+        <nmwgt:src type="hostname" value="[% src %]"/> 
+        <nmwgt:dst type="hostname" value="[% dst %]"/> 
+      </nmwgt:endPointPair>
+    </pinger:subject>
+
+    <pinger:parameters id="params">
+      [% IF count -%]<nmwg:parameter value="[% count %]" name="count" />[% END %]
+      [% IF packetSize -%]<nmwg:parameter value="[% packetSize %]" name="packetSize" />[% END %]
+      [% IF ttl -%]<nmwg:parameter value="[% ttl %]" name="ttl" />[% END %]
+      [% IF transport -%]<nmwg:parameter value="[% transport %]" name="transport" />[% END %]
+      [% IF packetInterval -%]<nmwg:parameter value="[% packetInterval %]" name="packetInterval" />[% END %]
+    </pinger:parameters>
+    
+    [%- END -%]
+    
+    <select:parameters id="select">      
+      <nmwg:parameter name="startTime">[% startTime %]</nmwg:parameter>
+      <nmwg:parameter name="endTime">[% endTime %]</nmwg:parameter>
+    </select:parameters>
+    
+     <nmwg:eventType>[% eventType %]</nmwg:eventType>
+     
+  </nmwg:metadata>
+ 
+  <nmwg:data id="data" metadataIdRef="meta"/>
+   
+</nmwg:message> 

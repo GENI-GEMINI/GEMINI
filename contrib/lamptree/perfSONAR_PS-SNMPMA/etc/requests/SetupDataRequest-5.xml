@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  perfSONAR-PS SetupDataRequest
+  
+  Use: 
+    perl client.pl URL SetupDataRequest-5.xml
+    
+  Expected Response:
+
+  <nmwg:message xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+                messageIdRef="SetupDataRequest1" id="message.14316782"
+                type="SetupDataResponse">
+
+    <nmwg:metadata metadataIdRef="metadata1c" id="metadata.5892323">
+      <nmwg:key xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" id="key1">
+        <nmwg:parameters id="params.0">
+          <nmwg:parameter name="maKey">aa0db2b9c7acd26a8eae4f576cc30149</nmwg:parameter>
+          <nmwg:parameter xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" name="startTime">1121472000</nmwg:parameter>
+          <nmwg:parameter xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" name="endTime">1121472600</nmwg:parameter>
+          <nmwg:parameter xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" name="consolidationFunction">AVERAGE</nmwg:parameter>
+          <nmwg:parameter xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" name="resolution">60</nmwg:parameter>
+        </nmwg:parameters>
+      </nmwg:key>
+    </nmwg:metadata>
+    
+    <nmwg:data metadataIdRef="metadata.5892323" id="data.11213162">
+      <nmwg:datum timeType="unix" value="nan" valueUnits="Bps" timeValue="1121472120"/>
+      <nmwg:datum timeType="unix" value="nan" valueUnits="Bps" timeValue="1121472240"/>
+      <nmwg:datum timeType="unix" value="nan" valueUnits="Bps" timeValue="1121472360"/>
+      <nmwg:datum timeType="unix" value="nan" valueUnits="Bps" timeValue="1121472480"/>
+      <nmwg:datum timeType="unix" value="nan" valueUnits="Bps" timeValue="1121472600"/>
+      <nmwg:datum timeType="unix" value="nan" valueUnits="Bps" timeValue="1121472720"/>
+    </nmwg:data>
+
+  </nmwg:message>
+
+-->
+
+<nmwg:message xmlns:netutil="http://ggf.org/ns/nmwg/characteristic/utilization/2.0/"
+              xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+              xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/"
+              type="SetupDataRequest" id="SetupDataRequest1">
+
+  <nmwg:metadata xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" 
+                 id="metadata1">
+    <nmwg:key xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" id="key1">
+      <nmwg:parameters id="params.0">
+        <nmwg:parameter name="maKey">aa0db2b9c7acd26a8eae4f576cc30149</nmwg:parameter>
+        <nmwg:parameter xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" name="startTime">1121472000</nmwg:parameter>
+        <nmwg:parameter xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" name="endTime">1121472600</nmwg:parameter>
+        <nmwg:parameter xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" name="consolidationFunction">AVERAGE</nmwg:parameter>
+        <nmwg:parameter xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" name="resolution">60</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>
+  </nmwg:metadata> 
+
+  <nmwg:data xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+             id="data1" metadataIdRef="metadata1"/>
+
+</nmwg:message>
+
+
+

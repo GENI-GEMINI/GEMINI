@@ -1,0 +1,25 @@
+[%- DEFAULT
+  EVENTTYPE = "http://ggf.org/ns/nmwg/characteristic/utilization/2.0"
+-%]
+
+<nmwg:message id="#message1"
+              type="MetadataKeyRequest"
+              xmlns:netutil="http://ggf.org/ns/nmwg/characteristic/utilization/2.0/"
+              xmlns:topo="http://ggf.org/ns/nmwg/topology/2.0/" 
+              xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+
+  <nmwg:metadata id="#meta1">
+
+    <netutil:subject id="#netutil1">
+      <topo:interface>
+        <!-- <topo:direction>in</topo:direction> -->
+      </topo:interface>
+    </netutil:subject>
+
+    <nmwg:eventType>[% EVENTTYPE %]</nmwg:eventType>
+
+  </nmwg:metadata>
+
+  <nmwg:data id="data1" metadataIdRef="#meta1"/>
+
+</nmwg:message>

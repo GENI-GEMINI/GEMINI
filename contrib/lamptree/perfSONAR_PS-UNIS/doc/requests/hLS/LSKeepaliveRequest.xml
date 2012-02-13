@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+Name:    LSKeepaliveRequest
+Purpose: Renew the registration for the supplied keys
+Outcome: 
+    Registered:     Update the timestamp for the key
+    Not Registered: Error message
+
+-->
+
+<nmwg:message type="LSKeepaliveRequest"
+        id="msg1"
+        xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+         
+  <nmwg:metadata id="key_to_keepalive">
+    <nmwg:key>
+      <nmwg:parameters id="keys">
+        <nmwg:parameter name="lsKey">5cfb07ea7a5b840ce4f8f48b842ac9c0</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>
+  </nmwg:metadata>
+     
+  <nmwg:data metadataIdRef="key_to_keepalive" id="d1"/>
+
+  <nmwg:metadata id="key_to_keepalive2">
+    <nmwg:key>
+      <nmwg:parameters id="keys">
+        <nmwg:parameter name="lsKey">a3f9c6904d10c7e810ce108bb334258c</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>
+  </nmwg:metadata>
+     
+  <nmwg:data metadataIdRef="key_to_keepalive2" id="d2"/>
+             
+</nmwg:message>

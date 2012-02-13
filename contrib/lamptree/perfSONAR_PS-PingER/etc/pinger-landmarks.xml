@@ -1,0 +1,8 @@
+<pingertopo:topology xmlns:pingertopo="http://ogf.org/ns/nmwg/tools/pinger/landmarks/1.0/"
+	xmlns:nmtl2="http://ogf.org/schema/network/topology/l2/20070707/"
+	xmlns:nmtl3="http://ogf.org/schema/network/topology/l3/20070707/"
+	xmlns:nmtl4="http://ogf.org/schema/network/topology/l4/20070707/"
+	xmlns:nmtb="http://ogf.org/schema/network/topology/base/20070707/"
+	xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+ 
+</pingertopo:topology>

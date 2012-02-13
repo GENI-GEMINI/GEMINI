@@ -1,0 +1,27 @@
+[%- DEFAULT
+  eventType = "http://ogf.org/ns/nmwg/tools/org/perfsonar/service/lookup/discovery/summary/2.0"
+-%]
+
+<nmwg:message type="LSQueryRequest"
+              id="LSDiscoveryRequest"
+              xmlns:perfsonar="http://ggf.org/ns/nmwg/tools/org/perfsonar/1.0/"
+              xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+              xmlns:psservice="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/1.0/"
+              xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/"
+              xmlns:summary="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/lookup/summarization/2.0/"
+              xmlns:nmtb="http://ogf.org/schema/network/topology/base/20070828/"
+              xmlns:nmtl3="http://ogf.org/schema/network/topology/l3/20070828/">
+
+  <nmwg:metadata id="meta1">
+    <summary:subject id="sub1" xmlns:summary="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/lookup/summarization/2.0/">
+     <nmwg:eventType>http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:eventType>
+     <nmwg:eventType>http://ggf.org/ns/nmwg/characteristics/bandwidth/acheiveable/2.0</nmwg:eventType>
+     <nmwg:eventType>http://ggf.org/ns/nmwg/tools/owamp/2.0</nmwg:eventType> 
+     <nmwg:eventType>http://ggf.org/ns/nmwg/tools/pinger/2.0/</nmwg:eventType>
+    </summary:subject>
+    <nmwg:eventType>[% eventType %]</nmwg:eventType>
+  </nmwg:metadata>
+              
+  <nmwg:data id="data1" metadataIdRef="meta1"/>
+
+</nmwg:message>

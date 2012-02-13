@@ -1,0 +1,179 @@
+<html>
+  <head>
+    <title>perfAdmin - Service Display - perfSONAR-BUOY One Way Latency Data</title>
+  </head>
+  <body>
+    <h3 align="center">Active Data Sets</h3>
+    <hr size=2 width="85%" />
+    <br>
+    <table width="95%" align="center" cellpadding="1" border="2">
+      <tr>
+        <th align="center" colspan="6"><tmpl_var name=EVENTTYPE> @ <tmpl_var name=SERVICE></th>
+      </tr>
+      <tr>
+        <th align="center">First Host</th>
+        <th align="center">First Address</th>
+        <th align="center">Second Host</th>
+        <th align="center">Second Address</th>
+        <th align="center">Bi-Directional</th>
+        <th align="center">Graph</th>
+      </tr>
+      <tmpl_loop name=PAIRS>
+      <tr>
+        <td align="center">
+          <tmpl_var name=SHOST>&nbsp;
+        </td>
+        <td align="center">
+          <tmpl_var name=SADDRESS>&nbsp;
+        </td>
+        <td align="center">
+          <tmpl_var name=DHOST>&nbsp;
+        </td>
+        <td align="center">
+          <tmpl_var name=DADDRESS>&nbsp;
+        </td>
+        <td align="center">
+          <tmpl_var name=BIDIR>&nbsp;
+        </td>
+        <td align="center">
+          <select value="Graph" id="graph1_<tmpl_var name=COUNT>" name="graph1_<tmpl_var name=COUNT>" onChange="window.open(options[selectedIndex].value,'graph1_<tmpl_var name=COUNT>','width=950,height=500,status=yes,scrollbars=yes,resizable=yes')">
+            <option selected value="./delayGraph.cgi">-- Select --</option>
+            <option value="./delayGraph.cgi?url=<tmpl_var name=SERVICE>&key=<tmpl_var name=KEY>&key2=<tmpl_var name=KEY2>&dst=<tmpl_var name=DADDRESS>&src=<tmpl_var name=SADDRESS>&dhost=<tmpl_var name=DHOST>&shost=<tmpl_var name=SHOST>&length=14400">4 Hours</option>
+            <option value="./delayGraph.cgi?url=<tmpl_var name=SERVICE>&key=<tmpl_var name=KEY>&key2=<tmpl_var name=KEY2>&dst=<tmpl_var name=DADDRESS>&src=<tmpl_var name=SADDRESS>&dhost=<tmpl_var name=DHOST>&shost=<tmpl_var name=SHOST>&length=43200">12 Hours</option>
+            <option value="./delayGraph.cgi?url=<tmpl_var name=SERVICE>&key=<tmpl_var name=KEY>&key2=<tmpl_var name=KEY2>&dst=<tmpl_var name=DADDRESS>&src=<tmpl_var name=SADDRESS>&dhost=<tmpl_var name=DHOST>&shost=<tmpl_var name=SHOST>&length=86400">24 Hours</option>
+          </select>
+        </td>
+      </tr>
+      </tmpl_loop>
+    </table>
+
+    <br><br>
+    <table border="1" width="50%" align="center" cellpadding="1" border="2">
+      <tr>
+        <th colspan="<tmpl_var name=MATRIXCOLSPAN>"><font size="+1">12 Hour Performance Summary (Min/Max Delay [MSec])</font></th>
+      </tr>
+      <tr>
+        <th><br></th>
+        <tmpl_loop name=MATRIXHEADER>
+        <th align=center valign=center><tmpl_var name=NAME></th>
+        </tmpl_loop>   
+      </tr>
+      <tmpl_loop name=MATRIX>
+      <tr>
+        <th align=center valign=center><tmpl_var name=NAME></th>
+        <tmpl_loop name=MATRIXCOLS>
+        <td align=center valign=center><tmpl_var name=MINVALUE> / <tmpl_var name=MAXVALUE></td>
+        </tmpl_loop>    
+      </tr>
+      </tmpl_loop>
+    </table>
+    <br><br>
+    
+    <h3 align="center">Non-Active Data Sets</h3>
+    <hr size=2 width="85%" />
+    <br>
+    <table width="95%" align="center" cellpadding="1" border="2">
+      <tr>
+        <th align="center" colspan="6"><tmpl_var name=EVENTTYPE> @ <tmpl_var name=SERVICE></th>
+      </tr>
+      <tr>
+        <th align="center">First Host</th>
+        <th align="center">First Address</th>
+        <th align="center">Second Host</th>
+        <th align="center">Second Address</th>
+        <th align="center">Bi-Directional</th>
+        <th align="center">Graph</th>
+      </tr>
+      <tmpl_loop name=HISTPAIRS>
+      <tr>
+        <td align="center">
+          <tmpl_var name=SHOST>&nbsp;
+        </td>
+        <td align="center">
+          <tmpl_var name=SADDRESS>&nbsp;
+        </td>
+        <td align="center">
+          <tmpl_var name=DHOST>&nbsp;
+        </td>
+        <td align="center">
+          <tmpl_var name=DADDRESS>&nbsp;
+        </td>
+        <td align="center">
+          <tmpl_var name=BIDIR>&nbsp;
+        </td>
+        <td align="center">
+          <form method="GET" name="form_<tmpl_var name=COUNT>" target="_blank" action="./delayGraph.cgi">
+            <input type="hidden" name="url" value="<tmpl_var name=SERVICE>" />
+            <input type="hidden" name="key" value="<tmpl_var name=KEY>" />
+            <input type="hidden" name="key2" value="<tmpl_var name=KEY2>" />
+            <input type="hidden" name="dst" value="<tmpl_var name=DADDRESS>" />
+            <input type="hidden" name="src" value="<tmpl_var name=SADDRESS>" />
+            <input type="hidden" name="dhost" value="<tmpl_var name=DHOST>" />
+            <input type="hidden" name="shost" value="<tmpl_var name=SHOST>" />
+                                     
+            Start: <select id="smon" name="smon">
+            <tmpl_loop name=SMON>
+              <tmpl_if SELECTED>
+              <option selected value="<tmpl_var name=VALUE>"><tmpl_var name=NAME></option>
+              <tmpl_else>
+              <option value="<tmpl_var name=VALUE>"><tmpl_var name=NAME></option>
+              </tmpl_if>
+            </tmpl_loop>
+            </select>
+            <select id="sday" name="sday">
+            <tmpl_loop name=SDAY>
+              <tmpl_if SELECTED>
+              <option selected value="<tmpl_var name=VALUE>"><tmpl_var name=NAME></option>
+              <tmpl_else>
+              <option value="<tmpl_var name=VALUE>"><tmpl_var name=NAME></option>
+              </tmpl_if>
+            </tmpl_loop>
+            </select>
+            <select id="syear" name="syear">
+            <tmpl_loop name=SYEAR>
+              <tmpl_if SELECTED>
+              <option selected value="<tmpl_var name=VALUE>"><tmpl_var name=NAME></option>
+              <tmpl_else>
+              <option value="<tmpl_var name=VALUE>"><tmpl_var name=NAME></option>
+              </tmpl_if>
+            </tmpl_loop>
+            </select><br>
+            
+            End: &nbsp;<select id="dmon" name="dmon">
+            <tmpl_loop name=DMON>
+              <tmpl_if SELECTED>
+              <option selected value="<tmpl_var name=VALUE>"><tmpl_var name=NAME></option>
+              <tmpl_else>
+              <option value="<tmpl_var name=VALUE>"><tmpl_var name=NAME></option>
+              </tmpl_if>
+            </tmpl_loop>
+            </select>
+            <select id="dday" name="dday">
+            <tmpl_loop name=DDAY>
+              <tmpl_if SELECTED>
+              <option selected value="<tmpl_var name=VALUE>"><tmpl_var name=NAME></option>
+              <tmpl_else>
+              <option value="<tmpl_var name=VALUE>"><tmpl_var name=NAME></option>
+              </tmpl_if>
+            </tmpl_loop>
+            </select>
+            <select id="dyear" name="dyear">
+            <tmpl_loop name=DYEAR>
+              <tmpl_if SELECTED>
+              <option selected value="<tmpl_var name=VALUE>"><tmpl_var name=NAME></option>
+              <tmpl_else>
+              <option value="<tmpl_var name=VALUE>"><tmpl_var name=NAME></option>
+              </tmpl_if>
+            </tmpl_loop>
+            </select><br>
+
+            <input type="submit" name="Graph" value="Graph" />
+          </form>
+        </td>
+      </tr>
+      </tmpl_loop>
+    </table>    
+    
+  </body>
+</html>
+

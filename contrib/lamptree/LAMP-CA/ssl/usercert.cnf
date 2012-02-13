@@ -1,0 +1,28 @@
+RANDFILE               = ./.rnd
+
+[ req ]
+prompt                  = no
+default_bits		= 1024
+default_keyfile 	= privkey.pem
+distinguished_name	= req_distinguished_name
+req_extensions	        = request_extensions
+string_mask             = nombstr
+
+[ request_extensions ]
+basicConstraints=critical,CA:TRUE
+subjectKeyIdentifier=hash
+subjectAltName=@req_altname
+
+# This will be appended to by mkusercert.
+[ req_distinguished_name ]
+C                      = US
+ST                     = Dev
+L                      = VBox
+O                      = Private PGENI Dev
+OU		= pgdev.service.lamp
+CN		= 7bf33/emailAddress=lamp@damsl.cis.udel.edu
+emailAddress	= lamp@damsl.cis.udel.edu
+
+[ req_altname ]
+URI=urn:publicid:IDN+emulab.net+service+lamp@lampdemo
+email=lamp@damsl.cis.udel.edu

@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+Name:    LSQueryRequest
+Purpose: Query for a sepcified XPath
+Outcome: 
+    Results if successful, an error message if not
+
+-->
+
+<nmwg:message type="LSQueryRequest"
+              id="msg1"
+              xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+              xmlns:xquery="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/lookup/xquery/1.0/">
+                          
+  <nmwg:metadata id="meta1">
+  
+    <xquery:subject id="sub1">
+declare namespace nmwg="http://ggf.org/ns/nmwg/base/2.0/";
+declare namespace perfsonar="http://ggf.org/ns/nmwg/tools/org/perfsonar/1.0/";
+declare namespace psservice="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/1.0/";
+for $store in /nmwg:store[@type="LSStore"] return
+    if (exists($store/nmwg:metadata)) then
+        let $metadata := $store/nmwg:metadata
+        let $node_id := $metadata/perfsonar:subject/psservice:service
+                            /*[local-name()='serviceNode' or local-name()='node']
+        where contains($node_id, 'urn:ogf:network:domain=emulab.net+slice+lampdemo:node=')
+        return $store
+    else if (exists($store/nmwg:data)) then
+        let $data := $store/nmwg:data
+        let $metadata_id := $data/@metadataIdRef
+        where exists(/nmwg:store[@type="LSStore"]/nmwg:metadata[@id=$metadata_id]/perfsonar:subject
+                        /psservice:service/*[(local-name()='serviceNode' or local-name()='node') 
+                                             and contains(., 'urn:ogf:network:domain=emulab.net+slice+lampdemo:node=')])
+        return $store
+    else ()
+    </xquery:subject>
+    <nmwg:eventType>http://ogf.org/ns/nmwg/tools/org/perfsonar/service/lookup/discovery/xquery/2.0</nmwg:eventType>
+    
+    <xquery:parameters id="param.1">
+      <nmwg:parameter name="lsOutput">native</nmwg:parameter>
+    </xquery:parameters>
+    
+  </nmwg:metadata>
+  
+  <nmwg:data metadataIdRef="meta1" id="d1"/>
+
+</nmwg:message>
+

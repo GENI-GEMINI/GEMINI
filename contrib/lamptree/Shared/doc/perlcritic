@@ -1,0 +1,47 @@
+ #--------------------------------------------------------------
+    # I think these are really important, so always load them
+
+    [TestingAndDebugging::RequireUseStrict]
+    severity = 5
+
+    [TestingAndDebugging::RequireUseWarnings]
+    severity = 5
+    
+    [Variables::ProhibitLocalVars]
+    severity = 5
+    #--------------------------------------------------------------
+    # I think these are less important, so only load when asked
+
+    [Variables::ProhibitPackageVars]
+    severity = 2
+
+    [ControlStructures::ProhibitPostfixControls]
+	#My custom configuration
+    allow = if unless  
+    severity = 2
+
+    #--------------------------------------------------------------
+    # Give these policies a custom theme.  I can activate just
+    # these policies by saying (-theme => 'larry + curly')
+
+    [Modules::RequireFilenameMatchesPackage]
+    add_themes = larry
+
+     
+    #--------------------------------------------------------------
+    # I do not agree with these at all or their 
+    # presence may create more owrse than good
+    # or they just toomuch to swallow
+
+    [-NamingConventions::ProhibitMixedCaseVars]
+    [-NamingConventions::ProhibitMixedCaseSubs]
+    [-ControlStructures::ProhibitUnlessBlocks]
+    [-Documentation::RequirePodSections]
+    [-TestingAndDebugging::ProhibitNoStrict]
+    [-Subroutines::ProhibitExcessComplexity]
+    [-Miscellanea::RequireRcsKeywords]
+    [-ValuesAndExpressions::ProhibitNoisyQuotes]
+    #--------------------------------------------------------------
+    # For all other Policies, I accept the default severity, theme
+    # and other parameters, so no additional configuration is
+    # required for them.

@@ -1,0 +1,16 @@
+#
+#  this is an example of the landmarks file
+# it follows very simple CSV format where the fields are
+#   
+#<domain>,<node>,<hostname>,<ip>,<description>,<packetsize>,<count>,<packetInterval>,<ttl>,<measurementPeriod>,<measurementOffset>,<project>
+#    First 4 parameters are required but if one of hostname or ip is missing then it will atempt to resolve the rest.
+#    Other parameters are optional and will be set to default values:
+#    <description=''>,<packetsize=1000>,<count=10>,<packetInterval=1>,<ttl=255>,<measurementPeriod=60>,<measurementOffset=0>,<project=LHCOPN>
+# 
+#  more information could be found by running:
+#  perldoc ../bin/create_landmarks.pl
+#
+# below you will see an example for the Fermilab's US CMS Tier-1 monitoring site
+#
+FNAL-T1,FNAL-T1-1,tukki.fnal.gov,,my description 1,64,10,,,,,
+FNAL-T1,FNAL-T1-2,lhcopnmon1-mgm.fnal.gov,,my description 2,64,10,,,,,

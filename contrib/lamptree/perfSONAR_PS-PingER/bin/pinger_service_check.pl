@@ -1,0 +1,1 @@
+../../Shared/client/pinger_service_check.pl

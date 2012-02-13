@@ -1,0 +1,45 @@
+version 3.1-1
+  * Initial RPM release.
+
+version 3.1-2
+  * Bugfixes in several graphs.
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=143
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=141
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=136
+ 
+version 3.1-3
+  * Fixes to to documentation and package structure. 
+  * Adding new graph support for PingER
+  * Bugfixes
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=297
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=288
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=286
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=244
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=243
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=226
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=225
+ 
+version 3.1-4
+  * RPM generation error fixed
+
+version 3.1-5
+  * useradd option change
+  * Bugfixes
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=323
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=317
+ 
+version 3.1-6
+  * Install missing lib (lib/perfSONAR_PS/Datatypes/Message.pm)
+
+version 3.1-7
+  * Documentation update
+  * Bugfixes
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=364
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=408
+
+version 3.1-8
+  * Fixing a dependency problem with logging libraries
+  
+version 3.1-9
+  * Fix for a packaging error
+

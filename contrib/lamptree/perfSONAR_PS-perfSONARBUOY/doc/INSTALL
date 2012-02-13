@@ -1,0 +1,247 @@
+         perfSONAR perfSONAR-BUOY MA Service Installation Instructions
+
+--------------------------------------------------------------------------------
+
+The perfSONAR-PS perfSONAR-BUOY Measurement Archive (MA) functions as both a
+storage facility and a regular testing framework in conjunction with the BWCTL
+and OWAMP measurement tools.  These archived measurements, stored in a MySQL
+database, are exposed through a web services interface.  
+
+Prerequisites:
+--------------
+
+The perfSONAR-BUOY MA is packaged as an RPM - an installation format geared
+towards use on Red Hat Linux based systems.  Examples include Fedora, Red Hat
+Enterprise Linux, CentOS, White Box, Scientific Linux, and possibly others.  
+
+These Linux distributions normally rely on "Package Management" tools to install
+and maintain software.  Examples of these tools include up2date, YUM, and
+APT-RPM.  Internet2 has created a repository to house the perfSONAR-PS software,
+related performance tools, and hard to find prerequisites.  We encourage
+adopters of these performance tools to install a simple RPM package that gives
+the necessary configuration information for the YUM and APT-RPM tools.  The RPM
+can be found here:
+
+  wget -c http://software.internet2.edu/Internet2-repo-0.1-2.noarch.rpm
+  
+To install this RPM first import the signing key:
+
+  (sudo) rpm --import http://software.internet2.edu/rpms/RPM-GPG-KEY-Internet2
+
+Then install the RPM:
+
+  (sudo) rpm -ivh Internet2-repo-0.1-2.noarch.rpm
+
+It is also recommended that an additional repository be installed for hard to 
+find prerequisite software that may not be available in traditional repositories
+used by the Linux distributions.  Two regarded repositories are:
+
+ * http://dries.ulyssis.org/rpm/
+ * http://dag.wieers.com/rpm/
+ 
+Each site provides configuration instructions and packages similar to the
+Internet2 repository.
+
+If using a package management system is not an option, or if your system is not
+RedHat based (e.g. Debian, Gentoo, etc.) it is still possible to install this
+software and related requirements by hand.  Please see the "Installation (Tar
+Package)" and "Installation (SVN)" sections for more details.  This tool uses
+the following Perl libraries, libraries, and external tools to function:
+
+  * Perl Libraries
+    - CGI::Carp
+    - Carp
+    - Config::General
+    - Cwd
+    - DBI
+    - DB_File
+    - DBD::mysql
+    - Data::UUID
+    - Data::Validate::IP
+    - Date::Manip
+    - Digest::MD5
+    - Error
+    - Fcntl
+    - File::Basename
+    - File::Path
+    - File::Temp
+    - FileHandle
+    - Getopt::Long
+    - Getopt::Std
+    - HTTP::Daemon
+    - IO::File
+    - IO::Socket
+    - IPC::Open3
+    - LWP::Simple
+    - LWP::UserAgent
+    - Log::Log4perl
+    - Log::Dispatch
+    - Log::Dispatch::FileRotate
+    - Log::Dispatch::Screen
+    - Math::BigFloat
+    - Math::Int64
+    - Module::Load
+    - Net::IPv6Addr
+    - Net::Ping
+    - Params::Validate
+    - Socket
+    - Sys::Hostname
+    - Sys::Syslog
+    - Term::ReadKey
+    - Time::HiRes
+    - XML::LibXML
+  * Libraries
+    - LibXML2
+  * Tools
+    - MySQL
+    - OWAMP
+    - BWCTL
+
+
+
+Installation (YUM):
+-------------------
+
+Installation using YUM lets the package manager do the work of finding and
+installing the dependencies.  The following command is all that is needed:
+
+  (sudo) yum install perl-perfSONAR_PS-perfSONARBUOY-client
+  (sudo) yum install perl-perfSONAR_PS-perfSONARBUOY-config
+  (sudo) yum install perl-perfSONAR_PS-perfSONARBUOY-server
+
+There may be several prerequisites to install depending on the age of your
+system.  To ensure that all are found, please be sure to install one of the
+alternative repositories above. 
+
+
+
+Installation (APT-RPM):
+-----------------------
+
+Like YUM, installation with APT-RPM also manages the task of finding
+dependencies.  The following commands will install is needed:
+
+  (sudo) apt-get update
+  (sudo) apt-get install perl-perfSONAR_PS-perfSONARBUOY-client
+  (sudo) apt-get install perl-perfSONAR_PS-perfSONARBUOY-config
+  (sudo) apt-get install perl-perfSONAR_PS-perfSONARBUOY-server
+
+There may be several prerequisites to install depending on the age of your
+system.  To ensure that all are found, please be sure to install one of the
+alternative repositories above.  
+
+
+
+Installation (Bare RPM):
+------------------------
+
+If you do not wish to install the Internet2 Repository package, you may simply
+find the appropriate RPM for your architecture without using a package manger.
+For example if you are on an "i386" architecture:
+
+  wget -c http://software.internet2.edu/rpms/i386/main/RPMS/perl-perfSONAR_PS-perfSONARBUOY-config-3.1-7.pSPS.noarch.rpm
+  wget -c http://software.internet2.edu/rpms/i386/main/RPMS/perl-perfSONAR_PS-perfSONARBUOY-server-3.1-7.pSPS.noarch.rpm
+  wget -c http://software.internet2.edu/rpms/i386/main/RPMS/perl-perfSONAR_PS-perfSONARBUOY-client-3.1-7.pSPS.noarch.rpm
+    
+To install without package manager help:
+
+  (sudo) rpm -ivh perl-perfSONAR_PS-perfSONARBUOY-client-3.1-7.pSPS.noarch.rpm perl-perfSONAR_PS-perfSONARBUOY-config-3.1-7.pSPS.noarch.rpm perl-perfSONAR_PS-perfSONARBUOY-server-3.1-7.pSPS.noarch.rpm
+
+Note that this RPM may need other packages to install correctly: if these
+packages are not found on your system, you will need to manually download and
+install them before proceeding.  An alternate method is to still use a package
+manager in a "local" way (YUM only):
+
+  (sudo) yum localinstall perl-perfSONAR_PS-perfSONARBUOY-client-3.1-7.pSPS.noarch.rpm perl-perfSONAR_PS-perfSONARBUOY-config-3.1-7.pSPS.noarch.rpm perl-perfSONAR_PS-perfSONARBUOY-server-3.1-7.pSPS.noarch.rpm
+  
+This will search the available repositories for any necessary packages.
+
+
+
+Installation (Tar Package):
+---------------------------
+
+All RPM packages are also available in "source" packages that may be installed
+and used in the typical Unix/Linux fashion.  There are helper scripts included
+that may be used to download the necessary prerequisite software packages:
+
+  wget -c http://software.internet2.edu/sources/perfSONAR-PS/perfSONAR_PS-perfSONARBUOY-3.1.7.tar.gz
+  tar -zxfv perfSONAR_PS-perfSONAR-BUOY-3.1.7.tar.gz
+  cd perfSONAR_PS-perfSONAR-BUOY-3.1.7
+  (sudo) make install
+    *Edit all configuration files - See README*
+  cd scripts
+  ./install_dependencies.sh
+  ./prepare_environment.sh
+
+The last three steps need to be run as root or via sudo. The latter two steps
+will configure the machine's users and startup scripts as well as contact CPAN
+for any necessary perl libraries.
+
+In addition to perl requirements, there are other software requirements that
+should be installed.  These are not controlled via the dependency scripts due to
+differences in package management.  The tools are listed below:
+
+  * DB4
+      * Debian/Ubuntu (replace X with proper version): libdb4.X, libdb4.X-dev, 
+                                                       db4.X-util  
+      * RedHat Systems: db4, db4-devel, db4-utils
+  * MYSQL
+      * Debian/Ubuntu: mysql-server, mysql-client  
+      * RedHat Systems: mysql-server, mysql, mysql-devel
+  * OWAMP
+    - Source is available here: http://software.internet2.edu/sources/owamp/
+    - Package management names:
+      * Debian/Ubuntu: owamp-client, owamp-server
+      * RedHat Systems: owamp-client, owamp-server
+  * BWCTL
+    - Source is available here: http://software.internet2.edu/sources/bwctl/
+    - Package management names:
+      * Debian/Ubuntu: bwctl-client, bwctl-server
+      * RedHat Systems: bwctl-client, bwctl-server
+  * LibXML2
+    - Package management names:
+      * Debian/Ubuntu: libxml2, libxml2-dev, libxml2-utils
+      * RedHat Systems: libxml2, libxml2-devel
+
+
+Installation (SVN):
+-------------------
+
+Software may be downloaded directly from our anonymous subversion server.  This
+installation method allows for easy upgrades between versions and access to 
+bugfixes immediately.  There are two ways to download from our server, one that
+retrieves all software and another that retrieves only selective services.
+
+To download the entire release:
+
+  svn checkout http://anonsvn.internet2.edu/svn/perfSONAR-PS/tags/RELEASE_3.1 perfSONAR-PS
+  
+The instructions are the same here as for the Tar package.  Note that
+installation may require pre-requisite software.  Read the preceding sections
+for necessary items and suggestions on how to install and configure them.  When
+you wish to update the checkout (to retrieve new development or bugfixes):
+
+  cd perfSONAR-PS
+  svn update
+  
+If a single service is all that is required, a similar method is used but also
+note that the service must have access to a "Shared" directory that contains
+perfSONAR-PS libraries:
+
+  svn checkout http://anonsvn.internet2.edu/svn/perfSONAR-PS/tags/RELEASE_3.1/perfSONAR_PS-perfSONAR-BUOY/
+  svn checkout http://anonsvn.internet2.edu/svn/perfSONAR-PS/tags/RELEASE_3.1/Shared
+
+The instructions are also the same as above:
+
+  cd Shared
+  svn update
+
+and
+
+  cd perfSONAR_PS-perfSONAR-BUOY
+  svn update
+
+--------------------------------------------------------------------------------
+
+Mon May 17 11:01:46 EDT 2010

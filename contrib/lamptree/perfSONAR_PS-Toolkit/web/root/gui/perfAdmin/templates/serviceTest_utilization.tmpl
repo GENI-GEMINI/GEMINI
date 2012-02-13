@@ -1,0 +1,71 @@
+[% IF service.match('.*localhost.*') %]
+	[% SET title = "Utilization Statistics" %]
+[% ELSE %]
+	[% SET title = "Utilization Statistics At ${service}" %]
+[% END %]
+
+[% INCLUDE header.tmpl %]
+
+<div class="mainContainer">
+<div class="rContainer">
+<div class="subTitle1">[% title %]</div>
+
+<center><font style="font-size: 14px;" color="red">
+<div style="width: 700px; font-weight: bold;" id="web_admin_error">
+This interface is an early prototype. It is being modified to handle all host
+monitoring metrics that are currently being exported by the SNMP MA (that wraps
+the Ganglia Meta Daemon). Feel free to try it out and give us feedback! You can 
+also access the Ganglia Web interface to visualize all the available metrics
+at https://&lt;collector node&gt;/ganglia.
+</div></font></center>
+
+<div class="rcontainer">
+    [% FOREACH metric_pair IN metrics %]
+    <table class="basic_table" width="80%" align="center" cellpadding="1" border="2">
+      <span dojoType="dijit.Tooltip" connectId="metric_[% metric_pair.value.name %]" toggle="fade">
+         [% metric_pair.value.description %]
+      </span>
+      <tr><th colspan=4><div id="metric_[% metric_pair.value.name %]">Metric: [% metric_pair.key %]</div></th></tr>
+      <tr>
+        <th align="center">Host Name</th>
+        [% IF metric_pair.value.hasIfName %]<th align="center">Interface Name</th>[% END %]
+        <th align="center">Graph</th>
+        <th align="center">Flash Graph</th>
+      </tr>
+      [% FOREACH subject IN metric_pair.value.subjects %]
+      <tr>
+        <td align="center">
+          [%- subject.hostName -%]&nbsp;
+        </td>
+        [% IF metric_pair.value.hasIfName %]
+        <td align="center">
+          [%- subject.ifName -%]&nbsp;
+        </td>
+        [% END %]
+        <td align="center">
+          <select name="graph1_[%- subject.count -%]" id="graph1_[%- subject.count -%]" onChange="window.open(options[selectedIndex].value,'graph1_[%- subject.count -%]','width=950,height=500,status=yes,scrollbars=yes,resizable=yes')">
+            <option selected value="./utilizationGraph.cgi">-- Select --</option>
+            <option value="./utilizationGraph.cgi?et=[%- metric_pair.key -%]&label=[%- metric_pair.value.description -%]&key1_type=[%- subject.key1type -%]&key1_1=[%- subject.key11 -%]&key1_2=[%- subject.key12 -%]&key2_type=[%- subject.key2type -%]&key2_1=[%- subject.key21 -%]&key2_2=[%- subject.key22 -%]&url=[%- subject.service -%]&host=[%- subject.hostName -%]&interface=[%- subject.ifName -%]&length=3600">1 Hour</option>
+            <option value="./utilizationGraph.cgi?et=[%- metric_pair.key -%]&label=[%- metric_pair.value.description -%]&key1_type=[%- subject.key1type -%]&key1_1=[%- subject.key11 -%]&key1_2=[%- subject.key12 -%]&key2_type=[%- subject.key2type -%]&key2_1=[%- subject.key21 -%]&key2_2=[%- subject.key22 -%]&url=[%- subject.service -%]&host=[%- subject.hostName -%]&interface=[%- subject.ifName -%]&length=14400">4 Hours</option>
+            <option value="./utilizationGraph.cgi?et=[%- metric_pair.key -%]&label=[%- metric_pair.value.description -%]&key1_type=[%- subject.key1type -%]&key1_1=[%- subject.key11 -%]&key1_2=[%- subject.key12 -%]&key2_type=[%- subject.key2type -%]&key2_1=[%- subject.key21 -%]&key2_2=[%- subject.key22 -%]&url=[%- subject.service -%]&host=[%- subject.hostName -%]&interface=[%- subject.ifName -%]&length=43200">12 Hours</option>
+            <option value="./utilizationGraph.cgi?et=[%- metric_pair.key -%]&label=[%- metric_pair.value.description -%]&key1_type=[%- subject.key1type -%]&key1_1=[%- subject.key11 -%]&key1_2=[%- subject.key12 -%]&key2_type=[%- subject.key2type -%]&key2_1=[%- subject.key21 -%]&key2_2=[%- subject.key22 -%]&url=[%- subject.service -%]&host=[%- subject.hostName -%]&interface=[%- subject.ifName -%]&length=86400">24 Hours</option>
+          </select>
+        </td>    
+        <td align="center">
+          <select name="graph2_[%- subject.count -%]" id="graph2_[%- subject.count -%]" onChange="window.open(options[selectedIndex].value,'graph2_[%- subject.count -%]','width=950,height=550,status=yes,scrollbars=yes,resizable=yes')">
+            <option selected value="./utilizationGraphFlash.cgi">-- Select --</option>
+            <option value="./utilizationGraphFlash.cgi?et=[%- metric_pair.key -%]&label=[%- metric_pair.value.description -%]&key1_type=[%- subject.key1type -%]&key1_1=[%- subject.key11 -%]&key1_2=[%- subject.key12 -%]&key2_type=[%- subject.key2type -%]&key2_1=[%- subject.key21 -%]&key2_2=[%- subject.key22 -%]&url=[%- subject.service -%]&host=[%- subject.hostName -%]&interface=[%- subject.ifName -%]&length=3600">1 Hour</option>
+            <option value="./utilizationGraphFlash.cgi?et=[%- metric_pair.key -%]&label=[%- metric_pair.value.description -%]&key1_type=[%- subject.key1type -%]&key1_1=[%- subject.key11 -%]&key1_2=[%- subject.key12 -%]&key2_type=[%- subject.key2type -%]&key2_1=[%- subject.key21 -%]&key2_2=[%- subject.key22 -%]&url=[%- subject.service -%]&host=[%- subject.hostName -%]&interface=[%- subject.ifName -%]&length=14400">4 Hours</option>
+            <option value="./utilizationGraphFlash.cgi?et=[%- metric_pair.key -%]&label=[%- metric_pair.value.description -%]&key1_type=[%- subject.key1type -%]&key1_1=[%- subject.key11 -%]&key1_2=[%- subject.key12 -%]&key2_type=[%- subject.key2type -%]&key2_1=[%- subject.key21 -%]&key2_2=[%- subject.key22 -%]&url=[%- subject.service -%]&host=[%- subject.hostName -%]&interface=[%- subject.ifName -%]&length=43200">12 Hours</option>
+            <option value="./utilizationGraphFlash.cgi?et=[%- metric_pair.key -%]&label=[%- metric_pair.value.description -%]&key1_type=[%- subject.key1type -%]&key1_1=[%- subject.key11 -%]&key1_2=[%- subject.key12 -%]&key2_type=[%- subject.key2type -%]&key2_1=[%- subject.key21 -%]&key2_2=[%- subject.key22 -%]&url=[%- subject.service -%]&host=[%- subject.hostName -%]&interface=[%- subject.ifName -%]&length=86400">24 Hours</option>
+          </select>
+        </td>        
+      </tr>
+      [% END %]
+    </table>
+   [% END %]
+</div>
+</div>
+</div>
+
+[% INCLUDE footer.tmpl %]

@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+Name:    LSKeyRequest
+Purpose: Retrieve Keys for Registered Services
+Outcome: 
+	Not Registered
+		gLS/hLS - return error stating key not registered
+	Registered
+		gLS/hLS - return valid key
+-->
+
+<nmwg:message type="LSKeyRequest"
+              id="msg1"
+              xmlns:perfsonar="http://ggf.org/ns/nmwg/tools/org/perfsonar/1.0/"
+              xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+              xmlns:psservice="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/1.0/">
+
+  <nmwg:metadata id="serviceLookupInfo">
+    <perfsonar:subject id="commonParameters1" xmlns:perfsonar="http://ggf.org/ns/nmwg/tools/org/perfsonar/1.0/">
+      <psservice:service id="serviceParameters1" xmlns:psservice="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/1.0/">
+        <psservice:serviceName>My_test_MA1</psservice:serviceName>
+        <psservice:accessPoint>http://localhost:8080/axis/services/snmpMA</psservice:accessPoint>
+        <psservice:serviceType>MA</psservice:serviceType>
+      </psservice:service>
+    </perfsonar:subject>
+  </nmwg:metadata>
+    
+  <nmwg:data id="data" metadataIdRef="serviceLookupInfo" />
+ 
+  <nmwg:metadata id="serviceLookupInfo2">
+    <perfsonar:subject id="commonParameters2" xmlns:perfsonar="http://ggf.org/ns/nmwg/tools/org/perfsonar/1.0/">
+      <psservice:service id="serviceParameters2" xmlns:psservice="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/1.0/">
+        <psservice:serviceName>xxx</psservice:serviceName>
+        <psservice:accessPoint>xxx</psservice:accessPoint>
+        <psservice:serviceType>xxx</psservice:serviceType>
+      </psservice:service>
+    </perfsonar:subject>
+  </nmwg:metadata>
+    
+  <nmwg:data id="data2" metadataIdRef="serviceLookupInfo2" /> 
+ 
+ 
+ 
+ 
+   <nmwg:metadata id="serviceLookupInfo3">
+    <perfsonar:subject id="commonParameters1" xmlns:perfsonar="http://ggf.org/ns/nmwg/tools/org/perfsonar/1.0/">
+      <psservice:service id="serviceParameters1" xmlns:psservice="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/1.0/">
+        <psservice:serviceName>My_test_MA1</psservice:serviceName>
+        <psservice:accessPoint>http://localhost:8080/axis/services/snmpMA</psservice:accessPoint>
+        <psservice:serviceType>MA</psservice:serviceType>
+      </psservice:service>
+    </perfsonar:subject>
+    <nmwg:eventType>http://ogf.org/ns/nmwg/tools/org/perfsonar/service/lookup/key/summary/2.0</nmwg:eventType>
+  </nmwg:metadata>
+    
+  <nmwg:data id="data3" metadataIdRef="serviceLookupInfo3" />
+ 
+  <nmwg:metadata id="serviceLookupInfo4">
+    <perfsonar:subject id="commonParameters4" xmlns:perfsonar="http://ggf.org/ns/nmwg/tools/org/perfsonar/1.0/">
+      <psservice:service id="serviceParameters2" xmlns:psservice="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/1.0/">
+        <psservice:serviceName>xxx</psservice:serviceName>
+        <psservice:accessPoint>xxx</psservice:accessPoint>
+        <psservice:serviceType>xxx</psservice:serviceType>
+      </psservice:service>
+    </perfsonar:subject>
+    <nmwg:eventType>http://ogf.org/ns/nmwg/tools/org/perfsonar/service/lookup/key/summary/2.0</nmwg:eventType>
+  </nmwg:metadata>
+    
+  <nmwg:data id="data4" metadataIdRef="serviceLookupInfo4" /> 
+  
+  
+  
+  
+   <nmwg:metadata id="serviceLookupInfo5">
+    <perfsonar:subject id="commonParameters1" xmlns:perfsonar="http://ggf.org/ns/nmwg/tools/org/perfsonar/1.0/">
+      <psservice:service id="serviceParameters1" xmlns:psservice="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/1.0/">
+        <psservice:serviceName>My_test_MA1</psservice:serviceName>
+        <psservice:accessPoint>http://localhost:8080/axis/services/snmpMA</psservice:accessPoint>
+        <psservice:serviceType>MA</psservice:serviceType>
+      </psservice:service>
+    </perfsonar:subject>
+    <nmwg:eventType>http://ogf.org/ns/nmwg/tools/org/perfsonar/service/lookup/key/service/2.0</nmwg:eventType>
+  </nmwg:metadata>
+    
+  <nmwg:data id="data5" metadataIdRef="serviceLookupInfo5" />
+ 
+  <nmwg:metadata id="serviceLookupInfo6">
+    <perfsonar:subject id="commonParameters6" xmlns:perfsonar="http://ggf.org/ns/nmwg/tools/org/perfsonar/1.0/">
+      <psservice:service id="serviceParameters2" xmlns:psservice="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/1.0/">
+        <psservice:serviceName>xxx</psservice:serviceName>
+        <psservice:accessPoint>xxx</psservice:accessPoint>
+        <psservice:serviceType>xxx</psservice:serviceType>
+      </psservice:service>
+    </perfsonar:subject>
+    <nmwg:eventType>http://ogf.org/ns/nmwg/tools/org/perfsonar/service/lookup/key/service/2.0</nmwg:eventType>
+  </nmwg:metadata>
+    
+  <nmwg:data id="data6" metadataIdRef="serviceLookupInfo6" /> 
+ 
+</nmwg:message>

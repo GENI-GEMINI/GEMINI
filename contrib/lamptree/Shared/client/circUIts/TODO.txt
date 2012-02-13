@@ -1,0 +1,52 @@
+--------------------------------------------------------------------------------
+generalize tickmark algorithm
+--------------------------------------------------------------------------------
+Set scaling from HTML
+--------------------------------------------------------------------------------
+smoke-ping style plot?
+--------------------------------------------------------------------------------
+clip data properly in viewport
+--------------------------------------------------------------------------------
+garbage collection - memory check
+--------------------------------------------------------------------------------
+show single time (no refresh)
+--------------------------------------------------------------------------------
+Playback
+
+--------------------------------------------------------------------------------
+wire-frame setup
+Use "class" attribute?
+
+*****************
+<canvas id="blah" class="speedo" width="75" height="400"
+                        style="border: 4px solid #aaa; background: #5a5a5a;">
+                        </canvas>
+Search for all 'canvas' elements with class "speedo":
+     var canvasObjs = MochiKit.DOM.getElementsByTagAndClassName('canvas', 'pSps.speedo');
+     for(var i = 0; i < canvasObjs.length; i++){
+          pSps.Speedo.init(canvasObjs[i], [options]);
+// still need to figure out how to get 'options' from knowing the 'id' of the canvas
+// - should be able to look for a class/hash with blah.options or something like that
+
+basically need a way to say:
+{
+     var localvar = 'named-global-var';
+}
+or - just have an overloaded 'attribute' of the element above that is a 'hash', and have the user
+define elements in that hash. (user == html creator)
+
+********************
+
+     Search for a given "class" in the DOM. - If it can do wildcards somehow:
+          - use Speedo.$blah for the class name
+          - create a $blah 'class' to hold potential 'function' pointers or other configuration
+               information - for example blah.getHost and/or blah.host
+               this 'class' can also define any 'options' that need to passed thru to plotkit etc.
+               (like resolution)
+Need to:
+     identify elments to create - and where in the page
+     identify data options (resolution, what data value etc...)
+     identify control structure
+          HTML of form directly? Dynamically create based on data type?
+
+--------------------------------------------------------------------------------

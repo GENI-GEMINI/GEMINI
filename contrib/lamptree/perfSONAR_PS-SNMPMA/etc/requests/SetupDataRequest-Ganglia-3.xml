@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  perfSONAR-PS SetupDataRequest (Ganglia Data)
+  
+  Use: 
+    perl client.pl URL SetupDataRequest-Ganglia-3.xml
+    
+  Expected Response:
+
+<nmwg:message xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" messageIdRef="SetupDataRequest1" id="message.9380747" type="SetupDataResponse">
+
+  <nmwg:metadata metadataIdRef="key1" id="metadata.5820496">
+    <nmwg:key xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" id="key1">
+      <nmwg:parameters id="params.0">
+        <nmwg:parameter name="maKey">8fff656abab6733f479ae32045174cb2</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>
+  </nmwg:metadata>
+  <nmwg:data metadataIdRef="metadata.5820496" id="data.1977646">
+    <nmwg:datum timeType="unix" value="6.7861111111e-01" valueUnits="%" timeValue="1282786560"/>
+    <nmwg:datum timeType="unix" value="5.5416666667e-01" valueUnits="%" timeValue="1282786920"/>
+    <nmwg:datum timeType="unix" value="5.7861111111e-01" valueUnits="%" timeValue="1282787280"/>
+    <nmwg:datum timeType="unix" value="6.0611111111e-01" valueUnits="%" timeValue="1282787640"/>
+
+... Lots More ...
+
+    <nmwg:datum timeType="unix" value="4.5555555556e-01" valueUnits="%" timeValue="1282872600"/>
+  </nmwg:data>
+
+</nmwg:message>
+
+  Error Response:
+
+<nmwg:message xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" messageIdRef="SetupDataRequest1" id="message.5628237" type="SetupDataResponse">
+
+  <nmwg:metadata metadataIdRef="metadata1" id="metadata.8793480">
+    <nmwg:eventType>error.ma.storage_result</nmwg:eventType>
+  </nmwg:metadata>
+  <nmwg:data metadataIdRef="metadata.8793480" id="data.3262269">
+    <nmwgr:datum xmlns:nmwgr="http://ggf.org/ns/nmwg/result/2.0/">Key error in metadata storage - key not found.</nmwgr:datum>
+  </nmwg:data>
+
+</nmwg:message>
+
+-->
+
+<nmwg:message xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+              xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/"
+              xmlns:ganglia="http://ggf.org/ns/nmwg/tools/ganglia/2.0/"
+              xmlns:nmwgt3="http://ggf.org/ns/nmwg/topology/base/3.0/"
+              type="SetupDataRequest" id="SetupDataRequest1">
+
+  <nmwg:metadata xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" 
+                 id="metadata1">
+    <nmwg:key id="key1">
+      <nmwg:parameters id="params.0">
+        <nmwg:parameter name="maKey">8fff656abab6733f479ae32045174cb2</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>
+  </nmwg:metadata> 
+
+  <nmwg:data xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+             id="data1" metadataIdRef="metadata1"/>
+
+</nmwg:message>
+
+
+

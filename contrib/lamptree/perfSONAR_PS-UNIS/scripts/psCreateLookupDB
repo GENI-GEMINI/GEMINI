@@ -1,0 +1,115 @@
+#!/usr/bin/perl -w
+
+use strict;
+use warnings;
+
+our $VERSION = 3.1;
+
+=head1 NAME
+
+psCreateLookupDB
+
+=head1 DESCRIPTION
+
+Creates the DB_CONFIG file for Oracle XML databases.
+
+=cut
+
+use Getopt::Long;
+
+=head2 usage()
+
+Prints out a help message.
+
+=cut
+
+sub usage {
+    print "$0: Initialize a Lookup Service database\n";
+    print "  --directory: The directory to hold the database\n";
+    return;
+}
+
+my $db_config = <<EOC
+set_lock_timeout 5000
+set_txn_timeout 5000
+set_lk_max_lockers 500000
+set_lk_max_locks 500000
+set_lk_max_objects 500000
+set_lk_detect DB_LOCK_MINLOCKS
+set_cachesize 0 33554432 0
+set_flags DB_LOG_AUTOREMOVE
+set_lg_regionmax 2097152
+EOC
+    ;
+
+my $DB_DIRECTORY;
+my $HELP;
+my $status = GetOptions(
+    'directory|d=s' => \$DB_DIRECTORY,
+    'help|h'        => \$HELP,
+);
+
+if ( not $status or $HELP ) {
+    usage();
+    exit( 0 );
+}
+
+unless ( $DB_DIRECTORY ) {
+    print "Error: No database directory specified\n";
+    usage();
+    exit( -1 );
+}
+
+unless ( -d $DB_DIRECTORY ) {
+    my $n = system( "mkdir -p $DB_DIRECTORY" );
+    if ( $n != 0 ) {
+        print "Error: could not create directory $DB_DIRECTORY\n";
+        exit( -2 );
+    }
+}
+
+open( DB_CONFIG, ">", $DB_DIRECTORY . "/DB_CONFIG" );
+print DB_CONFIG $db_config;
+close( DB_CONFIG );
+
+__END__
+
+=head1 SEE ALSO
+
+L<Getopt::Long>
+
+To join the 'perfSONAR Users' mailing list, please visit:
+
+  https://mail.internet2.edu/wws/info/perfsonar-user
+
+The perfSONAR-PS subversion repository is located at:
+
+  http://anonsvn.internet2.edu/svn/perfSONAR-PS/trunk
+
+Questions and comments can be directed to the author, or the mailing list.
+Bugs, feature requests, and improvements can be directed here:
+
+  http://code.google.com/p/perfsonar-ps/issues/list
+
+=head1 VERSION
+
+$Id$
+
+=head1 AUTHOR
+
+Aaron Brown, aaron@internet2.edu
+Jason Zurawski, zurawski@internet2.edu
+
+=head1 LICENSE
+
+You should have received a copy of the Internet2 Intellectual Property Framework
+along with this software.  If not, see
+<http://www.internet2.edu/membership/ip.html>
+
+=head1 COPYRIGHT
+
+Copyright (c) 2008-2009, Internet2
+
+All rights reserved.
+
+=cut

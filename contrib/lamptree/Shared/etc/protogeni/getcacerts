@@ -1,0 +1,245 @@
+#!/usr/bin/perl -w
+#
+# GENIPUBLIC-COPYRIGHT
+# Copyright (c) 2008-2009 University of Utah and the Flux Group.
+# All rights reserved.
+#
+use strict;
+use English;
+use Getopt::Std;
+
+#
+# Get and install the CRL 
+# 
+sub usage()
+{
+    print "Usage: getcacerts [-l] [-c ch]\n";
+    exit(1);
+}
+my $optlist = "c:lp";
+my $nolog   = 0;
+my $nopost  = 0;
+
+#
+# Configure variables
+#
+my $PGDIR         = "/usr/local/etc/protogeni";
+my $WGET	  = "/usr/bin/wget";
+my $OPENSSL       = "/usr/bin/openssl";
+my $CH            = "boss.emulab.net";
+
+# un-taint path
+$ENV{'PATH'} = '/bin:/usr/bin:/usr/local/bin:/usr/site/bin';
+delete @ENV{'IFS', 'CDPATH', 'ENV', 'BASH_ENV'};
+
+# Protos
+sub fatal($);
+
+#
+# Turn off line buffering on output
+#
+$| = 1; 
+
+if ($UID != 0) {
+    fatal("Must be root to run this script\n");
+}
+
+#
+# Check args.
+#
+my %options = ();
+if (! getopts($optlist, \%options)) {
+    usage();
+}
+if (defined($options{"l"})) {
+    $nolog  = 1;
+}
+if (defined($options{"p"})) {
+    $nopost  = 1;
+}
+if (defined($options{"c"})) {
+    $CH = $options{"c"};
+    
+    if ($CH =~ /^([\w\.]+)$/) {
+	$CH = $1;
+    }
+    else {
+	fatal("Tainted clearinghouse address: $CH");
+    }
+}
+my $restartservices = 0;
+
+mkdir("/tmp/genicacerts.$$", 0755) or
+    fatal("Could not mkdircacerts tmp dir");
+
+#
+# Fetch the ca bundle from Utah. These are public keys ...
+#
+system("$WGET -q -O /tmp/genica.bundle.$$ ".
+       "     http://$CH/genica.bundle") == 0
+    or fatal("Could not fetch genica bundle from Utah");
+
+#
+# Fetch the crl bundle from Utah. These are public keys ...
+#
+system("$WGET -q -O /tmp/genicrl.bundle.$$ ".
+       "     http://$CH/genicrl.bundle") == 0
+    or fatal("Could not fetch genicrl bundle from Utah");
+
+#
+# Split up the certs.
+#
+my @certs = ();
+my $certstr;
+
+open(BUNDLE, "/tmp/genica.bundle.$$")
+    or fatal("Could not open /tmp/genica.bundle.$$ for reading");
+while (<BUNDLE>) {
+    if ($_ =~ /^-----BEGIN CERT/) {
+	$certstr = $_;
+	next;
+    }
+    if ($_ =~ /^-----END CERT/) {
+	$certstr .= $_;
+	push(@certs, $certstr);
+	$certstr = undef;
+	next;
+    }
+    if ($certstr) {
+	$certstr .= $_;
+	next;
+    }
+}
+#
+# If the file is properly terminated, there should be no certificate in
+# progress. Hopefully the file is not trashed at a boundry. We do this
+# before the diff to make sure the file is reasonable.
+#
+fatal("Trashed bundle file")
+    if ($certstr);
+close(BUNDLE);
+
+#
+# Go no further if the file is exactly the same as last time.
+#
+system("/usr/bin/diff -q $PGDIR/ssl/genica.bundle /tmp/genica.bundle.$$");
+if ($?) {
+    my $idx = 0;
+    while (@certs) {
+	my $cert = pop(@certs);
+
+	open(CERT, ">/tmp/genicacerts.$$/$idx.pem")
+	    or fatal("Could not open pem file in /tmp/genicacerts.$$");
+	print CERT $cert;
+	close(CERT);
+	$idx++;
+    }
+
+    if (-e "$PGDIR/ssl/genica.bundle.old") {
+	unlink("$PGDIR/ssl/genica.bundle.old") or
+	    fatal("Could not remove old genica bundle");
+    }
+    if (-e "$PGDIR/ssl/genica.bundle") {
+	system("/bin/cp $PGDIR/ssl/genica.bundle $PGDIR/ssl/genica.bundle.old") == 0
+	    or fatal("Could not save off $PGDIR/ssl/genica.bundle");
+    }
+    if (-e "$PGDIR/ssl/genicacerts.old") {
+	system("/bin/rm -rf $PGDIR/ssl/genicacerts.old") == 0
+	    or fatal("Could not remove old genicacerts directory");
+    }
+    if (-e "$PGDIR/ssl/genicacerts") {
+	system("/bin/mv $PGDIR/ssl/genicacerts $PGDIR/ssl/genicacerts.old") == 0
+	    or fatal("Could not save off genicacerts directory");
+    }
+    system("/bin/mv /tmp/genica.bundle.$$ $PGDIR/ssl/genica.bundle") == 0
+	or fatal("Could not mv /tmp/genica.bundle.$$ $PGDIR/ssl/genica.bundle");
+    system("/bin/mv /tmp/genicacerts.$$ $PGDIR/ssl/genicacerts") == 0
+	or fatal("Could not mv /tmp/genicacerts.$$ to $PGDIR/ssl/genicacerts");
+
+    $restartservices = 1;
+}
+
+# Also do diff for the crl bundle
+system("/usr/bin/diff -q $PGDIR/ssl/genicrl.bundle /tmp/genicrl.bundle.$$");
+if ($?) {
+    if (-e "$PGDIR/ssl/genicrl.bundle.old") {
+	unlink("$PGDIR/ssl/genicrl.bundle.old") or
+	    fatal("Could not remove old genicrl bundle");
+    }
+    if (-e "$PGDIR/ssl/genicrl.bundle") {
+	system("/bin/cp $PGDIR/ssl/genicrl.bundle $PGDIR/ssl/genicrl.bundle.old") == 0
+	    or fatal("Could not save off $PGDIR/ssl/genicrl.bundle");
+    }
+    system("/bin/mv /tmp/genicrl.bundle.$$ $PGDIR/ssl/genicrl.bundle") == 0
+	or fatal("Could not mv /tmp/genicrl.bundle.$$ $PGDIR/ssl/genicrl.bundle");
+
+    $restartservices = 1;
+}
+
+#
+# Decode the CRLs.  All these temporary files are ugly, but we don't want
+# to pipe both to and from the child openssl process because of the
+# possibility of deadlock.
+#
+my $crlstr;
+my $incomplete = undef;
+
+open(BUNDLE, "$PGDIR/ssl/genicrl.bundle")
+    or fatal("Could not open $PGDIR/ssl/genicrl.bundle for reading");
+open(SINGLE, "> /tmp/genicrl.single.$$")
+    or fatal("Could not open /tmp/genicrl.single.$$ for writing");
+open(REVOKED, "> /tmp/genicrl.serials.$$")
+    or fatal("Could not open /tmp/genicrl.serials.$$ for writing");
+
+while (<BUNDLE>) {
+    print SINGLE $_;
+    if ($_ =~ /^-----BEGIN X509 CRL/) {
+	$incomplete++;
+	next;
+    }
+    if ($_ =~ /^-----END X509 CRL/) {
+	my $issuer;
+
+	open( CERT, "$OPENSSL crl -text -noout < /tmp/genicrl.single.$$ |" ) or
+	    fatal( "Could not decode CRL" );
+	while( <CERT> ) {
+	    m{Issuer: .*/CN=([^/]+)/} and $issuer = $1;
+	    /Serial Number: ([0-9A-Fa-f]+)/ and $issuer and print REVOKED "$issuer $1\n";
+	}
+	close CERT;
+	$incomplete = undef;
+	truncate( SINGLE, 0 );
+	seek( SINGLE, 0, 0 );
+	next;
+    }
+}
+#
+# If the file is properly terminated, there should be no CRL in
+# progress. Hopefully the file is not trashed at a boundary. We do this
+# before moving the decoded file into place to make sure the file
+# is reasonable.
+#
+fatal("Trashed CRL bundle file")
+    if ($incomplete);
+close(BUNDLE);
+close(SINGLE);
+close(REVOKED);
+
+system("/bin/mv /tmp/genicrl.serials.$$ $PGDIR/ssl/genicrl.serials") == 0
+    or fatal("Could not mv /tmp/genicrl.serials.$$ $PGDIR/ssl/genicrl.serials");
+
+if ($restartservices) {
+    # TODO: Ask some other script to restart pS services
+    fatal("Services shuold restart!");
+    #system("/usr/local/etc/rc.d/apache.sh restart") == 0
+}
+
+exit(0);
+
+sub fatal($)
+{
+    my ($msg) = @_;
+
+    die("*** $0:\n".
+	"    $msg\n");
+}

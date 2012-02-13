@@ -1,0 +1,7 @@
+strict,ignore
+warnings,ignore
+lib,ignore
+constant,ignore
+Socket6,ignore
+FindBin,ignore
+Net::Ping,add,Net::Ping::External

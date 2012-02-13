@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  perfSONAR-PS DataInfoRequest (Ganglia Data)
+  
+  Use: 
+    perl client.pl URL DataInfoRequest-Ganglia-2.xml
+    
+  Expected Response:
+
+<nmwg:message xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" messageIdRef="metadataKeyRequest1" id="message.17591304" type="DataInfoResponse">
+  
+  <nmwg:metadata metadataIdRef="metadata1" id="metadata.1461389">
+    <nmwg:key>
+      <nmwg:parameters id="params.0">
+        <nmwg:parameter name="maKey">8fff656abab6733f479ae32045174cb2</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>
+  </nmwg:metadata>
+  <nmwg:data metadataIdRef="metadata.1461389" id="data.12499806">
+    <nmwg:key id="key">
+      <nmwg:parameters id="pkey">
+      <nmwg:parameter name="supportedEventType">http://ggf.org/ns/nmwg/tools/ganglia/cpu/time/iowait/2.0</nmwg:parameter>
+      <nmwg:parameter name="supportedEventType">http://ggf.org/ns/nmwg/characteristic/cpu/time/iowait/2.0</nmwg:parameter>
+        <nmwg:parameter name="type">rrd</nmwg:parameter>
+        <nmwg:parameter name="file">/usr/local/ganglia-3.1.7/rrds/unspecified/192.52.179.83/cpu_wio.rrd</nmwg:parameter>
+        <nmwg:parameter name="valueUnits">%</nmwg:parameter>
+        <nmwg:parameter name="dataSource">sum</nmwg:parameter>
+        <nmwg:parameter name="consolidationFunction" value="AVERAGE">
+          <nmwg:parameter name="resolution">360</nmwg:parameter>
+          <nmwg:parameter name="resolution">2520</nmwg:parameter>
+          <nmwg:parameter name="resolution">10080</nmwg:parameter>
+          <nmwg:parameter name="resolution">86400</nmwg:parameter>
+        </nmwg:parameter>
+        <nmwg:parameter name="lastTime">1282871478</nmwg:parameter>
+        <nmwg:parameter name="firstTime">1282867830</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>
+  </nmwg:data>
+
+</nmwg:message>
+
+  Error Response:
+
+<nmwg:message xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" messageIdRef="metadataKeyRequest1" id="message.2859721" type="DataInfoResponse"
+  
+  <nmwg:metadata metadataIdRef="metadata1" id="metadata.17159245">
+    <nmwg:eventType>error.ma.storage_result</nmwg:eventType>
+  </nmwg:metadata>
+  <nmwg:data metadataIdRef="metadata.17159245" id="data.7647184">
+    <nmwgr:datum xmlns:nmwgr="http://ggf.org/ns/nmwg/result/2.0/">Key error in metadata storage - key not found.</nmwgr:datum>
+  </nmwg:data>
+  
+</nmwg:message>
+
+-->
+
+<nmwg:message xmlns:netutil="http://ggf.org/ns/nmwg/characteristic/utilization/2.0/"
+              xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+              xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/"
+              type="DataInfoRequest" id="DataInfoRequest1">
+
+  <nmwg:metadata xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" 
+                 id="metadata1">
+    <nmwg:key>
+      <nmwg:parameters id="params.0">
+        <nmwg:parameter name="maKey">8fff656abab6733f479ae32045174cb2</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>
+  </nmwg:metadata> 
+
+  <nmwg:data xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+             id="data1" metadataIdRef="metadata1"/>
+
+</nmwg:message>

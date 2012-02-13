@@ -1,0 +1,9 @@
+version 3.1
+  * Initial RPM release.
+  * Bugfixes
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=124
+      ls registration daemon not disconnecting properly 
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=121      
+      ls registration daemon TCP services aren't working locally 	
+  
+

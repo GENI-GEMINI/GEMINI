@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+   <title>Network: Utilization</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <script src="./js/MochiKit/MochiKit.js" type="text/javascript"></script>
+   <script src="./js/PlotKit/excanvas.js" type="text/javascript"></script>
+   <script src="./js/PlotKit/PlotKit_Packed.js" type="text/javascript"></script>
+</head>
+
+
+<body>
+    <div id="body">
+        <h2>Network Utilization</h2>
+    
+
+        <div id="div-example"
+            style="margin: 0 auto 0 auto;">
+            <canvas id="plot"
+            width="400" height="400"
+            style="border: 1px solid #eee;">
+            </canvas>
+        </div>
+        <input id="start-stop" type="button" value="Stop">
+
+        <script type="text/javascript">
+
+            // TODO: Get some opts from cookies?
+            var defOptions = {
+//                "xAxis": [1,4],
+                "xOriginIsZero": false,
+//                "yAxis":[0,1000],
+//                "yTicks":[
+//                {label: "0", v: 0},
+//                {label: "200", v: 200},
+//                {label: "400", v: 400},
+//                {label: "600", v: 600},
+//                {label: "800", v: 800},
+//                {label: "1000", v: 1000},
+//                    ],
+            };
+            var layout = null;
+            var renderer = null;
+            var go = true;
+
+            function loadData(req) {
+
+                if(!go) return;
+
+                log("JSON:",req.responseText);
+                log("PRE: evalJSON", Date());
+                var json = MochiKit.Async.evalJSONRequest(req);
+                log("POST: evalJSON", Date());
+
+                log("json got:", json);
+
+                layout.addDataset("sample",json.servdata.data);
+                layout.evaluate();
+                renderer.clear();
+                renderer.render();
+
+                MochiKit.Async.callLater(5,newData);
+            }
+
+            function newData(){
+                if(!go) return;
+
+                log("Fetch Data: ", Date());
+                // TODO: Change to POST and specify args
+                var doreq = MochiKit.Async.doSimpleXMLHttpRequest("updateData.cgi");
+                doreq.addCallback(loadData);
+            }
+
+            function startStop(){
+                go = !go;
+
+                if(go){
+                    $('start-stop').value = "Stop";
+                    log("Starting data loop", Date());
+                    newData();
+                }
+                else{
+                    log("Stopping data loop", Date());
+                    $('start-stop').value = "Start";
+                }
+            }
+
+            function initGraph(){
+                layout = new PlotKit.Layout("line",defOptions);
+
+                newData();
+
+                renderer = new SweetCanvasRenderer($('plot'),
+                        layout,defOptions);
+                MochiKit.Signal.connect("start-stop", 'onclick', startStop);
+            }
+
+            addLoadEvent(initGraph);
+
+            createLoggingPane();
+
+        </script>
+    </div>
+    
+    <div class="footer"><a href="http://www.liquidx.net/plotkit/">PlotKit</a></div>    
+</div>
+</body></html>

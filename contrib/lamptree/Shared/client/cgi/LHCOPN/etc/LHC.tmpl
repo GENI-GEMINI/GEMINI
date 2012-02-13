@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <title>LHC-Affilated Sites: perfSONAR Status</title>
+  </head>
+  <body>
+    <h1 align="center">LHC-Affilated Sites: perfSONAR Status</h1>
+    <br>
+    <center><i>Information Last Fetched <tmpl_var name="MOD"></i></center>
+    <br><br>
+            
+    <table align="center" width="95%">
+      <tr>
+        <th colspan="2" align="center">
+          <i>hLS URL</i>
+        </th>
+        <th align="center">
+          <i>Description</i>
+        </th>
+        <th align="center">
+          <i>Service Status</i>
+        </th>
+      </tr>
+    <tmpl_loop name=HLSINSTANCES>
+      <tr>
+        <td width="5%">
+          <br>
+        </td>
+        <td width="40%" align="left">
+          <tmpl_var name=COUNT>: &nbsp; <tmpl_var name=NAME>
+        </td>
+        <td width="45%" align="left">
+          <font size="-1"><tmpl_var name=DESC></font>
+        </td>
+        <td width="10%" align="left">
+        <tmpl_if name=ALIVE>
+          <font size="+1" color="green">OK</font>
+        <tmpl_else>
+          <font size="+1" color="red">NOT OK</font>         
+        </tmpl_if>
+        </td>
+      </tr>
+    </tmpl_loop>
+    </table>
+    <br><br>
+
+  </body>
+</html>

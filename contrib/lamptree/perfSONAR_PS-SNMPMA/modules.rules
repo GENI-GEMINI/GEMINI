@@ -1,0 +1,10 @@
+strict,ignore
+warnings,ignore
+lib,ignore
+Socket6,ignore
+FindBin,ignore
+POSIX,ignore
+Fcntl,ignore
+Carp,ignore
+English,ignore
+base,ignore

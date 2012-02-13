@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+Name:    LSKeyRequest
+Purpose: Request a key for a given service element
+Outcome: 
+    Registered:
+        Return a valid key
+    Not registered:
+        Error message
+
+-->
+
+<nmwg:message type="LSKeyRequest"
+              id="msg1"
+              xmlns:perfsonar="http://ggf.org/ns/nmwg/tools/org/perfsonar/1.0/"
+              xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+              xmlns:psservice="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/1.0/">
+
+  <nmwg:metadata id="serviceLookupInfo">
+    <perfsonar:subject id="commonParameters" xmlns:perfsonar="http://ggf.org/ns/nmwg/tools/org/perfsonar/1.0/">
+      <psservice:service id="serviceParameters" xmlns:psservice="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/1.0/">
+        <psservice:serviceName>My_test_MA</psservice:serviceName>
+        <psservice:accessPoint>http://localhost:8080/axis/services/snmpMA</psservice:accessPoint>
+        <psservice:serviceType>MA</psservice:serviceType>
+        <psservice:serviceDescription>This is my testing MA</psservice:serviceDescription>
+      </psservice:service>
+    </perfsonar:subject>
+  </nmwg:metadata>
+    
+  <nmwg:data id="data" metadataIdRef="serviceLookupInfo" />
+ 
+</nmwg:message>

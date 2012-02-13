@@ -1,0 +1,92 @@
+[% title = "LAMP I&M System" %]
+[% IF site_name; SET title = "${title} for Slice ${site_name}"; END %]
+[% IF site_name AND site_location; SET title = "${title} at ${site_location}"; END %]
+
+[% INCLUDE header.tmpl %]
+
+<div class="mainContainer">
+<div class="rContainer">
+<div class="subTitle1">[% title %]</div>
+
+<center><font color="red"><div id="web_admin_error">[% error_message %]</div></font></center>
+<center><div id="web_admin_status">[% status_message %]</div></center>
+<br/>
+<center><div id="last_pull">The configuration was last pulled on: [% last_pull_date %]</div></font></center>
+<center><div id="last_mod">The configuration was last modified on: [% last_modified_date %]</div></center>
+<br/>
+[% IF last_modified_date != "never" %]
+<center><font color="red"><div id="must_push">There are local modifications that have not been pushed!.</div></font></center>
+<center><font color="red"><div id="must_push2">Services will only update their configuration from UNIS.</div></font></center>
+[% END %]
+<br/>
+<input class="button" type="submit" name="push_config" id="push_config" value="Push Configuration to UNIS" onClick="handle_pushpull('push')">
+<input class="button" type="submit" name="pull_config" id="pull_config" value="Pull Configuration from UNIS" onClick="handle_pushpull('pull')">
+
+<script type="text/javascript">
+function handle_pushpull(fname) {
+    dojo.xhrGet ({
+            url: '[% self_url %]',
+            handleAs: "json",
+            content: { 'fname': fname },
+            timeout: 300000,
+            load: handle_pushpull_response,
+            error: function (response, io_args) { dojo.byId('web_admin_error').innerHTML="Problem " + fname + "ing configuration"; },
+            mimetype: "text/json" 
+        });
+}
+
+function handle_pushpull_response(response, io_args) {
+    if (response['error']) {
+        dojo.byId('web_admin_error').innerHTML=response['error'];
+        dojo.byId('web_admin_status').innerHTML="";
+    } else if (response['message']) {
+        window.location.reload()
+    } else {
+        dojo.byId('web_admin_error').innerHTML="Received unknown response from service";
+    }
+}
+</script>
+
+<div class="rcontainer">
+    <table class="basic_table">
+        <tr><th  style="width: 600px" colspan=2>Configured Services</th></tr>
+	[% FOREACH node_pair IN nodes %]
+	    <tr><td style="border-bottom: 1px solid #ccc;" class="top" colspan="2">Node [% node_pair.value.name %]</td></tr>
+	    [% FOREACH service_pair IN node_pair.value.SERVICES %]
+	       [% UNLESS service_pair.value.nodisplay %]
+	        <tr>
+	            <td class="middle">[% service_pair.value.name %][% IF service_pair.value.url %]<sup>[<a target="_blank" href="[% service_pair.value.url %]">1</a>]</sup>[% END %]</td>
+		        <td class="middle">
+		            [% IF service_pair.value.enabled %]
+			            <font color="green">Enabled</font>
+		            [% ELSE %]
+			            <font color="red">Disabled</font>
+		            [% END %]
+		        </td>
+		    </tr>
+		   [% END %]
+		[% END %]
+		<tr><td style="border-bottom: 2px solid #6678b1;" class="bottom" colspan="2" /></tr>
+	[% END %]
+	</table>
+<p>
+<input class="button" type="submit" name="push_config" id="push_config" value="Push Configuration to UNIS" onClick="handle_pushpull('push')">
+<input class="button" type="submit" name="pull_config" id="pull_config" value="Pull Configuration from UNIS" onClick="handle_pushpull('pull')">
+</p>
+	<table class="basic_table">
+		<tr><th style="width: 400px" colspan=2>Software Versions</th></tr>
+		<tr><td><a rel="external" target="_blank" href="http://groups.geni.net/geni/wiki/LAMP">LAMP Portal</a></td><td>1.0rc1</td></tr>
+		<tr><td><a rel="external" target="_blank" href="http://psps.perfsonar.net/toolkit/">(Based on pS-Performance Toolkit)</a></td><td>3.2</td></tr>
+		<tr><td><a rel="external" target="_blank" href="http://www.internet2.edu/performance/pS-PS/index.html">perfSONAR-PS pSConfig</a></td><td>1.0rc1</td></tr>
+		<tr><td><a rel="external" target="_blank" href="http://www.internet2.edu/performance/pS-PS/index.html">perfSONAR-PS PingER MA/MP</a></td><td>3.2lamp</td></tr>
+		<tr><td><a rel="external" target="_blank" href="http://www.internet2.edu/performance/pS-PS/index.html">perfSONAR-PS perfSONAR-BUOY</a></td><td>3.2lamp</td></tr>
+		<tr><td><a rel="external" target="_blank" href="http://www.internet2.edu/performance/pS-PS/index.html">perfSONAR-PS SNMP MA</a></td><td>3.2lamp</td></tr>
+		<tr><td><a rel="external" target="_blank" href="http://www.internet2.edu/performance/bwctl/">BWCTL</a></td><td>1.3</td></tr>
+		<tr><td><a rel="external" target="_blank" href="http://www.internet2.edu/performance/owamp/">OWAMP</a></td><td>3.2rc2</td></tr>
+		<tr><td><a rel="external" target="_blank" href="http://ganglia.sourceforge.net/">Ganglia</a></td><td>trunk20100907</td></tr>
+	</table>
+</div>
+</div>
+</div>
+
+[% INCLUDE footer.tmpl %]

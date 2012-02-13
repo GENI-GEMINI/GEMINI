@@ -1,0 +1,193 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+Name:    LSRegisterRequest-orig
+Purpose: Test Registration to hLS/gLS instances
+Outcome: 
+	hLS
+		Not Regisitered
+			Register 1st 2 services, and both sets of data
+			Reject last 2 services and related data
+		Registered
+			'Register' (e.g. update times) first 2 services, data
+			will 'register' as a 0 (already exists)
+			Reject last 2 services and related data
+	gLS
+		Fail on first 3 (can't accept due to eventTypes) will accept last
+-->
+
+<nmwg:message type="LSRegisterRequest"
+              id="LSRegisterRequest-orig"
+              xmlns:perfsonar="http://ggf.org/ns/nmwg/tools/org/perfsonar/1.0/"
+              xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+              xmlns:psservice="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/1.0/"
+              xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/"
+              xmlns:netutil="http://ggf.org/ns/nmwg/characteristic/utilization/2.0/">
+
+  <!--
+    Original style (e.g. no eventType)
+    
+    lsKey = 5cfb07ea7a5b840ce4f8f48b842ac9c0
+    
+  -->
+
+  <nmwg:metadata id="serviceLookupInfo1" xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+    <perfsonar:subject id="commonParameters1" xmlns:perfsonar="http://ggf.org/ns/nmwg/tools/org/perfsonar/1.0/">
+      <psservice:service id="serviceParameters1" xmlns:psservice="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/1.0/">
+        <psservice:serviceName>My_test_MA1</psservice:serviceName>
+        <psservice:accessPoint>http://localhost:8080/axis/services/snmpMA</psservice:accessPoint>
+        <psservice:serviceType>MA</psservice:serviceType>
+        <psservice:serviceDescription>This is my testing MA1</psservice:serviceDescription>
+      </psservice:service>
+    </perfsonar:subject>
+  </nmwg:metadata>
+    
+  <nmwg:data id="data1" metadataIdRef="serviceLookupInfo1" xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+    <nmwg:metadata id="meta1">
+      <netutil:subject id="subj1" xmlns:netutil="http://ggf.org/ns/nmwg/characteristic/utilization/2.0/">
+        <nmwgt:interface xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/">
+          <nmwgt:hostName>localhost</nmwgt:hostName>
+          <nmwgt:ifName>eth0</nmwgt:ifName>
+          <nmwgt:ifDescription>Interface eth0 on localhost</nmwgt:ifDescription>
+          <nmwgt:ifAddress type="ipv4">127.0.0.1</nmwgt:ifAddress>
+          <nmwgt:direction>in</nmwgt:direction>
+          <nmwgt:capacity>10000000000</nmwgt:capacity>
+        </nmwgt:interface>
+      </netutil:subject>
+      <nmwg:eventType>http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:eventType>
+      <nmwg:parameters id="param1">
+        <nmwg:parameter name="eventType">http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:parameter>
+        <nmwg:parameter name="supportedEventType">http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:metadata>
+  </nmwg:data>
+
+  <!--
+    New style (e.g. new eventType)
+    
+    lsKey = 9fe2a44e68fb22a51249f9b3e67137d0
+  -->
+
+  <nmwg:metadata id="serviceLookupInfo2" xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+    <perfsonar:subject id="commonParameters2" xmlns:perfsonar="http://ggf.org/ns/nmwg/tools/org/perfsonar/1.0/">
+      <psservice:service id="serviceParameters2" xmlns:psservice="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/1.0/">
+        <psservice:serviceName>My_test_MA2</psservice:serviceName>
+        <psservice:accessPoint>http://localhost:8081/axis/services/snmpMA</psservice:accessPoint>
+        <psservice:serviceType>MA</psservice:serviceType>
+        <psservice:serviceDescription>This is my testing MA2</psservice:serviceDescription>
+      </psservice:service>
+    </perfsonar:subject>
+    <nmwg:eventType>http://ogf.org/ns/nmwg/tools/org/perfsonar/service/lookup/registration/service/2.0</nmwg:eventType>
+  </nmwg:metadata>
+    
+  <nmwg:data id="data2" metadataIdRef="serviceLookupInfo2" xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+    <nmwg:metadata id="meta2-out">
+      <netutil:subject id="subj2-out" xmlns:netutil="http://ggf.org/ns/nmwg/characteristic/utilization/2.0/">
+        <nmwgt:interface xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/">
+          <nmwgt:hostName>localhost</nmwgt:hostName>
+          <nmwgt:ifName>eth1</nmwgt:ifName>
+          <nmwgt:ifDescription>Interface eth1 on localhost</nmwgt:ifDescription>
+          <nmwgt:ifAddress type="ipv4">127.0.1.1</nmwgt:ifAddress>
+          <nmwgt:direction>out</nmwgt:direction>
+          <nmwgt:capacity>10000000000</nmwgt:capacity>
+        </nmwgt:interface>
+      </netutil:subject>
+      <nmwg:eventType>http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:eventType>
+      <nmwg:parameters id="param2-out">
+        <nmwg:parameter name="eventType">http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:parameter>
+        <nmwg:parameter name="supportedEventType">http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:metadata>
+
+    <nmwg:metadata id="meta2-in">
+      <netutil:subject id="subj2-in" xmlns:netutil="http://ggf.org/ns/nmwg/characteristic/utilization/2.0/">
+        <nmwgt:interface xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/">
+          <nmwgt:hostName>localhost</nmwgt:hostName>
+          <nmwgt:ifName>eth1</nmwgt:ifName>
+          <nmwgt:ifDescription>Interface eth1 on localhost</nmwgt:ifDescription>
+          <nmwgt:ifAddress type="ipv4">127.0.1.1</nmwgt:ifAddress>
+          <nmwgt:direction>in</nmwgt:direction>
+          <nmwgt:capacity>10000000000</nmwgt:capacity>
+        </nmwgt:interface>
+      </netutil:subject>
+      <nmwg:eventType>http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:eventType>
+      <nmwg:parameters id="param2-in">
+        <nmwg:parameter name="eventType">http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:parameter>
+        <nmwg:parameter name="supportedEventType">http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:metadata>
+  </nmwg:data>
+
+  <!--
+    Bad (wrong eventType)
+  -->
+
+  <nmwg:metadata id="serviceLookupInfo3" xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+    <perfsonar:subject id="commonParameters3" xmlns:perfsonar="http://ggf.org/ns/nmwg/tools/org/perfsonar/1.0/">
+      <psservice:service id="serviceParameters3" xmlns:psservice="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/1.0/">
+        <psservice:serviceName>My_test_MA3</psservice:serviceName>
+        <psservice:accessPoint>http://localhost:8082/axis/services/snmpMA</psservice:accessPoint>
+        <psservice:serviceType>MA</psservice:serviceType>
+        <psservice:serviceDescription>This is my testing MA3</psservice:serviceDescription>
+      </psservice:service>
+    </perfsonar:subject>
+    <nmwg:eventType>http://ogf.org/ns/nmwg/tools/org/perfsonar/service/lookup/registration/service</nmwg:eventType>
+  </nmwg:metadata>
+    
+  <nmwg:data id="data3" metadataIdRef="serviceLookupInfo3" xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+    <nmwg:metadata id="meta3">
+      <netutil:subject id="subj3" xmlns:netutil="http://ggf.org/ns/nmwg/characteristic/utilization/2.0/">
+        <nmwgt:interface xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/">
+          <nmwgt:hostName>localhost</nmwgt:hostName>
+          <nmwgt:ifName>eth2</nmwgt:ifName>
+          <nmwgt:ifDescription>Interface eth2 on localhost</nmwgt:ifDescription>
+          <nmwgt:ifAddress type="ipv4">127.0.2.1</nmwgt:ifAddress>
+          <nmwgt:direction>in</nmwgt:direction>
+          <nmwgt:capacity>10000000000</nmwgt:capacity>
+        </nmwgt:interface>
+      </netutil:subject>
+      <nmwg:eventType>http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:eventType>
+      <nmwg:parameters id="param3">
+        <nmwg:parameter name="eventType">http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:parameter>
+        <nmwg:parameter name="supportedEventType">http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:metadata>
+  </nmwg:data>
+ 
+  <!--
+    Bad (gLS sync eventType) - will work for gLS instances
+  -->
+
+  <nmwg:metadata id="serviceLookupInfo4" xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+    <perfsonar:subject id="commonParameters4" xmlns:perfsonar="http://ggf.org/ns/nmwg/tools/org/perfsonar/1.0/">
+      <psservice:service id="serviceParameters4" xmlns:psservice="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/1.0/">
+        <psservice:serviceName>My_test_MA3</psservice:serviceName>
+        <psservice:accessPoint>http://localhost:8082/axis/services/snmpMA</psservice:accessPoint>
+        <psservice:serviceType>MA</psservice:serviceType>
+        <psservice:serviceDescription>This is my testing MA3</psservice:serviceDescription>
+      </psservice:service>
+    </perfsonar:subject>
+    <nmwg:eventType>http://ogf.org/ns/nmwg/tools/org/perfsonar/service/lookup/registration/synchronization/2.0</nmwg:eventType>
+  </nmwg:metadata>
+    
+  <nmwg:data id="data4" metadataIdRef="serviceLookupInfo4" xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+    <nmwg:metadata id="meta4">
+      <netutil:subject id="subj4" xmlns:netutil="http://ggf.org/ns/nmwg/characteristic/utilization/2.0/">
+        <nmwgt:interface xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/">
+          <nmwgt:hostName>localhost</nmwgt:hostName>
+          <nmwgt:ifName>eth2</nmwgt:ifName>
+          <nmwgt:ifDescription>Interface eth2 on localhost</nmwgt:ifDescription>
+          <nmwgt:ifAddress type="ipv4">127.0.2.1</nmwgt:ifAddress>
+          <nmwgt:direction>in</nmwgt:direction>
+          <nmwgt:capacity>10000000000</nmwgt:capacity>
+        </nmwgt:interface>
+      </netutil:subject>
+      <nmwg:eventType>http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:eventType>
+      <nmwg:parameters id="param4">
+        <nmwg:parameter name="eventType">http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:parameter>
+        <nmwg:parameter name="supportedEventType">http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:metadata>
+  </nmwg:data> 
+ 
+</nmwg:message>

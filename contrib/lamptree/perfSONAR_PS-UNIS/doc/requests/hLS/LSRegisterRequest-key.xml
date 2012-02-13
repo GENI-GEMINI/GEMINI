@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+Name:    LSRegisterRequest
+Purpose: Using an already registered key, add to dataset
+Outcome: 
+    Registered:
+        add new information
+    Not Registered:
+        Error
+
+-->
+
+<nmwg:message type="LSRegisterRequest"
+              id="msg1"
+              xmlns:perfsonar="http://ggf.org/ns/nmwg/tools/org/perfsonar/1.0/"
+              xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+              xmlns:psservice="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/1.0/"
+              xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/"
+              xmlns:netutil="http://ggf.org/ns/nmwg/characteristic/utilization/2.0/">
+
+  <nmwg:parameters id="parameters.1">
+    <nmwg:parameter name="lsTTL">300</nmwg:parameter>
+  </nmwg:parameters>
+
+  <nmwg:metadata id="serviceLookupInfo">
+    <nmwg:key>
+      <nmwg:parameters id="param1">
+        <nmwg:parameter name="lsKey">5cfb07ea7a5b840ce4f8f48b842ac9c0</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>  
+  </nmwg:metadata>
+    
+  <nmwg:data id="data" metadataIdRef="serviceLookupInfo">
+    <nmwg:metadata id="meta">
+      <netutil:subject id="subj" xmlns:netutil="http://ggf.org/ns/nmwg/characteristic/utilization/2.0/">
+        <nmwgt:interface xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/">
+          <nmwgt:hostName>localhost</nmwgt:hostName>
+          <nmwgt:ifName>eth5</nmwgt:ifName>
+          <nmwgt:ifDescription>Interface eth5 on localhost</nmwgt:ifDescription>
+          <nmwgt:ifAddress type="ipv4">127.0.0.5</nmwgt:ifAddress>
+          <nmwgt:direction>out</nmwgt:direction>
+          <nmwgt:capacity>10000000000</nmwgt:capacity>
+        </nmwgt:interface>
+      </netutil:subject>
+      <nmwg:eventType>http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:eventType>
+    </nmwg:metadata>
+  </nmwg:data>
+ 
+</nmwg:message>

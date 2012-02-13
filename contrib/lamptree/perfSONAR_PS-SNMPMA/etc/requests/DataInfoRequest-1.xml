@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  perfSONAR-PS DataInfo
+  
+  Use: 
+    perl client.pl URL DataInfoRequest-1.xml
+    
+  Expected Response:
+
+    <nmwg:message xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+                  messageIdRef="DataInfoRequest1" id="message.4621557" 
+                  type="DataInfoResponse">
+      <nmwg:metadata xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" id="metadata.5551555" metadataIdRef="m-in-netutil-1">
+        <netutil:subject xmlns:netutil="http://ggf.org/ns/nmwg/characteristic/utilization/2.0/" id="s-in-netutil-1">
+          <nmwgt:interface xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/">
+            <nmwgt:ifAddress type="ipv4">127.0.0.1</nmwgt:ifAddress>
+            <nmwgt:hostName>localhost</nmwgt:hostName>
+            <nmwgt:ifName>eth0</nmwgt:ifName>
+            <nmwgt:ifIndex>2</nmwgt:ifIndex>
+            <nmwgt:direction>in</nmwgt:direction>
+            <nmwgt:capacity>1000000000</nmwgt:capacity>
+          </nmwgt:interface>
+        </netutil:subject>
+        <nmwg:parameters id="p-in-netutil-1">
+          <nmwg:parameter name="supportedEventType">http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:parameter>
+          <nmwg:parameter name="supportedEventType">http://ggf.org/ns/nmwg/tools/snmp/2.0</nmwg:parameter>
+        </nmwg:parameters>
+        <nmwg:eventType>http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:eventType>
+        <nmwg:eventType>http://ggf.org/ns/nmwg/tools/snmp/2.0</nmwg:eventType>
+      </nmwg:metadata>
+    
+      <nmwg:data metadataIdRef="metadata.5551555" id="data.4806006">
+        <nmwg:data xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" id="d-in-netutil-1" metadataIdRef="m-in-netutil-1">
+          <nmwg:key id="k-in-netutil-1">
+            <nmwg:parameters id="pk-in-netutil-1">
+              <nmwg:parameter name="eventType">http://ggf.org/ns/nmwg/tools/snmp/2.0</nmwg:parameter>
+              <nmwg:parameter name="eventType">http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:parameter>
+              <nmwg:parameter name="type">rrd</nmwg:parameter>
+              <nmwg:parameter name="file">/home/jason/RELEASE/RELEASE_3.1/test/snmp/localhost.rrd</nmwg:parameter>
+              <nmwg:parameter name="valueUnits">Bps</nmwg:parameter>
+              <nmwg:parameter name="dataSource">ifinoctets</nmwg:parameter>
+              <nmwg:parameter xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" name="firstTime">1230917487</nmwg:parameter>
+              <nmwg:parameter xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" name="lastTime">1231159406</nmwg:parameter>
+              <nmwg:parameter xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" name="maKey">aa0db2b9c7acd26a8eae4f576cc30149</nmwg:parameter>
+            </nmwg:parameters>
+          </nmwg:key>
+        </nmwg:data>
+      </nmwg:data>
+    </nmwg:message>
+
+-->
+
+<nmwg:message xmlns:netutil="http://ggf.org/ns/nmwg/characteristic/utilization/2.0/"
+              xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+              xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/"
+              type="DataInfoRequest" id="DataInfoRequest1">
+
+  <nmwg:metadata xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" 
+                 id="metadata1">
+    <netutil:subject xmlns:netutil="http://ggf.org/ns/nmwg/characteristic/utilization/2.0/"
+                     id="s-in-netutil-1">
+      <nmwgt:interface xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/">
+        <nmwgt:ifAddress type="ipv4">127.0.0.1</nmwgt:ifAddress>
+        <nmwgt:hostName>localhost</nmwgt:hostName>
+        <nmwgt:direction>in</nmwgt:direction>
+      </nmwgt:interface>
+    </netutil:subject>
+    <nmwg:eventType>http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:eventType>
+  </nmwg:metadata> 
+
+  <nmwg:data xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+             id="data1" metadataIdRef="metadata1"/>
+
+</nmwg:message>

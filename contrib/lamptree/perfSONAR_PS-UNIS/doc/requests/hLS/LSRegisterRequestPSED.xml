@@ -1,0 +1,17 @@
+<nmwg:message type="LSRegisterRequest" id="930886" xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"><nmwg:metadata id="692777">
+    <nmwg:subject>
+      <nmtb:service xmlns:nmtb="http://ogf.org/schema/network/base/20070707/">
+        <nmtb:domain>lampsliceXXX</nmtb:domain>
+        <nmtb:name>Another Test PSED</nmtb:name>
+        <nmtb:type>psed</nmtb:type>
+        <nmtb:description>pS Event Daemon</nmtb:description>
+        <nmtb:address type="uri">tcp://192.168.1.20:3313</nmtb:address>
+      </nmtb:service>
+    </nmwg:subject>
+</nmwg:metadata>
+<nmwg:data metadataIdRef="692777" id="636915">
+    <nmwg:metadata id="289383">
+        <nmwg:subject/>
+        <nmwg:eventType>http://ggf.org/ns/nmwg/tools/psed/2.0</nmwg:eventType>
+    </nmwg:metadata>
+</nmwg:data></nmwg:message>

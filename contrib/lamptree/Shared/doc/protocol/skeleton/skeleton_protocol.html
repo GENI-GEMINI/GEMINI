@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>perfSONAR XXX Protocol</title><meta name="generator" content="DocBook XSL Stylesheets V1.71.0" /></head><body><div class="article" lang="en" xml:lang="en"><div class="titlepage"><div><div><h1 class="title"><a id="id2479485"></a>perfSONAR XXX Protocol</h1></div><div><div class="author"><h3 class="author"><span class="firstname">XXX</span> <span class="surname">XXX</span></h3><div class="affiliation"><span class="orgname">XXX<br /></span><div class="address"><p>   <br />
+          <code class="email">&lt;<a href="mailto:XXX@XXX.XXX">XXX@XXX.XXX</a>&gt;</code><br />
+        </p></div></div></div></div><div><p class="copyright">Copyright © 2007 XXX</p></div></div><hr /></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#changes">1. Document Changes</a></span></dt><dt><span class="section"><a href="#introduction">2. Introduction</a></span></dt><dt><span class="section"><a href="#architecture">3. System Architecture</a></span></dt><dt><span class="section"><a href="#protocol">4. XXX Protocol</a></span></dt><dd><dl><dt><span class="section"><a href="#request_message">4.1. Request Message</a></span></dt><dd><dl><dt><span class="section"><a href="#request_example">4.1.1. Request Example</a></span></dt><dd><dl><dt><span class="section"><a href="#request_schema_message">4.1.1.1. Message Element</a></span></dt></dl></dd><dt><span class="section"><a href="#request_schema">4.1.2. Request Schema</a></span></dt><dd><dl><dt><span class="section"><a href="#request_schema_relax">4.1.2.1. RELAX-NG</a></span></dt><dt><span class="section"><a href="#request_schema_xsd">4.1.2.2. XSD</a></span></dt></dl></dd></dl></dd><dt><span class="section"><a href="#response_message">4.2. Response Message</a></span></dt><dd><dl><dt><span class="section"><a href="#response_example">4.2.1. Response Example</a></span></dt><dd><dl><dt><span class="section"><a href="#response_schema_message">4.2.1.1. Message Element</a></span></dt></dl></dd><dt><span class="section"><a href="#response_schema">4.2.2. Response Schema</a></span></dt><dd><dl><dt><span class="section"><a href="#response_schema_relax">4.2.2.1. RELAX-NG</a></span></dt><dt><span class="section"><a href="#response_schema_xsd">4.2.2.2. XSD</a></span></dt></dl></dd></dl></dd><dt><span class="section"><a href="#protocol_extension">4.3. Extensions</a></span></dt></dl></dd><dt><span class="glossary"><a href="#glossary">Terms</a></span></dt><dt><span class="bibliography"><a href="#bibliography">References</a></span></dt></dl></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="changes"></a>1. Document Changes</h2></div></div></div><div class="table"><a id="table.1"></a><p class="title"><b>Table 1. Change Log</b></p><div class="table-contents"><table summary="Change Log" border="1"><colgroup><col align="left" /></colgroup><thead><tr><th align="left">Version</th><th align="left">Date</th><th align="left">Description</th><th align="left">Author(s)</th></tr></thead><tbody><tr><td align="left">XXX</td><td align="left">XX/XX/200X</td><td align="left">Initial Preparation</td><td align="left">XXX</td></tr></tbody></table></div></div><br class="table-break" /></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="introduction"></a>2. Introduction</h2></div></div></div><p>
+      The <a href="#id2527715">perfSONAR</a> software suite is an infrastructure 
+      for network performance monitoring, making it easier to solve end-to-end 
+      performance problems on paths crossing several networks.  This set of 
+      independent software services is focused on the task of delivering 
+      performance measurements within a <span class="emphasis"><em>federated</em></span> 
+      environment. These services act as an intermediate layer, between the 
+      functions provided by the performance measurement tools and that of the 
+      diagnostic and visualization applications (i.e network 
+      <span class="emphasis"><em>weathermaps</em></span>, [<span class="citation">perfSONAR-UI</span>], etc.). 
+      The goal of this layer is making and exchanging performance measurements 
+      between networks, utilizing well-defined protocols.
+    </p><p>
+      ... Add some more introductory material about this particular protocol,
+      the service it may use, and set the stage for what you hope to talk
+      about ...
+    </p><p>  
+      The remainder of this document will explain the origins of this protocol
+      in <a href="#architecture">Architecture</a>, detailed descriptions regarding syntax
+      and semantics in <a href="#protocol">XXX Protocol</a> and finally
+      points of extension will be discussed in 
+      <a href="#protocol_extension">Extensions</a>.
+    </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="architecture"></a>3. System Architecture</h2></div></div></div><p>
+      ... Talk about the pS architecture in general, then get specific about
+      the particular service this protocol is being used for.  Don't go into
+      pages of detail, just enough to motivate why this protocol is needed for
+      ther service and a litt of what it does ...
+    </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="protocol"></a>4. XXX Protocol</h2></div></div></div><p>
+      ... Start talking about the protocol in general.  There are probably
+      several message sets (requests, responses) that are in use, mention
+      those here first ...
+    </p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="request_message"></a>4.1. Request Message</h3></div></div></div><p>
+        ...  use this to talk about a specific requet message, mention why
+        it is needed and what it accomplishes.  Then give an example of what
+        it looks like, then describe each part, then finally go into schema
+        details ...
+      </p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="request_example"></a>4.1.1. Request Example</h4></div></div></div><pre class="programlisting">
+          
+            &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+            &lt;nmwg:message type="Request"
+                          id="message.54957485"
+                          xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"&gt;
+ 
+              &lt;!-- some message --&gt;
+              
+            &lt;/nmwg:message&gt;
+          
+        </pre><p>
+          ... set the stage to talk about the parts of this example ...
+        </p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="request_schema_message"></a>4.1.1.1. Message Element</h5></div></div></div><pre class="programlisting">
+            
+              &lt;nmwg:message type="Request"
+                            id="STRING"
+                            xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"&gt;
+
+              &lt;/nmwg:message&gt;
+            
+          </pre><div class="itemizedlist"><ul type="opencircle"><li style="list-style-type: circle"><p><span><strong class="command">localname</strong></span> - message</p></li><li style="list-style-type: circle"><p><span><strong class="command">namespace</strong></span> - http://ggf.org/ns/nmwg/base/2.0/</p></li><li style="list-style-type: circle"><p><span><strong class="command">attributes</strong></span> - id, type</p></li><li style="list-style-type: circle"><p><span><strong class="command">nested elements</strong></span> - N/A</p></li><li style="list-style-type: circle"><p><span><strong class="command">required</strong></span> - yes</p></li></ul></div><p>
+            ... talk about why we need this, and the stuff that makes it what
+            it is (elements, namespace, attributes, etc.).  Be detailed here, 
+            because this part matters the most ...
+          </p></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="request_schema"></a>4.1.2. Request Schema</h4></div></div></div><p>
+          ... insert some VALID schema here.  Since we write these in 
+          RELAX-NG, use that always.  Sometimes it makes sense to include
+          XSD as well ...
+        </p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="request_schema_relax"></a>4.1.2.1. RELAX-NG</h5></div></div></div><p>
+            ... talk about it a little ...
+          </p><pre class="programlisting">
+            
+              namespace nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+
+              start = 
+                element nmwg:message { 
+                  attribute id { xsd:string } &amp;
+                  attribute type { "Request" } &amp;
+                }
+            
+          </pre></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="request_schema_xsd"></a>4.1.2.2. XSD</h5></div></div></div><p>
+            ... talk about it a little ...
+          </p><pre class="programlisting">
+            
+              &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+              &lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+                         elementFormDefault="qualified" 
+                         targetNamespace="http://ggf.org/ns/nmwg/base/2.0/" 
+                         xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"&gt;
+                &lt;xs:element name="message"&gt;
+                  &lt;xs:complexType&gt;
+                    &lt;xs:attribute name="id" use="required" type="xs:string"/&gt;
+                    &lt;xs:attribute name="type" use="required"&gt;
+                      &lt;xs:simpleType&gt;
+                        &lt;xs:restriction base="xs:token"&gt;
+                          &lt;xs:enumeration value="Request"/&gt;
+                        &lt;/xs:restriction&gt;
+                      &lt;/xs:simpleType&gt;
+                    &lt;/xs:attribute&gt;
+                  &lt;/xs:complexType&gt;
+                &lt;/xs:element&gt;
+              &lt;/xs:schema&gt;
+            
+          </pre></div></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="response_message"></a>4.2. Response Message</h3></div></div></div><p>
+        ...  use this to talk about a specific requet message, mention why
+        it is needed and what it accomplishes.  Then give an example of what
+        it looks like, then describe each part, then finally go into schema
+        details ...
+      </p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="response_example"></a>4.2.1. Response Example</h4></div></div></div><pre class="programlisting">
+          
+            &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+            &lt;nmwg:message type="Response"
+                          id="message.54957485"
+                          xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"&gt;
+ 
+              &lt;!-- some message --&gt;
+              
+            &lt;/nmwg:message&gt;
+          
+        </pre><p>
+          ... set the stage to talk about the parts of this example ...
+        </p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="response_schema_message"></a>4.2.1.1. Message Element</h5></div></div></div><pre class="programlisting">
+            
+              &lt;nmwg:message type="Response"
+                            id="STRING"
+                            xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"&gt;
+
+              &lt;/nmwg:message&gt;
+            
+          </pre><div class="itemizedlist"><ul type="opencircle"><li style="list-style-type: circle"><p><span><strong class="command">localname</strong></span> - message</p></li><li style="list-style-type: circle"><p><span><strong class="command">namespace</strong></span> - http://ggf.org/ns/nmwg/base/2.0/</p></li><li style="list-style-type: circle"><p><span><strong class="command">attributes</strong></span> - id, type</p></li><li style="list-style-type: circle"><p><span><strong class="command">nested elements</strong></span> - N/A</p></li><li style="list-style-type: circle"><p><span><strong class="command">required</strong></span> - yes</p></li></ul></div><p>
+            ... talk about why we need this, and the stuff that makes it what
+            it is (elements, namespace, attributes, etc.).  Be detailed here, 
+            because this part matters the most ...
+          </p></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h4 class="title"><a id="response_schema"></a>4.2.2. Response Schema</h4></div></div></div><p>
+          ... insert some VALID schema here.  Since we write these in 
+          RELAX-NG, use that always.  Sometimes it makes sense to include
+          XSD as well ...
+        </p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="response_schema_relax"></a>4.2.2.1. RELAX-NG</h5></div></div></div><p>
+            ... talk about it a little ...
+          </p><pre class="programlisting">
+            
+              namespace nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+
+              start = 
+                element nmwg:message { 
+                  attribute id { xsd:string } &amp;
+                  attribute type { "Response" } &amp;
+                }
+            
+          </pre></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h5 class="title"><a id="response_schema_xsd"></a>4.2.2.2. XSD</h5></div></div></div><p>
+            ... talk about it a little ...
+          </p><pre class="programlisting">
+            
+              &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+              &lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+                         elementFormDefault="qualified" 
+                         targetNamespace="http://ggf.org/ns/nmwg/base/2.0/" 
+                         xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"&gt;
+                &lt;xs:element name="message"&gt;
+                  &lt;xs:complexType&gt;
+                    &lt;xs:attribute name="id" use="required" type="xs:string"/&gt;
+                    &lt;xs:attribute name="type" use="required"&gt;
+                      &lt;xs:simpleType&gt;
+                        &lt;xs:restriction base="xs:token"&gt;
+                          &lt;xs:enumeration value="Response"/&gt;
+                        &lt;/xs:restriction&gt;
+                      &lt;/xs:simpleType&gt;
+                    &lt;/xs:attribute&gt;
+                  &lt;/xs:complexType&gt;
+                &lt;/xs:element&gt;
+              &lt;/xs:schema&gt;
+            
+          </pre></div></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="protocol_extension"></a>4.3. Extensions</h3></div></div></div><p>
+        ...  this could be optional, but discuss optional (perhaps service
+        specific) recomendations that can be used to extend the base of the
+        protocol ...
+      </p></div></div><div class="glossary"><div class="titlepage"><div><div><h2 class="title"><a id="glossary"></a>Terms</h2></div></div></div><div class="glossdiv"><dl></dl></div><div class="glossdiv"><dl></dl></div><div class="glossdiv"><h3 class="title">C</h3><dl><dt><a id="characteristic"></a>characteristic</dt><dd><p>Taken on the context of networking, these describe the 
+          intrinsic properties of a portion of the network that are related 
+          to the performance and reliability of the network.  See 
+          <a href="http://www.ggf.org/documents/GFD.23.pdf" target="_top">http://www.ggf.org/documents/GFD.23.pdf</a> 
+          for more information.</p></dd></dl></div><div class="glossdiv"><dl></dl></div><div class="glossdiv"><dl></dl></div><div class="glossdiv"><dl></dl></div><div class="glossdiv"><dl></dl></div><div class="glossdiv"><dl></dl></div><div class="glossdiv"><dl></dl></div><div class="glossdiv"><dl></dl></div><div class="glossdiv"><dl></dl></div><div class="glossdiv"><dl></dl></div><div class="glossdiv"><dl></dl></div><div class="glossdiv"><h3 class="title">N</h3><dl><dt><a id="NMWG"></a>NM-WG</dt><dd><p>The performance of most grid applications is dependent on the 
+          performance of the networks forming the grid. The Network 
+          Measurements Working Group (NMWG) identifies network metrics 
+          (aka <a href="#characteristic">characteristics</a>) useful to grid applications 
+          and middleware, and develops standard mechanisms to describe and 
+          publish these characteristics to the Grid.</p></dd></dl></div><div class="glossdiv"><dl></dl></div><div class="glossdiv"><dl></dl></div><div class="glossdiv"><dl></dl></div><div class="glossdiv"><dl></dl></div><div class="glossdiv"><h3 class="title">S</h3><dl><dt><a id="schema"></a>schema</dt><dd><p>XML specification, normally written in XML.</p></dd><dt><a id="schemata"></a>schemata</dt><dd><p>Plural of schema.</p></dd></dl></div><div class="glossdiv"><dl></dl></div><div class="glossdiv"><dl></dl></div><div class="glossdiv"><dl></dl></div><div class="glossdiv"><dl></dl></div><div class="glossdiv"><dl></dl></div><div class="glossdiv"><dl></dl></div><div class="glossdiv"><dl></dl></div></div><div class="bibliography"><div class="titlepage"><div><div><h2 class="title"><a id="bibliography"></a>References</h2></div></div></div><div class="biblioentry"><a id="id2527622"></a><p>[<abbr class="abbrev">MSV</abbr>] <span class="title"><i>
+        <a href="https://msv.dev.java.net/" target="_top">Sun Multi-Schema XML Validator (MSV)</a>
+      </i>. </span></p></div><div class="biblioentry"><a id="id2527641"></a><p>[<abbr class="abbrev">Trang</abbr>] <span class="title"><i>
+        <a href="http://www.thaiopensource.com/relaxng/trang.html" target="_top">Multi-format schema converter based on RELAX NG</a>
+      </i>. </span></p></div><div class="biblioentry"><a id="id2527660"></a><p>[<abbr class="abbrev">NMWG-Schema</abbr>] <span class="title"><i>
+        <a href="http://nmwg.internet2.edu/nm-schema-base.html" target="_top">NMWG Base Schema</a>
+      </i>. </span></p></div><div class="biblioentry"><a id="id2527678"></a><p>[<abbr class="abbrev">RELAX-NG</abbr>] <span class="title"><i>
+        <a href="http://relaxng.org/" target="_top">RELAX-NG Schema Language</a>
+      </i>. </span></p></div><div class="biblioentry"><a id="id2527697"></a><p>[<abbr class="abbrev">NM-WG</abbr>] <span class="title"><i>
+        <a href="http://nmwg.internet2.edu" target="_top">Network Measurements Working Group</a>
+      </i>. </span></p></div><div class="biblioentry"><a id="id2527715"></a><p>[<abbr class="abbrev">perfSONAR</abbr>] <span class="title"><i>
+        <a href="http://www.perfsonar.net" target="_top">perfSONAR</a>
+      </i>. </span></p></div><div class="biblioentry"><a id="id2527734"></a><p>[<abbr class="abbrev">XML</abbr>] <span class="title"><i>
+        <a href="http://www.w3.org/XML" target="_top">Extensible Markup Language (XML)</a>
+      </i>. </span></p></div><div class="biblioentry"><a id="id2527752"></a><p>[<abbr class="abbrev">OGF</abbr>] <span class="title"><i>
+        <a href="http://www.ogf.org/" target="_top">(Global|Open) Grid Forum</a>
+      </i>. </span></p></div><div class="biblioentry"><a id="id2527770"></a><p>[<abbr class="abbrev">Zurawski06Scalable</abbr>] <span class="title"><i>A Scalable Framework for Representation and Exchange of Network Measurements</i>. </span><span class="authorgroup"><span class="firstname">J.</span> <span class="surname">Zurawski</span>, <span class="firstname">M.</span> <span class="surname">Swany</span>, and <span class="firstname">D.</span> <span class="surname">Gunter</span>. </span><span class="confgroup"><span class="confdates">March, 2006. </span><span class="conftitle">2nd International IEEE/Create-Net Conference on Testbeds and Research Infrastructures for the Development of Networks and Communities. </span><span class="address">Barcelona, Spain. </span><span class="confsponsor">IEEE/Create-Net. </span>. </span></p></div><div class="biblioentry"><a id="id2527840"></a><p>[<abbr class="abbrev">XSD</abbr>] <span class="title"><i>
+        <a href="http://www.w3.org/XML/Schema" target="_top">XML Schema</a>
+      </i>. </span></p></div></div></div></body></html>

@@ -1,0 +1,188 @@
+namespace iperf = "http://ggf.org/ns/nmwg/tools/iperf/2.0/"
+namespace nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+namespace nmwgt="http://ggf.org/ns/nmwg/topology/2.0/"
+namespace nmwgtopo="http://ggf.org/ns/nmwg/topology/2.0/"
+namespace nmwgtopo3 = "http://ggf.org/ns/nmwg/topology/base/3.0/"
+namespace nmtl3 = "http://ggf.org/ns/nmwg/topology/base/3.0/"
+namespace nmtl4 = "http://ggf.org/ns/nmwg/topology/l4/3.0/"
+namespace psservice="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/1.0/"
+namespace perfsonar="http://ggf.org/ns/nmwg/tools/org/perfsonar/1.0/"
+
+
+start = element nmwg:message {
+          MessageContent 
+        }
+
+MessageContent =
+        Identifier? &
+        MessageIdentifierRef? &
+        Type &
+        (
+          ServiceMetadata &
+          Data+
+        )
+
+Identifier =
+        attribute id { 
+          xsd:string 
+        }
+
+MessageIdentifierRef =
+        attribute messageIdRef { 
+          xsd:string 
+        }
+
+Type =
+        attribute type { 
+          "LSRegisterRequest" 
+        }
+
+ServiceMetadata=
+        element nmwg:metadata {
+          (
+            Identifier &
+            MetadataIdentifierRef? &
+            ServiceSubject
+          )
+        }
+
+MetadataIdentifierRef =
+        attribute metadataIdRef { 
+          xsd:string
+        }
+
+ServiceSubject = element perfsonar:subject {
+                   (
+                     Identifier? &
+                     ServiceInfo
+                   )
+                 }
+
+ServiceInfo =
+        element psservice:service {
+          Identifier? &
+          element psservice:serviceName {xsd:string} &
+          element psservice:accessPoint {xsd:string} &
+          element psservice:serviceType {xsd:string} &
+          element psservice:serviceDescription {xsd:string}
+                
+        }
+
+Data =
+        element nmwg:data {
+           Identifier &
+           MetadataIdentifierRef &
+           IperfMetadata+     
+        }
+
+IperfMetadata = 
+        element nmwg:metadata {
+                Identifier &
+                MetadataIdentifierRef? &
+                IperfMetadataContent
+        }
+          
+IperfMetadataContent = 
+        IperfSubject &
+        (
+          IperfParameters |
+          NMWGParameters    
+        )? &
+        element nmwg:eventType { 
+          xsd:string 
+        }+
+
+IperfSubject =
+        element iperf:subject {
+                Identifier &
+                MetadataIdentifierRef? &        
+                (                   
+                        EndpointPair |
+                        L4EndpointPair
+                )
+        }
+
+IperfParameters =
+        element iperf:parameters {
+                Identifier &        
+                IperfParameter+
+        }
+
+NMWGParameters =
+        element nmwg:parameters {
+                Identifier &        
+                IperfParameter+
+        }
+        
+IperfParameter = 
+        element nmwg:parameter { 
+                attribute name { "format" | "interval" | "protocol" | 
+                                 "bufferLength" | "windowSize" | 
+                                 "windowSizeRequest" | "timeDuration" | 
+                                 "arguments" | "valueUnits" | "numBytes" | 
+                                 "numBytesUnits" } &
+                (
+                        attribute value { text } |
+                        text
+                )
+        }
+        
+EndpointPair = 
+        element nmwgtopo:endPointPair {
+                EndpointPairContent
+        }
+
+EndpointPairContent =
+        element nmwgtopo:src {
+                EndpointContent
+        } &
+        element nmwgtopo:dst {
+                EndpointContent
+        }  
+
+EndpointContent = 
+        (
+                attribute value { xsd:string } |
+                text
+        ) &
+        attribute type { xsd:string } &
+        attribute port { xsd:string }?
+
+L4EndpointPair = 
+        element nmtl4:endPointPair {
+                L4EndpointPairContent
+        }
+
+L4EndpointPairContent =
+        (
+                element nmtl4:endPoint {
+                        attribute port { xsd:string }? &
+                        attribute protocol { xsd:string }? &
+                        (
+                                attribute role { "src" } |
+                                element nmwgtopo3:role { "src" }
+                        )? &
+                        (
+                                element nmtl4:address { L4Address }
+                        )?                
+                },
+                element nmtl4:endPoint {
+                        attribute port { xsd:string }? &
+                        attribute protocol { xsd:string }? &
+                        (
+                                attribute role { "dst" } |
+                                element nmwgtopo3:role { "dst" }
+                        )? &
+                        (
+                                element nmtl4:address { L4Address }
+                        )                
+                } 
+        )
+
+L4Address = 
+        (
+                attribute value { xsd:string } |
+                text
+        ) &
+        attribute type { xsd:string }
+

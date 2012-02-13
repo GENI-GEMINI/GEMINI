@@ -1,0 +1,250 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+Name:    LSRegisterRequest-clobber
+Purpose: Test 'clobber' Registration to hLS/gLS instances
+Outcome: 
+	hLS
+		Not Regisitered (e.g. bad keys)
+			Reject when sent key is not found for no and proper et
+			Reject improper et anyway
+		Registered (e.g. good key)
+			Remove all data, add new data update time when key and
+			et type is proper
+	gLS
+		Fail (can't accept due to eventTypes)
+-->
+
+<nmwg:message type="LSRegisterRequest"
+              id="LSRegisterRequest-clobber"
+              xmlns:perfsonar="http://ggf.org/ns/nmwg/tools/org/perfsonar/1.0/"
+              xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+              xmlns:psservice="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/1.0/"
+              xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/"
+              xmlns:netutil="http://ggf.org/ns/nmwg/characteristic/utilization/2.0/">
+
+  <!--
+    Clobber with a good key (e.g. no eventType)
+    
+    lsKey = 5cfb07ea7a5b840ce4f8f48b842ac9c0
+    
+  -->
+
+  <nmwg:metadata id="serviceLookupInfo1" xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+
+    <nmwg:key>
+      <nmwg:parameters id="param1">
+        <nmwg:parameter name="lsKey">5cfb07ea7a5b840ce4f8f48b842ac9c0</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>       
+    
+    <perfsonar:subject id="commonParameters1" xmlns:perfsonar="http://ggf.org/ns/nmwg/tools/org/perfsonar/1.0/">
+      <psservice:service id="serviceParameters1" xmlns:psservice="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/1.0/">
+        <psservice:serviceName>My_test_MA11</psservice:serviceName>
+        <psservice:accessPoint>http://localhost:8011/axis/services/snmpMA</psservice:accessPoint>
+        <psservice:serviceType>MA</psservice:serviceType>
+        <psservice:serviceDescription>This is my testing MA11</psservice:serviceDescription>
+      </psservice:service>
+    </perfsonar:subject>
+  </nmwg:metadata>
+    
+  <nmwg:data id="data1" metadataIdRef="serviceLookupInfo1" xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+    <nmwg:metadata id="meta1-in">
+      <netutil:subject id="subj1-in" xmlns:netutil="http://ggf.org/ns/nmwg/characteristic/utilization/2.0/">
+        <nmwgt:interface xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/">
+          <nmwgt:hostName>localhost</nmwgt:hostName>
+          <nmwgt:ifName>eth11</nmwgt:ifName>
+          <nmwgt:ifDescription>Interface eth11 on localhost</nmwgt:ifDescription>
+          <nmwgt:ifAddress type="ipv4">127.0.11.1</nmwgt:ifAddress>
+          <nmwgt:direction>in</nmwgt:direction>
+          <nmwgt:capacity>10000000000</nmwgt:capacity>
+        </nmwgt:interface>
+      </netutil:subject>
+      <nmwg:eventType>http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:eventType>
+      <nmwg:parameters id="param1-in">
+        <nmwg:parameter name="eventType">http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:parameter>
+        <nmwg:parameter name="supportedEventType">http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:metadata>
+
+    <nmwg:metadata id="meta1-out">
+      <netutil:subject id="subj1-out" xmlns:netutil="http://ggf.org/ns/nmwg/characteristic/utilization/2.0/">
+        <nmwgt:interface xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/">
+          <nmwgt:hostName>localhost</nmwgt:hostName>
+          <nmwgt:ifName>eth11</nmwgt:ifName>
+          <nmwgt:ifDescription>Interface eth11 on localhost</nmwgt:ifDescription>
+          <nmwgt:ifAddress type="ipv4">127.0.11.1</nmwgt:ifAddress>
+          <nmwgt:direction>out</nmwgt:direction>
+          <nmwgt:capacity>10000000000</nmwgt:capacity>
+        </nmwgt:interface>
+      </netutil:subject>
+      <nmwg:eventType>http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:eventType>
+      <nmwg:parameters id="param1-out">
+        <nmwg:parameter name="eventType">http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:parameter>
+        <nmwg:parameter name="supportedEventType">http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:metadata>
+  </nmwg:data>
+
+  <!--
+    Clobber with a good key (e.g. with eventType)
+    
+    lsKey = 9fe2a44e68fb22a51249f9b3e67137d0
+  -->
+
+  <nmwg:metadata id="serviceLookupInfo2" xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+  
+    <nmwg:key>
+      <nmwg:parameters id="param1">
+        <nmwg:parameter name="lsKey">9fe2a44e68fb22a51249f9b3e67137d0</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>  
+  
+    <perfsonar:subject id="commonParameters2" xmlns:perfsonar="http://ggf.org/ns/nmwg/tools/org/perfsonar/1.0/">
+      <psservice:service id="serviceParameters2" xmlns:psservice="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/1.0/">
+        <psservice:serviceName>My_test_MA22</psservice:serviceName>
+        <psservice:accessPoint>http://localhost:8022/axis/services/snmpMA</psservice:accessPoint>
+        <psservice:serviceType>MA</psservice:serviceType>
+        <psservice:serviceDescription>This is my testing MA22</psservice:serviceDescription>
+      </psservice:service>
+    </perfsonar:subject>
+    <nmwg:eventType>http://ogf.org/ns/nmwg/tools/org/perfsonar/service/lookup/registration/service/2.0</nmwg:eventType>
+  </nmwg:metadata>
+    
+  <nmwg:data id="data2" metadataIdRef="serviceLookupInfo2" xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+    <nmwg:metadata id="meta2">
+      <netutil:subject id="subj2" xmlns:netutil="http://ggf.org/ns/nmwg/characteristic/utilization/2.0/">
+        <nmwgt:interface xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/">
+          <nmwgt:hostName>localhost</nmwgt:hostName>
+          <nmwgt:ifName>eth22</nmwgt:ifName>
+          <nmwgt:ifDescription>Interface eth22 on localhost</nmwgt:ifDescription>
+          <nmwgt:ifAddress type="ipv4">127.0.22.1</nmwgt:ifAddress>
+          <nmwgt:direction>out</nmwgt:direction>
+          <nmwgt:capacity>10000000000</nmwgt:capacity>
+        </nmwgt:interface>
+      </netutil:subject>
+      <nmwg:eventType>http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:eventType>
+      <nmwg:parameters id="param2">
+        <nmwg:parameter name="eventType">http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:parameter>
+        <nmwg:parameter name="supportedEventType">http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:metadata>
+  </nmwg:data>
+
+  <!--
+    Bad (wrong eventType)
+  -->
+
+  <nmwg:metadata id="serviceLookupInfo3" xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+
+    <nmwg:key>
+      <nmwg:parameters id="param1">
+        <nmwg:parameter name="lsKey">JunkKeyButItDoesntMatterAnyway</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key> 
+
+    <perfsonar:subject id="commonParameters3" xmlns:perfsonar="http://ggf.org/ns/nmwg/tools/org/perfsonar/1.0/">
+      <psservice:service id="serviceParameters3" xmlns:psservice="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/1.0/">
+        <psservice:serviceName>My_test_MA33</psservice:serviceName>
+        <psservice:accessPoint>http://localhost:8033/axis/services/snmpMA</psservice:accessPoint>
+        <psservice:serviceType>MA</psservice:serviceType>
+        <psservice:serviceDescription>This is my testing MA33</psservice:serviceDescription>
+      </psservice:service>
+    </perfsonar:subject>
+    <nmwg:eventType>http://ogf.org/ns/nmwg/tools/org/perfsonar/service/lookup/registration/service</nmwg:eventType>
+  </nmwg:metadata>
+    
+  <nmwg:data id="data3" metadataIdRef="serviceLookupInfo3" xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+    <nmwg:metadata id="meta3">
+      <netutil:subject id="subj3" xmlns:netutil="http://ggf.org/ns/nmwg/characteristic/utilization/2.0/">
+        <nmwgt:interface xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/">
+          <nmwgt:hostName>localhost</nmwgt:hostName>
+          <nmwgt:ifName>eth33</nmwgt:ifName>
+          <nmwgt:ifDescription>Interface eth33 on localhost</nmwgt:ifDescription>
+          <nmwgt:ifAddress type="ipv4">127.0.33.1</nmwgt:ifAddress>
+          <nmwgt:direction>in</nmwgt:direction>
+          <nmwgt:capacity>10000000000</nmwgt:capacity>
+        </nmwgt:interface>
+      </netutil:subject>
+      <nmwg:eventType>http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:eventType>
+    </nmwg:metadata>
+  </nmwg:data>
+
+  <!--
+    Junk Key (no eventType)
+  -->
+
+  <nmwg:metadata id="serviceLookupInfo4" xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+
+    <nmwg:key>
+      <nmwg:parameters id="param1">
+        <nmwg:parameter name="lsKey">JunkKeyButItDoesntMatterAnyway</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key> 
+
+    <perfsonar:subject id="commonParameters4" xmlns:perfsonar="http://ggf.org/ns/nmwg/tools/org/perfsonar/1.0/">
+      <psservice:service id="serviceParameters4" xmlns:psservice="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/1.0/">
+        <psservice:serviceName>My_test_MA33</psservice:serviceName>
+        <psservice:accessPoint>http://localhost:8033/axis/services/snmpMA</psservice:accessPoint>
+        <psservice:serviceType>MA</psservice:serviceType>
+        <psservice:serviceDescription>This is my testing MA33</psservice:serviceDescription>
+      </psservice:service>
+    </perfsonar:subject>
+  </nmwg:metadata>
+    
+  <nmwg:data id="data4" metadataIdRef="serviceLookupInfo4" xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+    <nmwg:metadata id="meta3">
+      <netutil:subject id="subj3" xmlns:netutil="http://ggf.org/ns/nmwg/characteristic/utilization/2.0/">
+        <nmwgt:interface xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/">
+          <nmwgt:hostName>localhost</nmwgt:hostName>
+          <nmwgt:ifName>eth33</nmwgt:ifName>
+          <nmwgt:ifDescription>Interface eth33 on localhost</nmwgt:ifDescription>
+          <nmwgt:ifAddress type="ipv4">127.0.33.1</nmwgt:ifAddress>
+          <nmwgt:direction>in</nmwgt:direction>
+          <nmwgt:capacity>10000000000</nmwgt:capacity>
+        </nmwgt:interface>
+      </netutil:subject>
+      <nmwg:eventType>http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:eventType>
+    </nmwg:metadata>
+  </nmwg:data>
+
+  <!--
+    Junk Key (eventType)
+  -->
+
+  <nmwg:metadata id="serviceLookupInfo5" xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+
+    <nmwg:key>
+      <nmwg:parameters id="param1">
+        <nmwg:parameter name="lsKey">JunkKeyButItDoesntMatterAnyway</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key> 
+
+    <perfsonar:subject id="commonParameters5" xmlns:perfsonar="http://ggf.org/ns/nmwg/tools/org/perfsonar/1.0/">
+      <psservice:service id="serviceParameters5" xmlns:psservice="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/1.0/">
+        <psservice:serviceName>My_test_MA33</psservice:serviceName>
+        <psservice:accessPoint>http://localhost:8033/axis/services/snmpMA</psservice:accessPoint>
+        <psservice:serviceType>MA</psservice:serviceType>
+        <psservice:serviceDescription>This is my testing MA33</psservice:serviceDescription>
+      </psservice:service>
+    </perfsonar:subject>
+    <nmwg:eventType>http://ogf.org/ns/nmwg/tools/org/perfsonar/service/lookup/registration/service/2.0</nmwg:eventType>
+  </nmwg:metadata>
+    
+  <nmwg:data id="data5" metadataIdRef="serviceLookupInfo5" xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+    <nmwg:metadata id="meta3">
+      <netutil:subject id="subj3" xmlns:netutil="http://ggf.org/ns/nmwg/characteristic/utilization/2.0/">
+        <nmwgt:interface xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/">
+          <nmwgt:hostName>localhost</nmwgt:hostName>
+          <nmwgt:ifName>eth33</nmwgt:ifName>
+          <nmwgt:ifDescription>Interface eth33 on localhost</nmwgt:ifDescription>
+          <nmwgt:ifAddress type="ipv4">127.0.33.1</nmwgt:ifAddress>
+          <nmwgt:direction>in</nmwgt:direction>
+          <nmwgt:capacity>10000000000</nmwgt:capacity>
+        </nmwgt:interface>
+      </netutil:subject>
+      <nmwg:eventType>http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:eventType>
+    </nmwg:metadata>
+  </nmwg:data>
+
+</nmwg:message>

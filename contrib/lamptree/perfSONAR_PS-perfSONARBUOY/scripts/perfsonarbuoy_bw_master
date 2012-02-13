@@ -1,0 +1,48 @@
+#!/bin/bash
+#
+# Init file for perfSONAR perfSONAR-BUOY BWCTL Measurement Service
+#
+# chkconfig: 2345 60 20
+# description: perfSONAR perfSONAR-BUOY BWCTL Measurement Service
+#
+
+TOOL="perfSONAR perfSONAR-BUOY BWCTL Measurement Service"
+PREFIX=/opt/perfsonar_ps/perfsonarbuoy_ma
+CONF_PREFIX=${PREFIX}/etc
+TOOL_EXE=${PREFIX}/bin/bwmaster.pl
+
+# probably need to add a '-n node' into cmd
+# (unless specified by a HOST block in config file)
+cmd="$TOOL_EXE -c $CONF_PREFIX "
+
+case "$1" in
+start)
+        [ -x $TOOL_EXE ] && $cmd && echo 'perfSONAR-BUOY BWCTL Measurement Service Started'
+	if [ $? != 0 ]; then
+		echo "Couldn't start perfSONAR-BUOY BWCTL Measurement Service"
+	fi
+        ;;
+stop)
+        [ -x $TOOL_EXE ] && $cmd -k && echo 'perfSONAR-BUOY BWCTL Measurement Service Stopped'
+	if [ $? != 0 ]; then
+		echo "Couldn't stop perfSONAR-BUOY BWCTL Measurement Service"
+	fi
+        ;;
+restart)
+        [ -x $TOOL_EXE ] && $cmd -h && echo 'perfSONAR-BUOY BWCTL Measurement Service restarted'
+	if [ $? != 0 ]; then
+        	[ -x $TOOL_EXE ] && $cmd -k && echo 'perfSONAR-BUOY BWCTL Measurement Service Stopped'
+        	[ -x $TOOL_EXE ] && $cmd && echo 'perfSONAR-BUOY BWCTL Measurement Service Started'
+
+		if [ $? != 0 ]; then
+			echo "Couldn't start perfSONAR-BUOY BWCTL Measurement Service"
+		fi
+	fi
+
+        ;;
+*)
+        echo "Usage: `basename $0` {start|stop}" >&2
+        ;;
+esac
+
+exit 0

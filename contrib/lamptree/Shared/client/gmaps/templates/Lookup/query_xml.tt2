@@ -1,0 +1,17 @@
+<nmwg:message type="LSQueryRequest"
+              id="msg1"
+              xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+              xmlns:xquery="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/lookup/xquery/1.0/">
+                                                                                                                                   
+  <nmwg:metadata id="meta1">
+    <xquery:subject id="sub1">
+
+      [%- XQUERY -%]
+
+    </xquery:subject>
+    <nmwg:eventType>http://ggf.org/ns/nmwg/tools/org/perfsonar/service/lookup/xquery/1.0</nmwg:eventType>
+  </nmwg:metadata>
+  
+  <nmwg:data metadataIdRef="meta1" id="d1"/>
+
+</nmwg:message>

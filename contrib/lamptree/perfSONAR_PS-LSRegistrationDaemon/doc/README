@@ -1,0 +1,114 @@
+                      perfSONAR LS Registration Daemon
+
+--------------------------------------------------------------------------------
+
+About:
+------
+
+The perfSONAR-PS LS Registration Daemon allows networks to register their
+BWCTL, OWAMP, NDT, NPAD and Phoebus services with a perfSONAR-PS Lookup
+Service. This allows interested clients to search for and find the network's
+services. 
+
+Installation:
+-------------
+
+Please read the INSTALL file for instructions
+  
+Configuration:
+--------------
+
+There are several files that may be adjusted manually to configure this service:
+
+  - etc/ls_registration_daemon.conf: 
+  
+    Specifies which services to check, how frequently to check them and where
+    and how to register their presence
+   
+      ls_instance         - The URL of the Lookup Service to register with
+      ls_interval         - Length of time (hours) between contacting the LS
+      check_interval      - Length of time (seconds) between checks if the service is up
+
+    There are a series of groups called "site". This site group can correspond
+    to a physical location, but do not need to. A site can have one or more
+    variables and one more 'service' groups.
+
+     site_name            - The name of the site's organization (e.g. Internet2)
+     site_location        - The city, state, country or other identifying location (e.g. Ann Arbor, MI)
+     site_project         - One or more projects. These are keywords that make it easier to group sites (e.g. LHC, Internet2, USATLAS)
+
+    The site can have one or more 'service' elements. These elements can
+    correspond to a service.
+
+     type                 - The type of service. Currently supported values:
+                                    ping              - The host will respond to ping requests
+                                    traceroute        - The host will respond to traceroute requests
+                                    owamp             - An OWAMP service
+                                    bwctl             - A BWCTL service
+                                    ndt               - An NDT service
+                                    npad              - An NPAD service
+                                    phoebus           - A Phoebus service
+     address              - One or more addresses that will checked for the service.
+                                 If the service is found running on any of the addresses,
+                                 it will be registered as up.
+     port                 - For services listening on TCP or UDP ports, the port can be
+                                 specified explicitly if it's not running on the service default
+     config_file          - For services that have a configuration file (BWCTL, OWAMP, NPAD),
+                                 the daemon will read that file to figure out which address and
+                                 port to use.
+
+    The default ls_registration_daemon.conf comes with examples describing how
+    one might describe various deployment scenarios.
+
+  - etc/ls_registration_daemon-logger.conf:
+
+    Contains information related to logging, there are three modes:
+    
+      Log::Dispatch::Screen     - Log messages to screen (useful for debugging)
+      Log::Dispatch::Syslog     - Log messages to syslog facility
+      Log::Dispatch::FileRotate - Log messages to specified file
+
+    In the file, there are example instances of each of the above, with the
+    Screen and Syslog sections commented out.
+
+Starting/Stopping:
+------------------
+
+The service comes with init scripts that may be used to start and stop it:
+
+If installed via RPM, the service can be started or stopped with:
+
+  /etc/init.d/ls_registration_interval start
+  /etc/init.d/ls_registration_interval stop
+  /etc/init.d/ls_registration_interval restart
+
+The service can also be run in a manual fashion (useful for debugging):
+
+  perl bin/daemon.pl --verbose --conf=etc/daemon.conf
+  
+Maintenance:
+------------
+
+Subscribe to the user mailing lists if you are seeking help on some problem
+related to this software.  Announements regarding availability of new releases
+will also be sent to these locations
+
+  perfSONAR-PS Users Group - https://mail.internet2.edu/wws/info/psps-users
+  perfSONAR-PS Announcements - https://mail.internet2.edu/wws/info/psps-announce
+
+  Performance Node Users - https://mail.internet2.edu/wws/info/performance-node-users
+  Performance Node Announcements - https://mail.internet2.edu/wws/info/performance-node-announce
+
+Also if you are using package management software and have installed the
+Internet2 software repository, a typical upgrade should download new releases:
+
+  yum update
+
+Finally, check the following websites for news of software releases:
+
+  http://software.internet2.edu
+  http://www.internet2.edu/performance
+
+--------------------------------------------------------------------------------
+
+Thu Feb 25 13:28:03 EST 2010

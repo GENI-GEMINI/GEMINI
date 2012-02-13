@@ -1,0 +1,14 @@
+<nmwg:message type="SetupDataRequest"
+        id="#tops"
+        xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+
+    <nmwg:metadata id="#meta1">
+        <nmwg:eventType>http://ggf.org/ns/nmwg/topology/query/xquery/20070809</nmwg:eventType>
+        <xquery:subject id="sub1" xmlns:xquery="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/lookup/xquery/1.0/">
+        [% XQUERY %]
+        </xquery:subject>
+    </nmwg:metadata>
+    
+  <nmwg:data id="#data1" metadataIdRef="#meta1"/>
+
+</nmwg:message>

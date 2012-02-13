@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+ <title>CheckTree Demonstration</title>
+
+ <!-- CHECKTREE v1.0RC by Angus Turnbull http://www.twinhelix.com -->
+ <link rel="stylesheet" type="text/css" href="checktree.css" />
+ <script type="text/javascript" src="checktree.js"></script>
+ <script type="text/javascript"><!--
+
+ // USAGE NOTES: Create a new CheckTree() object like so, and pass it its own name.
+ var checkmenu = new CheckTree('checkmenu');
+ // You can create several such tree objects, just give each a unique name.
+
+ // One optional property: whether to count all checkboxes beneath the current level,
+ // or just to count the checkboxes immediately beneath the current level (the default).
+ //checkmenu.countAllLevels = true;
+
+ //--></script>
+
+</head>
+<body style="font: 0.8em/1.6 sans-serif; background-color: #FFF">
+
+<form action="javascript:void(0)">
+
+<!--
+
+Once you've created a named tree object, all you have to do is have an unordered list
+on the page like this, with ID="..." attributes on some elements. The rules are:
+
+1) Outer <ul> tag must be labelled: ID="tree-OBJECTNAME" where OBJECTNAME is from the script.
+2) A <ul> tag with ID="tree-LEVELNAME" will be shown and hidden onclick of...
+3) A LI tag with ID="show-LEVELNAME" will toggle the next level's visibility when clicked.
+4) Checkboxes that respond to lower levels must be labelled ID="check-LEVELNAME".
+5) Any tag with ID="count-LEVELNAME" will show the number of boxes ticked in that level.
+6) The last LI tag in each list should have CLASS="last" applied, so it looks good.
+
+Have a look at the example below; it's not too hard I hope :).
+
+-->
+
+<ul id="tree-checkmenu" class="checktree">
+ <li id="show-explorer">
+  <input id="check-explorer" type="checkbox" />
+  Internet Explorer
+  <span id="count-explorer" class="count"></span>
+  <ul id="tree-explorer">
+   <li id="show-iemac">
+    <input id="check-iemac" type="checkbox" />
+    Macintosh
+    <span id="count-iemac" class="count"></span>
+    <ul id="tree-iemac">
+     <li><input type="checkbox" />v4.0</li>
+     <li class="last"><input type="checkbox" />v5.0</li>
+    </ul>
+   </li>
+   <li id="show-iewin" class="last">
+    <input id="check-iewin" type="checkbox" />
+    Windows
+    <span id="count-iewin" class="count"></span>
+    <ul id="tree-iewin">
+     <li><input type="checkbox" />v4.0</li>
+     <li><input type="checkbox" />v5.0</li>
+     <li><input type="checkbox" />v5.5</li>
+     <li class="last"><input type="checkbox" />v6.0</li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li id="show-netscape">
+  <input id="check-netscape" type="checkbox" />
+  Netscape
+  <span id="count-netscape" class="count"></span>
+  <ul id="tree-netscape">
+   <li><input type="checkbox" />v4.0x</li>
+   <li><input type="checkbox" />v4.5-v4.7</li>
+   <li><input type="checkbox" />v6.x</li>
+   <li><input type="checkbox" />v7.x</li>
+   <li id="show-mozilla" class="last">
+    <input id="check-mozilla" type="checkbox" />
+    Mozilla
+    <span id="count-mozilla" class="count"></span>
+    <ul id="tree-mozilla">
+     <li><input type="checkbox" />pre-v1.0</li>
+     <li><input type="checkbox" />v1.0</li>
+     <li><input type="checkbox" />v1.1+</li>
+     <li class="last"><input type="checkbox" />Firebird</li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li id="show-opera">
+  <input id="check-opera" type="checkbox" />
+  Opera
+  <span id="count-opera" class="count"></span>
+  <ul id="tree-opera">
+   <li><input type="checkbox" />v5.x</li>
+   <li><input type="checkbox" />v6.x</li>
+   <li class="last"><input type="checkbox" />v7.x</li>
+  </ul>
+ </li>
+ <li id="show-khtml">
+  <input id="check-khtml" type="checkbox" />
+  KHTML
+  <span id="count-khtml" class="count"></span>
+  <ul id="tree-khtml">
+   <li><input type="checkbox" />Safari</li>
+   <li class="last"><input type="checkbox" />Konqueror</li>
+  </ul>
+ </li>
+ <li class="last"><input type="checkbox" />Omniweb</li>
+</ul>
+
+</form>
+
+
+
+
+<div style="text-align: center">
+ <h1 style="font-size: 20pt">CheckTree v1.0 RC</h1>
+ by Angus Turnbull - <a href="http://www.twinhelix.com">http://www.twinhelix.com</a>.
+ Updated: 25 June 2006.
+ <hr />
+</div>
+
+<h4>Features:</h4>
+<ul>
+ <li><b>Object-orientated code</b> for separate tree systems.</li>
+ <li><b>Pure W3C DOM based script</b> utilising unordered list data in the page.</li>
+ <li><b>Cross-browser compatibility</b> with IE5+, NS6+, Opera7+, Safari, and similar.</li>
+ <li><b>Hierarchial / Multilevel</b> trees, as many levels are required.</li>
+ <li><b>Automatic checkboxes</b> keep track of selections.</li>
+ <li><b>Fast script</b>, naturally :)</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<div style="border: 2px solid red; background: #FFF0F0; padding: 0pt 10pt 0pt 10pt">
+<h4>Script License Agreement</h4>
+<p>You may use this script only if you agree that:</p>
+<ol>
+ <li>You must EITHER:
+  <ol style="list-style-type: lower-alpha">
+   <li><strong>Donating Users:</strong> This script is "donation-ware". If you can
+    <strong><a href="http://www.twinhelix.com/donate/">make a donation</a></strong> to support
+    this script, it may be used on a website without a crediting link.
+    Please consider making a donation! I have spent a lot of time developing, debugging and
+    documenting scripts, and any support is welcome.
+    <a href="http://www.twinhelix.com/donate/">More info...</a></li>
+   <li><strong>Free Users:</strong> All websites using this script for free must contain somewhere
+    a <strong>visible crediting link</strong> to TwinHelix Designs, e.g.
+    '<a href="http://www.twinhelix.com">DHTML / JavaScript Tree by TwinHelix Designs</a>'.</li>
+  </ol>
+ </li>
+ <li>You must leave the "Script Name/Author/URL" comment in the source of the script file.</li>
+ <li>This script is provided on an "AS-IS" basis, without any warranties, and you use it entirely
+  at your own risk.</li>
+ <li>This script may not be redistributed, sold, rented, leased or sublicensed to third parties
+  without my prior consent.</li>
+</ol>
+<p>If you have another use for the script (for example, within a web application) or wish to
+ arrange alternate licensing terms, please
+ <a href="http://www.twinhelix.com/contact/">contact me</a> for more information.</p>
+</div>
+
+<p>&nbsp;</p>
+
+<h4>Usage Instructions:</h4>
+<p>Open this page up in your favourite text editor, instructions are provided in the source.
+You don't need to edit the .JS file at all, just customise your tree data and perhaps also
+the .CSS file which controls tree appearance.</p>
+
+<p>&nbsp;</p>
+
+<p><i>Good luck - Angus.</i></p>
+
+</body>
+</html>

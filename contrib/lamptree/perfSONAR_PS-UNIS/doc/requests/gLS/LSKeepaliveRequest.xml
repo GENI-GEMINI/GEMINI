@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+Name:    LSKeepaliveRequest
+Purpose: Test Registration to hLS/gLS instances
+Outcome: 
+	Not Regisitered
+		gLS/hLS - ignore
+	Registered
+		gLS/hLS update time from either summary/regular db (depends
+		on eventType)
+-->
+
+<nmwg:message type="LSKeepaliveRequest"
+        id="LSKeepaliveRequest"
+        xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+         
+  <nmwg:metadata id="key_to_keepalive">
+    <nmwg:key>
+      <nmwg:parameters id="keys">
+        <nmwg:parameter name="lsKey">5cfb07ea7a5b840ce4f8f48b842ac9c0</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>
+  </nmwg:metadata>
+     
+  <nmwg:data metadataIdRef="key_to_keepalive" id="d1"/>
+
+  <nmwg:metadata id="key_to_keepalive2">
+    <nmwg:key>
+      <nmwg:parameters id="keys">
+        <nmwg:parameter name="lsKey">JunkKey</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>
+  </nmwg:metadata>
+     
+  <nmwg:data metadataIdRef="key_to_keepalive2" id="d2"/>
+
+  <nmwg:metadata id="key_to_keepalive11">
+    <nmwg:key>
+      <nmwg:parameters id="keys11">
+        <nmwg:parameter name="lsKey">5cfb07ea7a5b840ce4f8f48b842ac9c0</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>
+    <nmwg:eventType>http://ogf.org/ns/nmwg/tools/org/perfsonar/service/lookup/keepalive/summary/2.0</nmwg:eventType>
+  </nmwg:metadata>
+     
+  <nmwg:data metadataIdRef="key_to_keepalive11" id="d11"/>
+
+  <nmwg:metadata id="key_to_keepalive12">
+    <nmwg:key>
+      <nmwg:parameters id="keys12">
+        <nmwg:parameter name="lsKey">JunkKey</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>
+    <nmwg:eventType>http://ogf.org/ns/nmwg/tools/org/perfsonar/service/lookup/keepalive/summary/2.0</nmwg:eventType>
+  </nmwg:metadata>
+     
+  <nmwg:data metadataIdRef="key_to_keepalive12" id="d12"/>
+
+  <nmwg:metadata id="key_to_keepalive3">
+    <nmwg:key>
+      <nmwg:parameters id="keys3">
+        <nmwg:parameter name="lsKey">5cfb07ea7a5b840ce4f8f48b842ac9c0</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>
+    <nmwg:eventType>http://ogf.org/ns/nmwg/tools/org/perfsonar/service/lookup/keepalive/service/2.0</nmwg:eventType>
+  </nmwg:metadata>
+     
+  <nmwg:data metadataIdRef="key_to_keepalive3" id="d3"/>
+
+  <nmwg:metadata id="key_to_keepalive13">
+    <nmwg:key>
+      <nmwg:parameters id="keys13">
+        <nmwg:parameter name="lsKey">JunkKey</nmwg:parameter>
+      </nmwg:parameters>
+    </nmwg:key>
+    <nmwg:eventType>http://ogf.org/ns/nmwg/tools/org/perfsonar/service/lookup/keepalive/service/2.0</nmwg:eventType>
+  </nmwg:metadata>
+     
+  <nmwg:data metadataIdRef="key_to_keepalive13" id="d13"/>
+             
+</nmwg:message>

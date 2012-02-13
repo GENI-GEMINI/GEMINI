@@ -1,0 +1,155 @@
+<!--
+/*
+ * Copyright 2001-2004 The Apache Software Foundation.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+ -->
+<axisconfig name="AxisJava2.0">
+
+<module ref="rampart" />
+
+<parameter name="OutflowSecurity">
+    <action>
+        <items>Timestamp Signature</items>
+        <user>i2phoebus</user>
+        <passwordCallbackClass>
+            net.es.oscars.client.security.PWCallback
+        </passwordCallbackClass>
+        <signaturePropFile>repo/sec-client.properties</signaturePropFile>
+        <signatureKeyIdentifier>DirectReference</signatureKeyIdentifier>
+    </action>
+</parameter>
+
+<parameter name="InflowSecurity">
+    <action>
+        <enableSignatureConfirmation>false</enableSignatureConfirmation>
+        <items>Timestamp </items>
+        <signaturePropFile>repo/sec-client.properties</signaturePropFile>
+    </action>
+</parameter>
+
+<parameter name="hotdeployment" locked="false">true</parameter>
+<parameter name="hotupdate" locked="false">false</parameter>
+<parameter name="enableMTOM" locked="false">false</parameter>
+<parameter name="ConfigContextTimeoutInterval" locked="false">30</parameter>
+<parameter name="sendStacktraceDetailsWithFaults" locked="false">
+   true 
+</parameter>
+<parameter name="DrillDownToRootCauseForFaultReason" locked="false">
+   true 
+</parameter>
+<parameter name="userName" locked="false">admin</parameter>
+<parameter name="password" locked="false">axis2</parameter>
+<parameter name="manageTransportSession" locked="false">false</parameter>
+<parameter name="enableRESTInAxis2MainServlet" locked="true">false</parameter>
+<parameter name="disableREST" locked="true">false</parameter>
+<parameter name="disableSeparateEndpointForREST" locked="true">
+    false
+</parameter>
+
+<messageReceivers>
+    <messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-only"
+            class="org.apache.axis2.receivers.RawXMLINOnlyMessageReceiver" />
+    <messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-out"
+            class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver" />
+</messageReceivers>
+
+<transportReceiver name="http"
+            class="org.apache.axis2.transport.http.SimpleHTTPServer">
+    <parameter name="port" locked="false">8080</parameter>
+</transportReceiver>
+    
+<transportSender name="tcp"
+            class="org.apache.axis2.transport.tcp.TCPTransportSender" />
+<transportSender name="local"
+            class="org.apache.axis2.transport.local.LocalTransportSender" />
+<transportSender name="http"
+            class="org.apache.axis2.transport.http.CommonsHTTPTransportSender">
+    <parameter name="PROTOCOL" locked="false">HTTP/1.1</parameter>
+    <parameter name="Transfer-Encoding" locked="false">chunked</parameter>
+</transportSender>
+<transportSender name="https"
+            class="org.apache.axis2.transport.http.CommonsHTTPTransportSender">
+    <parameter name="PROTOCOL" locked="false">HTTP/1.1</parameter>
+    <parameter name="Transfer-Encoding" locked="false">chunked</parameter>
+</transportSender>
+
+<phaseOrder type="InFlow">
+    <phase name="Transport">
+        <handler name="RequestURIBasedDispatcher"
+                class="org.apache.axis2.dispatchers.RequestURIBasedDispatcher">
+            <order phase="Transport" />
+        </handler>
+        <handler name="SOAPActionBasedDispatcher"
+                class="org.apache.axis2.dispatchers.SOAPActionBasedDispatcher">
+            <order phase="Transport" />
+        </handler>
+    </phase>
+    <phase name="Security" />
+    <phase name="PreDispatch" />
+    <phase name="Dispatch" class="org.apache.axis2.engine.DispatchPhase">
+        <handler name="AddressingBasedDispatcher"
+                 class="org.apache.axis2.dispatchers.AddressingBasedDispatcher">
+            <order phase="Dispatch" />
+        </handler>
+        <handler name="SOAPMessageBodyBasedDispatcher"
+                 class="org.apache.axis2.dispatchers.SOAPMessageBodyBasedDispatcher">
+            <order phase="Dispatch" />
+        </handler>
+    </phase>
+
+    <phase name="OperationInPhase" />
+    <phase name="soapmonitorPhase" />
+</phaseOrder>
+
+<phaseOrder type="OutFlow">
+    <phase name="soapmonitorPhase" />
+    <phase name="OperationOutPhase" />
+    <phase name="PolicyDetermination" />
+    <phase name="MessageOut" />
+    <phase name="Security" />
+</phaseOrder>
+
+<phaseOrder type="InFaultFlow">
+    <phase name="PreDispatch" />
+    <phase name="Dispatch" class="org.apache.axis2.engine.DispatchPhase">
+        <handler name="RequestURIBasedDispatcher"
+                 class="org.apache.axis2.dispatchers.RequestURIBasedDispatcher">
+            <order phase="Dispatch" />
+        </handler>
+        <handler name="SOAPActionBasedDispatcher"
+                 class="org.apache.axis2.dispatchers.SOAPActionBasedDispatcher">
+            <order phase="Dispatch" />
+        </handler>
+        <handler name="AddressingBasedDispatcher"
+                 class="org.apache.axis2.dispatchers.AddressingBasedDispatcher">
+            <order phase="Dispatch" />
+        </handler>
+        <handler name="SOAPMessageBodyBasedDispatcher"
+                 class="org.apache.axis2.dispatchers.SOAPMessageBodyBasedDispatcher">
+            <order phase="Dispatch" />
+        </handler>
+    </phase>
+    <phase name="OperationInFaultPhase" />
+    <phase name="soapmonitorPhase" />
+</phaseOrder>
+
+<phaseOrder type="OutFaultFlow">
+    <phase name="soapmonitorPhase" />
+    <phase name="OperationOutFaultPhase" />
+    <phase name="PolicyDetermination" />
+    <phase name="MessageOut" />
+</phaseOrder>
+
+</axisconfig>

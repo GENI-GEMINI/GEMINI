@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+Name:    LSDiscoveryRequest
+Purpose: Test query via the discovery interface
+Outcome: N/A
+
+-->
+
+<nmwg:message type="LSQueryRequest"
+              id="LSDiscoveryRequest"
+              xmlns:perfsonar="http://ggf.org/ns/nmwg/tools/org/perfsonar/1.0/"
+              xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+              xmlns:psservice="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/1.0/"
+              xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/"
+              xmlns:summary="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/lookup/summarization/2.0/"
+              xmlns:nmtb="http://ogf.org/schema/network/topology/base/20070828/"
+              xmlns:nmtl3="http://ogf.org/schema/network/topology/l3/20070828/">
+              
+  <nmwg:metadata id="meta1">
+      <summary:subject xmlns:summary="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/lookup/summarization/2.0/" id="subject.1">
+
+<!-- can have multiples of each, note that this creates an 'or' relationship -->
+        <nmtb:address xmlns:nmtb="http://ogf.org/schema/network/topology/base/20070828/" type="ipv4">128.4.133.167</nmtb:address>
+        <nmtb:address xmlns:nmtb="http://ogf.org/schema/network/topology/base/20070828/"type="ipv4">128.4.100.45</nmtb:address>
+
+        <nmtb:domain xmlns:nmtb="http://ogf.org/schema/network/topology/base/20070828/">
+          <nmtb:name type="dns">edu</nmtb:name>          
+        </nmtb:domain>      
+
+        <nmtb:domain xmlns:nmtb="http://ogf.org/schema/network/topology/base/20070828/">
+          <nmtb:name type="dns">udel.edu</nmtb:name>          
+        </nmtb:domain>    
+
+        <nmwg:eventType>http://ggf.org/ns/nmwg/characteristic/utilization/2.0</nmwg:eventType>
+        <nmwg:eventType>http://ggf.org/ns/nmwg/characteristic/errors/2.0</nmwg:eventType>
+
+<!-- the combination of all things is an 'and' relationsip, this entire subject is therefore:
+
+('128.4.133.167' or '128.4.100.45')  and 
+('udel.edu' or 'edu') and 
+('http://ggf.org/ns/nmwg/characteristic/utilization/2.0' or 'http://ggf.org/ns/nmwg/characteristic/errors/2.0')
+
+-->
+
+      </summary:subject>
+
+    <!-- need this... -->      
+    <nmwg:eventType>http://ogf.org/ns/nmwg/tools/org/perfsonar/service/lookup/discovery/summary/2.0</nmwg:eventType>   
+
+  </nmwg:metadata>
+  
+  <nmwg:data metadataIdRef="meta1" id="d1"/>
+
+</nmwg:message>
+

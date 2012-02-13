@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- 
+        This query requests the entire contents of the Topology Service.
+-->
+<nmwg:message type="TSQueryRequest" id="msg1" xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" xmlns:xquery="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/lookup/xquery/1.0/">
+  <nmwg:metadata id="meta1">
+    <nmwg:eventType>http://ggf.org/ns/nmwg/topology/20070809</nmwg:eventType>
+  </nmwg:metadata>
+  <nmwg:data metadataIdRef="meta1" id="d1" />
+</nmwg:message>

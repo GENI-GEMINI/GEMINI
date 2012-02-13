@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+Name:    LSQueryRequest
+Purpose: Query for a sepcified XPath
+Outcome: 
+    Results if successful, an error message if not
+
+-->
+
+<nmwg:message type="LSQueryRequest"
+              id="msg1"
+              xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+              xmlns:xquery="http://ggf.org/ns/nmwg/tools/org/perfsonar/service/lookup/xquery/1.0/">
+                          
+  <nmwg:metadata id="meta1">
+  
+    <xquery:subject id="sub1">
+
+  declare namespace nmwg="http://ggf.org/ns/nmwg/base/2.0/";
+  /nmwg:store[@type="LSStore"]
+
+    </xquery:subject>
+    <nmwg:eventType>http://ogf.org/ns/nmwg/tools/org/perfsonar/service/lookup/discovery/xquery/2.0</nmwg:eventType>
+    
+    <xquery:parameters id="param.1">
+      <nmwg:parameter name="lsOutput">native</nmwg:parameter>
+    </xquery:parameters>
+    
+  </nmwg:metadata>
+  
+  <nmwg:data metadataIdRef="meta1" id="d1"/>
+
+</nmwg:message>
+

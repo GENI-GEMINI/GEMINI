@@ -1,0 +1,19 @@
+RANDFILE               = ./.rnd
+
+[ req ]
+prompt                  = no
+default_bits		= 1024
+default_keyfile 	= privkey.pem
+distinguished_name	= req_distinguished_name
+req_extensions	        = request_extensions
+string_mask             = nombstr
+oid_section		= protogeni_oids
+
+[ protogeni_oids ]
+xmlrpc = 2.25.305821105408246119474742976030998643995
+
+# This will be appended to by mkusercert.
+[ request_extensions ]
+basicConstraints=critical,CA:TRUE
+subjectKeyIdentifier=hash
+subjectAltName=@req_altname

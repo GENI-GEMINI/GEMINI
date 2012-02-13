@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nmwg:message type="SetupDataRequest"
+               xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+
+     <!-- get the most recent status for each link -->
+     <nmwg:metadata id="meta1">
+         <nmwg:eventType>Path.Status</nmwg:eventType>
+     </nmwg:metadata>
+
+     <nmwg:data id="data1" metadataIdRef="meta1"/>
+
+     <!-- get the most status for the link at timestamp 1188495426 
+     <nmwg:metadata id="meta2">
+         <nmwg:eventType>Path.Status</nmwg:eventType>
+
+	 <nmwg:parameters>
+		<nmwg:parameter name="time">1188495426</nmwg:parameter>
+	 </nmwg:parameters>
+     </nmwg:metadata>
+
+     <nmwg:data id="data2" metadataIdRef="meta2"/>
+-->
+
+</nmwg:message>

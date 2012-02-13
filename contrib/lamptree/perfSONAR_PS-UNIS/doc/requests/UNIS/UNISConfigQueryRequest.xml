@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- 
+        This query requests a subset of the elements in the Topology Service. The
+        subject element specifies an XQuery to run against the Topology Database.
+-->
+<nmwg:message type="TSQueryRequest" id="msg1" xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" 
+  xmlns:xquery="http://ggf.org/ns/nmwg/tools/org/perfsonar/xquery/1.0/">
+  <nmwg:metadata id="meta1">
+    <xquery:subject id="sub0">//*[local-name()='node' and @id='urn:ogf:network:domain=__SLICEID__:node=__NODE__' and namespace-uri()='http://ogf.org/schema/network/topology/unis/20100528/']</xquery:subject>
+    <nmwg:eventType>http://ggf.org/ns/nmwg/topology/20070809</nmwg:eventType>
+  </nmwg:metadata>
+  <nmwg:data metadataIdRef="meta1" id="d1" />
+</nmwg:message>

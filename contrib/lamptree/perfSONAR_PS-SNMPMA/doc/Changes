@@ -1,0 +1,28 @@
+version 3.1
+  * Initial RPM release.
+  * The following development changes where added since the last release (0.9)
+    - Support for Cacti and Cricket data sets
+    - Enhancements to increase RRD and XML access performance
+    - New message type to retrieve RRD information (e.g. resolutions, times)
+    - Updated examples
+  * Bugfixes
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=44
+      - SNMP MA does not seems to handle rrd fetch errors   	  
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=84
+      - Exit MA service if no data is present 	 
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=112
+      - supportedEventType Examples for SNMP/pSB 	 
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=116
+      - migrate getRRDData to SNMP MA 
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=137
+      - RRD.pm cannot read RRD File 
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=159
+      - makeDBConf Missing from LS package
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=187
+      - perl-Clone needed by hLS (other?) RPM
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=279
+      - Cacti restarting SNMP MA 
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=4
+      reread SNMP MA store.xml file   	 
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=340
+      SNMP MA - Indicate it is not running due to cacti 

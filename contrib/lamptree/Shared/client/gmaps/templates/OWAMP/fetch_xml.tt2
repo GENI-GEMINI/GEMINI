@@ -1,0 +1,33 @@
+[%- DEFAULT
+  eventType = "http://ggf.org/ns/nmwg/tools/owamp/2.0"
+-%]
+<nmwg:message id="message1"
+              type="SetupDataRequest"
+              xmlns="http://ggf.org/ns/nmwg/base/2.0/" 
+              xmlns:owamp="http://ggf.org/ns/nmwg/tools/owamp/2.0/"
+              xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/"
+              xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+              xmlns:select="http://ggf.org/ns/nmwg/ops/select/2.0/">
+
+   
+   <nmwg:metadata id="meta">
+    <owamp:subject id="subject">
+      <nmwgt:endPointPair>
+        <nmwgt:src type="ipv4" value="[% src %]"/> 
+        <nmwgt:dst type="ipv4" value="[% dst %]"/> 
+      </nmwgt:endPointPair>
+    </owamp:subject>
+
+    <nmwg:parameters id="params"/>
+
+    <select:parameters id="select">      
+      <nmwg:parameter name="startTime">[% startTime %]</nmwg:parameter>
+      <nmwg:parameter name="endTime">[% endTime %]</nmwg:parameter>
+    </select:parameters>
+    
+     <nmwg:eventType>[% eventType %]</nmwg:eventType>
+  </nmwg:metadata>
+ 
+  <nmwg:data id="data" metadataIdRef="meta"/>
+   
+</nmwg:message> 

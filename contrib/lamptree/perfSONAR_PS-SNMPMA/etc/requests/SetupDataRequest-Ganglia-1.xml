@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  perfSONAR-PS SetupDataRequest (Ganglia Data)
+  
+  Use: 
+    perl client.pl URL SetupDataRequest-Ganglia-1.xml
+    
+  Expected Response:
+
+<nmwg:message xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" messageIdRef="SetupDataRequest1" id="message.8598169" type="SetupDataResponse">
+  
+  <nmwg:metadata xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" id="metadata.12912432" metadataIdRef="metadata1">
+    <ganglia:subject xmlns:ganglia="http://ggf.org/ns/nmwg/tools/ganglia/2.0/" id="subject">
+      <nmwgt3:node xmlns:nmwgt3="http://ggf.org/ns/nmwg/topology/base/3.0/" id="node">
+        <nmwgt3:name>unspecified-unspecified-192.52.179.83</nmwgt3:name>
+        <nmwgt3:hostName>192.52.179.83</nmwgt3:hostName>
+        <nmwgt3:cpu>x86</nmwgt3:cpu>
+        <nmwgt3:operSys>Linux 2.6.18-194.8.1.el5xen</nmwgt3:operSys>
+      </nmwgt3:node>
+    </ganglia:subject>
+    <nmwg:eventType>http://ggf.org/ns/nmwg/tools/ganglia/cpu/time/iowait/2.0</nmwg:eventType>
+    <nmwg:eventType>http://ggf.org/ns/nmwg/characteristic/cpu/time/iowait/2.0</nmwg:eventType>
+    <nmwg:parameters id="parameters">
+      <nmwg:parameter name="supportedEventType">http://ggf.org/ns/nmwg/tools/ganglia/cpu/time/iowait/2.0</nmwg:parameter>
+      <nmwg:parameter name="supportedEventType">http://ggf.org/ns/nmwg/characteristic/cpu/time/iowait/2.0</nmwg:parameter>
+    </nmwg:parameters>
+  </nmwg:metadata>
+  <nmwg:data metadataIdRef="metadata.12912432" id="data.1914177">
+    <nmwg:datum timeType="unix" value="6.7861111111e-01" valueUnits="%" timeValue="1282786560"/>
+    <nmwg:datum timeType="unix" value="5.5416666667e-01" valueUnits="%" timeValue="1282786920"/>
+    <nmwg:datum timeType="unix" value="5.7861111111e-01" valueUnits="%" timeValue="1282787280"/>
+    <nmwg:datum timeType="unix" value="6.0611111111e-01" valueUnits="%" timeValue="1282787640"/>
+
+... Lots More ...
+
+    <nmwg:datum timeType="unix" value="4.5555555556e-01" valueUnits="%" timeValue="1282872600"/>
+  </nmwg:data>
+  
+</nmwg:message>
+
+  Error Response:
+
+<nmwg:message xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" messageIdRef="metadataKeyRequest1" id="message.1686572" type="MetadataKeyResponse">
+  
+  <nmwg:metadata metadataIdRef="metadata1" id="metadata.14717512">
+    <nmwg:eventType>error.ma.storage</nmwg:eventType>
+  </nmwg:metadata>
+  <nmwg:data metadataIdRef="metadata.14717512" id="data.1835721">
+    <nmwgr:datum xmlns:nmwgr="http://ggf.org/ns/nmwg/result/2.0/">Database "/home/zurawski/perfSONAR-PS/perfSONAR_PS-SNMPMA/etc/store.xml" returned 0 results for search</nmwgr:datum>
+  </nmwg:data>
+
+</nmwg:message>
+
+-->
+
+<nmwg:message xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+              xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/"
+              xmlns:ganglia="http://ggf.org/ns/nmwg/tools/ganglia/2.0/"
+              xmlns:nmwgt3="http://ggf.org/ns/nmwg/topology/base/3.0/"
+              type="SetupDataRequest" id="SetupDataRequest1">
+
+  <nmwg:metadata xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" 
+                 id="metadata1">
+    <ganglia:subject xmlns:ganglia="http://ggf.org/ns/nmwg/tools/ganglia/2.0/" id="subject">
+      <nmwgt3:node xmlns:nmwgt3="http://ggf.org/ns/nmwg/topology/base/3.0/" id="node">
+        <nmwgt3:name>unspecified-unspecified-192.52.179.83</nmwgt3:name>
+        <nmwgt3:hostName>192.52.179.83</nmwgt3:hostName>
+        <nmwgt3:cpu>x86</nmwgt3:cpu>
+      </nmwgt3:node>
+    </ganglia:subject>
+    <nmwg:eventType>http://ggf.org/ns/nmwg/tools/ganglia/cpu/time/iowait/2.0</nmwg:eventType>
+<!--
+    <nmwg:eventType>http://ggf.org/ns/nmwg/characteristic/cpu/time/iowait/2.0</nmwg:eventType>
+-->
+  </nmwg:metadata> 
+
+  <nmwg:data xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+             id="data1" metadataIdRef="metadata1"/>
+
+</nmwg:message>

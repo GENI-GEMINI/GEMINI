@@ -1,0 +1,83 @@
+2010/08/13 23:27:41 (24777) WARN> daemon.pl:308 main:: - Setting maximum worker lifetime at 60 seconds
+2010/08/13 23:27:41 (24777) WARN> daemon.pl:313 main:: - Setting maximum worker processes at 32
+2010/08/13 23:27:41 (24777) WARN> daemon.pl:318 main:: - Setting LS registration interval at 60 minutes
+2010/08/13 23:27:41 (24777) WARN> daemon.pl:323 main:: - Enabling echo service for each endpoint unless specified otherwise
+2010/08/13 23:27:41 (24777) WARN> daemon.pl:328 main:: - Setting reaper interval to 20 seconds
+2010/08/13 23:27:41 (24777) DEBUG> daemon.pl:332 main:: - Starting perfSONAR-PS daemon as '24777'
+2010/08/13 23:27:41 (24777) DEBUG> Transport.pm:205 perfSONAR_PS::Transport::splitURI - Found host: unis.pg.damslab.org port: 8012 endpoint: /perfSONAR_PS/services/unis scheme https
+2010/08/13 23:27:41 (24777) DEBUG> Transport.pm:225 perfSONAR_PS::Transport::getSchemeURI - Created URI: https://unis.pg.damslab.org:8012/perfSONAR_PS/services/unis
+2010/08/13 23:27:41 (24777) DEBUG> Transport.pm:268 perfSONAR_PS::Transport::sendReceive - Sending information to "https://unis.pg.damslab.org:8012/perfSONAR_PS/services/unis": <SOAP-ENV:Envelope xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+                   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP-ENV:Header/>
+  <SOAP-ENV:Body>
+<nmwg:message type="QueryRequest" xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+<nmwg:metadata id="meta0">
+  <xquery:subject id="sub1" xmlns:xquery="http://ggf.org/ns/nmwg/tools/org/perfsonar/xquery/1.0/">
+//*[local-name()='node' and @id='urn:ogf:network:domain=emulab.net+slice+lampdemo:node=client1' and namespace-uri()='http://ogf.org/schema/network/topology/unis/20100528/']  </xquery:subject>
+  <nmwg:eventType>http://ggf.org/ns/nmwg/topology/20070809</nmwg:eventType>
+</nmwg:metadata>
+<nmwg:data id="data0" metadataIdRef="meta0" />
+</nmwg:message>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+2010/08/13 23:27:41 (24777) DEBUG> Transport.pm:272 perfSONAR_PS::Transport::sendReceive - Doing SSL connection with CERT (/usr/local/etc/protogeni/ssl/lampcert.pem) and KEY (/usr/local/etc/protogeni/ssl/lampcert.pem)
+2010/08/13 23:27:41 (24777) DEBUG> Transport.pm:300 perfSONAR_PS::Transport::sendReceive - Response returned: <SOAP-ENV:Envelope xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+                   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP-ENV:Header/>
+  <SOAP-ENV:Body>
+<nmwg:message xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" id="message.6811367" type="QueryResponse"><nmwg:data metadataIdRef="meta0" id="data.13333167"><unis:node xmlns:unis="http://ogf.org/schema/network/topology/unis/20100528/" id="urn:ogf:network:domain=emulab.net+slice+lampdemo:node=client1">
+                    <unis:address type="dns"> pc4.pgeni.dev.private </unis:address>
+                    <unis:nodePropertiesBag>
+                        <pgeni:nodeProperties xmlns:pgeni="http://ogf.org/schema/network/topology/protogeni/20100716/" component_manager_urn="urn:publicid:IDN+pgeni.dev.private+authority+cm" component_manager_uuid="d79c2b7a-8266-11df-b55c-080027c7bf33" component_urn="urn:publicid:IDN+pgeni.dev.private+node+pc4" component_uuid="e25ab74a-7d1f-11df-bcd5-080027c7bf33" exclusive="1" sliver_urn="urn:publicid:IDN+pgeni.dev.private+sliver+73" sliver_uuid="e25ab74a-7d1f-11df-bcd5-080027c7bf33" virtualization_type="raw">
+                            <pgeni:node_type type_name="pc" type_slots="1"/>
+                            <pgeni:disk_image name="urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU91"/>
+                            <pgeni:services>
+                                <pgeni:login authentication="ssh-keys" hostname="pc4.pgeni.dev.private" port="22"/>
+                            </pgeni:services>
+                        </pgeni:nodeProperties>
+                        <psconfig:nodeProperties xmlns:psconfig="http://ogf.org/schema/network/topology/psconfig/20100716/">
+                            <psconfig:service enable="true" type="psec"/>
+                            <psconfig:service enable="true" type="pinger">
+                                <psconfig:policy type="allow"> urn:publicid:IDN+emulab.net+user+kissel </psconfig:policy>
+                                <pinger:landmark xmlns:pinger="http://ogf.org/schema/network/topology/psconfig/pinger/20100813">
+                                    <pinger:domain> emulab.net+slice+lampdemo </pinger:domain>
+                                    <pinger:node> client2 </pinger:node>
+                                    <pinger:hostname> client2 </pinger:hostname>
+                                    <pinger:description> PingER test from Client1 to Client2 </pinger:description>
+                                    <pinger:packetSize> 64 </pinger:packetSize>
+                                    <pinger:count> 15 </pinger:count>
+                                </pinger:landmark>
+                            </psconfig:service>
+                        </psconfig:nodeProperties>
+                    </unis:nodePropertiesBag>
+                    
+                    
+                <unis:port xmlns:unis="http://ogf.org/schema/network/topology/unis/20100528/" id="urn:ogf:network:domain=emulab.net+slice+lampdemo:node=client1:port=iface0">
+                        <unis:name> eth3 </unis:name>
+                        <unis:portPropertiesBag>
+                            <pgeni:portProperties xmlns:pgeni="http://ogf.org/schema/network/topology/protogeni/20100716/" component_id="eth3" component_urn="urn:publicid:IDN+pgeni.dev.private+interface+pc4:eth3" sliver_urn="urn:publicid:IDN+pgeni.dev.private+sliver+77" sliver_uuid="9936667b-a289-11df-be91-080027c7bf33"/>
+                        </unis:portPropertiesBag>
+                        <unis:address type="mac"> 020000040103 </unis:address>
+                        <unis:address type="ipv4"> 10.10.1.1 </unis:address>
+                    </unis:port></unis:node></nmwg:data><nmwg:metadata xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" id="meta0">
+  <xquery:subject xmlns:xquery="http://ggf.org/ns/nmwg/tools/org/perfsonar/xquery/1.0/" id="sub1">
+//*[local-name()='node' and @id='urn:ogf:network:domain=emulab.net+slice+lampdemo:node=client1' and namespace-uri()='http://ogf.org/schema/network/topology/unis/20100528/']  </xquery:subject>
+  <nmwg:eventType>http://ggf.org/ns/nmwg/topology/20070809</nmwg:eventType>
+</nmwg:metadata></nmwg:message>  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+2010/08/13 23:27:41 (24777) DEBUG> Common.pm:827 perfSONAR_PS::Common::consultArchive - Time to make request: 0
+2010/08/13 23:27:41 (24777) DEBUG> Common.pm:53 perfSONAR_PS::Common::find - Query(pre-process): //nmwg:message
+2010/08/13 23:27:41 (24777) DEBUG> Common.pm:58 perfSONAR_PS::Common::find - Query(post-process): //*[name()='nmwg:message']
+2010/08/13 23:27:41 (24777) DEBUG> Common.pm:53 perfSONAR_PS::Common::find - Query(pre-process): ./*[local-name()="data"]
+2010/08/13 23:27:41 (24777) DEBUG> Common.pm:58 perfSONAR_PS::Common::find - Query(post-process): ./*[local-name()="data"]
+2010/08/13 23:27:41 (24777) DEBUG> Common.pm:53 perfSONAR_PS::Common::find - Query(pre-process): ./*[local-name()="metadata"]
+2010/08/13 23:27:41 (24777) DEBUG> Common.pm:58 perfSONAR_PS::Common::find - Query(post-process): ./*[local-name()="metadata"]
+2010/08/13 23:27:41 (24777) DEBUG> Common.pm:53 perfSONAR_PS::Common::find - Query(pre-process): .//*[local-name()="service" and @type="pinger"]
+2010/08/13 23:27:41 (24777) DEBUG> Common.pm:58 perfSONAR_PS::Common::find - Query(post-process): .//*[local-name()="service" and @type="pinger"]
+2010/08/13 23:27:41 (24777) WARN> daemon.pl:565 main::__ANON__[/home/fernandes/dev/workspace/ps-PS-pSConfig/bin/daemon.pl:567] - Warned: Can't exec "/etc/init.d/pinger": Permission denied at /home/fernandes/dev/workspace/ps-PS-pSConfig/bin/../lib/perfSONAR_PS/Services/pSConfig/Handlers/PingER.pm line 151.
+2010/08/13 23:27:50 (24777) DEBUG> Common.pm:53 perfSONAR_PS::Common::find - Query(pre-process): .//*[local-name()="service" and @type="pinger"]
+2010/08/13 23:27:50 (24777) DEBUG> Common.pm:58 perfSONAR_PS::Common::find - Query(post-process): .//*[local-name()="service" and @type="pinger"]

@@ -1,0 +1,216 @@
+             perfSONAR SNMP MA Service Installation Instructions
+
+--------------------------------------------------------------------------------
+
+The perfSONAR-PS SNMP Measurement Archive (MA) offers archived SNMP data stored
+in Round Robin Database (RRD) files through a web services interface.  RRD
+storage is normally used in tools such as MRTG, Cacti, and Cricket - interfaces
+are provided for directly interacting with these tools or specifying the
+information stored in RRD files of other types.
+
+Prerequisites:
+--------------
+
+The SNMP MA is packaged as an RPM - an installation format geared towards use
+on Red Hat Linux based systems.  Examples include Fedora, Red Hat Enterprise
+Linux, CentOS, White Box, Scientific Linux, and possibly others.  
+
+These Linux distributions normally rely on "Package Management" tools to install
+and maintain software.  Examples of these tools include up2date, YUM, and
+APT-RPM.  Internet2 has created a repository to house the perfSONAR-PS software,
+related performance tools, and hard to find prerequisites.  We encourage
+adopters of these performance tools to install a simple RPM package that gives
+the necessary configuration information for the YUM and APT-RPM tools.  The RPM
+can be found here:
+
+  wget -c http://software.internet2.edu/Internet2-repo-0.1-2.noarch.rpm
+  
+To install this RPM first import the signing key:
+
+  (sudo) rpm --import http://software.internet2.edu/rpms/RPM-GPG-KEY-Internet2
+
+Then install the RPM:
+
+  (sudo) rpm -ivh Internet2-repo-0.1-2.noarch.rpm
+
+It is also recommended that an additional repository be installed for hard to 
+find prerequisite software that may not be available in traditional repositories
+used by the Linux distributions.  Two regarded repositories are:
+
+ * http://dries.ulyssis.org/rpm/
+ * http://dag.wieers.com/rpm/
+ 
+Each site provides configuration instructions and packages similar to the
+Internet2 repository.
+
+If using a package management system is not an option, or if your system is not
+RedHat based (e.g. Debian, Gentoo, etc.) it is still possible to install this
+software and related requirements by hand.  Please see the "Installation (Tar
+Package)" and "Installation (SVN)" sections for more details.  This tool uses
+the following Perl libraries, libraries, and external tools to function:
+
+  * Perl Libraries
+    - Config::General
+    - Cwd
+    - DBI
+    - DBD::mysql
+    - Data::UUID
+    - Date::Manip
+    - Digest::MD5
+    - Error
+    - Exporter
+    - File::Basename
+    - File::Temp
+    - Getopt::Long
+    - HTTP::Daemon
+    - IO::File
+    - LWP::Simple
+    - LWP::UserAgent
+    - Log::Log4perl
+    - Log::Dispatch
+    - Log::Dispatch::FileRotate
+    - Log::Dispatch::Screen
+    - Module::Load
+    - Net::Ping
+    - Params::Validate
+    - RRDp
+    - Socket
+    - Sys::Hostname
+    - Term::ReadKey
+    - Time::HiRes
+    - XML::LibXML
+  * Libraries
+    - LibXML2
+  * Tools
+    - RRDTool
+
+
+
+Installation (YUM):
+-------------------
+
+Installation using YUM lets the package manager do the work of finding and
+installing the dependencies.  The following command is all that is needed:
+
+  (sudo) yum install perl-perfSONAR_PS-SNMPMA
+
+There may be several prerequisites to install depending on the age of your
+system.  To ensure that all are found, please be sure to install one of the
+alternative repositories above. 
+
+
+
+Installation (APT-RPM):
+-----------------------
+
+Like YUM, installation with APT-RPM also manages the task of finding
+dependencies.  The following commands will install is needed:
+
+  (sudo) apt-get update
+  (sudo) apt-get install perl-perfSONAR_PS-SNMPMA
+
+There may be several prerequisites to install depending on the age of your
+system.  To ensure that all are found, please be sure to install one of the
+alternative repositories above.  
+
+
+
+Installation (Bare RPM):
+------------------------
+
+If you do not wish to install the Internet2 Repository package, you may simply
+find the appropriate RPM for your architecture without using a package manger.
+For example if you are on an "i386" architecture:
+
+  wget -c http://software.internet2.edu/rpms/i386/main/RPMS/perl-perfSONAR_PS-SNMPMA-3.1-11.pSPS.noarch.rpm
+  
+To install without package manager help:
+
+  (sudo) rpm -ivh perl-perfSONAR_PS-SNMPMA-3.1-11.pSPS.noarch.rpm
+  
+Note that this RPM may need other packages to install correctly: if these
+packages are not found on your system, you will need to manually download and
+install them before proceeding.  An alternate method is to still use a package
+manager in a "local" way (YUM only):
+
+  (sudo) yum localinstall perl-perfSONAR_PS-SNMPMA-3.1-11.pSPS.noarch.rpm
+  
+This will search the available repositories for any necessary packages.
+
+
+
+Installation (Tar Package):
+---------------------------
+
+All RPM packages are also available in "source" packages that may be installed
+and used in the typical Unix/Linux fashion.  There are helper scripts included
+that may be used to download the necessary prerequisite software packages:
+
+  wget -c http://software.internet2.edu/sources/perfSONAR-PS/perfSONAR_PS-SNMPMA-3.1.11.tar.gz
+  tar -zxfv perfSONAR_PS-SNMPMA-3.1.11.tar.gz
+  cd perfSONAR_PS-SNMPMA-3.1.11
+  (sudo) make install
+    *Edit all configuration files - See README*
+  cd scripts
+  ./install_dependencies.sh
+  ./prepare_environment.sh
+
+The last three steps need to be run as root or via sudo. The latter two steps
+will configure the machine's users and startup scripts as well as contact CPAN
+for any necessary perl libraries.
+
+In addition to perl requirements, there are other software requirements that
+should be installed.  These are not controlled via the dependency scripts due to
+differences in package management.  The tools are listed below:
+
+  * RRDTool
+    - Source is available here: http://oss.oetiker.ch/rrdtool/
+    - Package management names:
+      * Debian/Ubuntu: rrdtool, librrd2, librrd2-dev, librrds-perl, librrdp-perl
+      * RedHat Systems: rrdtool, rrdtool-devel, perl-rrdtool
+  * LibXML2
+    - Package management names:
+      * Debian/Ubuntu: libxml2, libxml2-dev, libxml2-utils
+      * RedHat Systems: libxml2, libxml2-devel
+
+
+Installation (SVN):
+-------------------
+
+Software may be downloaded directly from our anonymous subversion server.  This
+installation method allows for easy upgrades between versions and access to 
+bugfixes immediately.  There are two ways to download from our server, one that
+retrieves all software and another that retrieves only selective services.
+
+To download the entire release:
+
+  svn checkout http://anonsvn.internet2.edu/svn/perfSONAR-PS/tags/RELEASE_3.1 perfSONAR-PS
+  
+The instructions are the same here as for the Tar package.  Note that
+installation may require pre-requisite software.  Read the preceding sections
+for necessary items and suggestions on how to install and configure them.  When
+you wish to update the checkout (to retrieve new development or bugfixes):
+
+  cd perfSONAR-PS
+  svn update
+  
+If a single service is all that is required, a similar method is used but also
+note that the service must have access to a "Shared" directory that contains
+perfSONAR-PS libraries:
+
+  svn checkout http://anonsvn.internet2.edu/svn/perfSONAR-PS/tags/RELEASE_3.1/perfSONAR_PS-SNMPMA/
+  svn checkout http://anonsvn.internet2.edu/svn/perfSONAR-PS/tags/RELEASE_3.1/Shared
+
+The instructions are also the same as above:
+
+  cd Shared
+  svn update
+
+and
+
+  cd perfSONAR_PS-SNMPMA
+  svn update
+
+--------------------------------------------------------------------------------
+
+Wed May 12 13:42:04 EDT 2010

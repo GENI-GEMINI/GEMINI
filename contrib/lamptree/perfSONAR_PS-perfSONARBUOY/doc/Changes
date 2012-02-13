@@ -1,0 +1,62 @@
+version 3.1
+  * Initial RPM release.
+  * The following development changes where added since the last release (0.9)
+    - OWAMP Support
+    - Bugfixes (see below)
+    - Updated message examples
+  * Bugfixes
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=13
+      pSB_master/collector restart messages 	 
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=34
+      owmesh format change 	 
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=35
+      Spelling correction - pSB EventType 	 	  
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=53
+      Very bad bwctl performance due to improper parsing/passing of window size
+      parameters. 	 
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=84
+      Exit MA service if no data is present 	  
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=110
+      perfSONAR-BUOY Data Query Error 	 
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=112
+      supportedEventType Examples for SNMP/pSB 
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=115
+      pSB Metadata Generation 
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=130
+      pSB Store File generation: Star vs Mesh 
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=131
+      achievable bandwidth event type is mis-spelled achieveable 
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=147
+      bwctl zombies 	
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=152
+      pSB MA gLS ERRORS 	
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=174
+      windowSize not reported correctly for pSB
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=106
+      bwmaster/bwcontroller: better logging support	 	   	  
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=185
+      pS-B backend database sometimes includes 'port' in the host portion - need
+      to normalize. 
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=192
+      SIGHUP fails to restart powmaster 
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=194
+      signal handling needs to be corrected in bwcollector and bwmaster   	
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=241
+      ps-buoy endpoint doesn't seem to store/upload owamp measurements; throws
+      perl uninit value warning in data validation code
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=248
+      improvements for perfsonar-buoy README file 	 
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=263
+      pSB Log Location 	 
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=306
+      powmaster runs after stopping 	 
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=314
+      documentation patch for bwdb.pl & owdb.pl	 
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=315
+      perfsonarbuoy_ma/doc/README testing section non-obvious
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=374
+      Large clock change causes NTP to stop updating and services to stop 
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=412
+      pSB/owamp not restarting powstream properly     
+    - http://code.google.com/p/perfsonar-ps/issues/detail?id=420
+      psb 'master' scripts can periodically not restart properly 

@@ -1,0 +1,21 @@
+[%- DEFAULT
+  EVENTTYPE = "http://ggf.org/ns/nmwg/tools/pinger/2.0/"
+-%]
+
+<nmwg:message id="message1"
+              type="MetadataKeyRequest"
+              xmlns="http://ggf.org/ns/nmwg/base/2.0/" 
+              xmlns:pinger="http://ggf.org/ns/nmwg/tools/pinger/2.0/"
+              xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/"
+              xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+
+  <nmwg:metadata id="meta1">
+      <pinger:parameters/>
+        <!-- <nmwg:parameter name="count">10</nmwg:parameter>
+      </pinger:parameters> -->
+    <nmwg:eventType>[% EVENTTYPE %]</nmwg:eventType>
+  </nmwg:metadata>
+
+  <nmwg:data id="data1" metadataIdRef="meta1"/>
+
+</nmwg:message>

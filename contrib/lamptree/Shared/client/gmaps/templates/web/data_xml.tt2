@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gmaps>
+  [%- FOREACH node = NODES %]
+  <node id="[% node.id %]" domain="[% node.domain %]" 
+      lat="[% node.latitude %]" lng="[% node.longitude %]">
+    [%- FOREACH service = node.services %]
+    <service id="[% service.id %]" serviceType="[% service.serviceType %]" eventType="[% service.eventType %]" 
+      accessPoint="[% service.accessPoint %]"/>
+    [%- END %]
+    [%- FOREACH urn = node.urns %]
+    <urn id="[% urn.id %]" serviceType="[% node.serviceType %]" eventType="[% node.eventType %]"
+      accessPoint="[% node.accessPoint %]">[% urn.urn %]</urn>
+    [%- END %]
+  </node>
+  [%- END %]
+  [%- FOREACH link = LINKS %]
+  <link src="[% link.src_id %]" dst="[% link.dst_id %]"
+      srcDomain="[% link.src_domain %]" dstDomain="[% link.dst_domain %]">
+    [%- FOREACH urn = link.urns %]
+    <urn id="[% urn.id %]" serviceType="[% link.serviceType %]" eventType="[% link.eventType %]"
+      accessPoint="[% link.accessPoint %]">[% urn.urn %]</urn>
+    [%- END %]
+  </link>
+  [%- END %]
+</gmaps>

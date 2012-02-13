@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<nmwg:metadata id="1" xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+  <netutil:subject xmlns:netutil="http://ggf.org/ns/nmwg/characteristic/utilization/2.0/" id="1">
+    <nmwgt:interface xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/">
+      <nmwgt:ifAddress type="ipv4">128.4.133.167</nmwgt:ifAddress>
+      <nmwgt:hostName>stout</nmwgt:hostName>
+    </nmwgt:interface>
+  </netutil:subject>
+  <nmwg:eventType>http://ggf.org/ns/nmwg/tools/snmp/2.0/</nmwg:eventType>
+</nmwg:metadata>
+
+<nmwg:metadata id="2" xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" metadataIdRef="1">
+  <netutil:subject xmlns:netutil="http://ggf.org/ns/nmwg/characteristic/utilization/2.0/" id="2">
+    <nmwgt:interface xmlns:nmwgt="http://ggf.org/ns/nmwg/topology/2.0/">
+      <nmwgt:ifName>eth1</nmwgt:ifName>
+      <nmwgt:ifIndex>3</nmwgt:ifIndex>
+      <nmwgt:direction>in</nmwgt:direction>
+    </nmwgt:interface>
+  </netutil:subject>
+  <nmwg:eventType>http://ggf.org/ns/nmwg/tools/snmp/2.0/</nmwg:eventType>
+</nmwg:metadata>
+
+<nmwg:metadata id="3">
+  <netutil:subject id="3" metadataIdRef="2"/>
+  <nmwg:parameters id="3">
+    <select:parameter name="time" operator="gte">
+      1172173843
+    </select:parameter>
+    <select:parameter name="time" operator="lte">
+      1172173914
+    </select:parameter>      
+  </nmwg:parameters>
+</nmwg:metadata>  

@@ -1,0 +1,79 @@
+<html>
+<head>
+<script type="text/javascript" src="tree.js"></script>  
+<script  type="text/javascript">
+  // initate the tree
+  function init(e) {
+    tree.initElement( 'domain1' );
+  }
+</script>
+</head>
+<body onload="init()">
+
+<div id="tree">
+
+<li id="domain1">
+  <input id="check" type="checkbox"/>domain1
+  <span id="count" class="count"></span>
+  <span id="select" class="count"></span>
+  <ul id="tree">
+    <li>
+      <input id="check" type="checkbox"/>node1
+      <span id="count" class="count"></span>
+      <ul id="tree">
+       <li><input id="urn1" type="checkbox"/>Port urn1</li>
+       <li><input id="urn2" type="checkbox"/>Port urn2</li>
+       <li><input id="urn3" type="checkbox"/>Port urn3</li>
+      </ul>                           
+    </li>
+    <li>
+      <input id="check" type="checkbox"/>node2
+      <span id="count" class="count"></span>
+      <ul id="tree">
+       <li><input id="urn4" type="checkbox"/>Port urn4</li>
+       <li><input id="urn5" type="checkbox"/>Port urn5</li>
+       <li><input id="urn6" type="checkbox"/>Port urn6</li>
+      </ul>                           
+    </li>
+  </ul>
+</li>
+
+<li id="domain2">
+  <input id="check-domain2" type="checkbox"/>domain2
+  <span id="count-domain2" class="count"></span>
+  <span id="select-domain2" class="count"></span>
+  <ul id="tree-domain2">
+    <li id="show-domain2">
+      <input id="check-domain2_node1" type="checkbox"/>node1
+      <span id="count-domain2_node1" class="count"></span>
+      <ul id="tree-domain2_node1_ports">
+       <li><input id="urn7" type="checkbox"/>Port urn7</li>
+       <li><input id="urn8" type="checkbox"/>Port urn8</li>
+       <li><input id="urn9" type="checkbox"/>Port urn9</li>
+      </ul>                           
+    </li>
+    <li id="show-domain2">
+      <input id="check-domain2_node2" type="checkbox"/>node2
+      <span id="count-domain2_node2" class="count"></span>
+      <ul id="tree-domain2_node2_ports">
+       <li><input id="urn10" type="checkbox"/>Port urn10</li>
+       <li><input id="urn11" type="checkbox"/>Port urn11</li>
+       <li><input id="urn12" type="checkbox"/>Port urn12</li>
+      </ul>                           
+    </li>
+    <li id="show-domain2">
+      <input id="check-domain2_node3" type="checkbox"/>node3
+      <span id="count-domain2_node3" class="count"></span>
+      <ul id="tree-domain2_node3_ports">
+       <li><input id="urn13" type="checkbox"/>Port urn13</li>
+       <li><input id="urn14" type="checkbox"/>Port urn14</li>
+       <li><input id="urn15" type="checkbox"/>Port urn15</li>
+      </ul>                           
+    </li>
+  </ul>
+</li>
+
+</div>
+
+</body>
+</head>

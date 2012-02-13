@@ -1,0 +1,223 @@
+<div class="mainContainer">
+<div class="subTitle1">Enabled Services Configuration Tool</div>
+
+<div class="rcontainer">
+
+<center><font color="red"><div id="web_admin_error">[% error_message %]</div></font></center>
+<center><div id="web_admin_status">[% status_message %]</div></center>
+
+<script type="text/javascript">
+function handle_save() {
+    if ( !check_valid_node() ) {
+        return;
+    }
+    
+	display_waiting_dialog("Saving Configuration..");
+
+	var send_content = dijit.byId("services_form").attr('value');
+	for(var tmp in send_content) {
+		if (send_content[tmp] == '') {
+			send_content[tmp] = "off";
+		}
+	}
+	send_content["fname"] = "save_config";
+    send_content["node"]  = dijit.byId('node_select').attr('value');
+    
+	dojo.xhrGet ({
+			url: '[% self_url %]',
+			handleAs: "json",
+			content: send_content,
+			timeout: 90000,
+			load: function(response, io_args) { hide_waiting_dialog(); handle_save_response(response, io_args); },
+			error: function (response, io_args) { hide_waiting_dialog(); dojo.byId('web_admin_error').innerHTML="Problem saving configuration"; },
+			mimetype: "text/json" 
+		});
+}
+
+function handle_save_response(response, io_args) {
+	if (response['error']) {
+		dojo.byId('web_admin_error').innerHTML=response['error'];
+		dojo.byId('web_admin_status').innerHTML="";
+	} else if (response['message']) {
+		dojo.byId('web_admin_error').innerHTML="";
+		dojo.byId('web_admin_status').innerHTML=response['message'];
+		dojo.byId('nptoolkit_is_modified').value = 0;
+	} else {
+		dojo.byId('web_admin_error').innerHTML="Received unknown response from service";
+		dojo.byId('web_admin_status').innerHTML="";
+	}
+}
+
+function handle_reset() {
+    var node = dijit.byId('node_select').attr('value');
+    
+    if ( !check_valid_node() ) {
+        return;
+    }
+    
+    oldnode = node;
+	dojo.xhrGet ({
+			url: '[% self_url %]',
+			handleAs: "json",
+			content: { 'fname': "reset_config", 'node': node },
+			timeout: 15000,
+			load: handle_reset_response,
+			error: function (response, io_args) { dojo.byId('web_admin_error').innerHTML="Problem reseting configuration"; },
+			mimetype: "text/json" 
+		});
+}
+
+function handle_reset_response(response, io_args) {
+	if (response['error']) {
+		dojo.byId('web_admin_error').innerHTML=response['error'];
+	} else if (response['services']) {
+		for(var srv in response['services']) {
+			console.log("Service: "+srv);
+
+			var box = dijit.byId(srv);
+			if (!box) {
+				continue;
+			}
+
+			if (response['services'][srv]) {
+				box.attr('value', true);
+			}
+			else {
+				box.attr('value', false);
+			}
+		}
+
+		dojo.byId('nptoolkit_is_modified').value = 0;
+	} else {
+		dojo.byId('web_admin_error').innerHTML="Received unknown response from service";
+	}
+}
+
+function select_bandwidth_services() {
+	var bandwidth_services = [ "perfsonarbuoy_bwctl", "perfsonarbuoy_ma", "ndt", "npad", "bwctl"  ];
+	var latency_services = [ "perfsonarbuoy_owamp", "perfsonarbuoy_ma", "pinger", "owamp" ];
+	var disabled_services = [ "snmp_ma" ];
+
+	dojo.byId('nptoolkit_is_modified').value = 1;
+
+	for (var i = 0; i < disabled_services.length; i++) {
+		var service = disabled_services[i];
+
+		var checkbox = dijit.byId(service);
+		if (!checkbox) {
+			console.log("Did not find "+service);
+			continue;
+		}
+
+		checkbox.attr('value', false);
+	}
+
+	for (var i = 0; i < latency_services.length; i++) {
+		var service = latency_services[i];
+
+		var checkbox = dijit.byId(service);
+		if (!checkbox) {
+			continue;
+		}
+
+		checkbox.attr('value', false);
+	}
+
+	for (var i = 0; i < bandwidth_services.length; i++) {
+		var service = bandwidth_services[i];
+
+		var checkbox = dijit.byId(service);
+		if (!checkbox) {
+			continue;
+		}
+
+		checkbox.attr('value', true);
+	}
+}
+
+function select_latency_services() {
+	var bandwidth_services = [ "perfsonarbuoy_bwctl", "perfsonarbuoy_ma", "ndt", "npad", "bwctl"  ];
+	var latency_services = [ "perfsonarbuoy_owamp", "perfsonarbuoy_ma", "pinger", "owamp" ];
+	var disabled_services = [ "snmp_ma" ];
+
+	dojo.byId('nptoolkit_is_modified').value = 1;
+
+	for (var i = 0; i < disabled_services.length; i++) {
+		var service = disabled_services[i];
+
+		var checkbox = dijit.byId(service);
+		if (!checkbox) {
+			continue;
+		}
+
+		checkbox.attr('value', false);
+	}
+
+	for (var i = 0; i < bandwidth_services.length; i++) {
+		var service = bandwidth_services[i];
+
+		var checkbox = dijit.byId(service);
+		if (!checkbox) {
+			continue;
+		}
+
+		checkbox.attr('value', false);
+	}
+
+	for (var i = 0; i < latency_services.length; i++) {
+		var service = latency_services[i];
+
+		var checkbox = dijit.byId(service);
+		if (!checkbox) {
+			continue;
+		}
+
+		checkbox.attr('value', true);
+	}
+}
+</script>
+
+<div>
+<table>
+<tr>
+  <td style="font-size: 14px; color: #039;">Node: </td>
+  <td>
+<form id="node_form" dojoType="dijit.form.Form">
+<select id='node_select' dojoType='dijit.form.FilteringSelect' autocomplete='false' value='' onChange='handle_node_select()'>
+    <option value='head'>Please select a node..</option>
+[% FOREACH pair IN nodes.pairs %]
+    <option value='[% pair.key %]'>[% pair.value.name %]</option>
+[% END %]
+</select>
+</form>
+  </td>
+</tr>
+</table>
+</div>
+
+<input type="hidden" id="nptoolkit_is_modified" value="0" />
+
+<form id="services_form" dojoType="dijit.form.Form">
+<table class="basic_table">
+        <tr>
+        <th></th><th>Services</th><th>Description</th>
+        </tr>
+        [% FOREACH pair IN services.pairs %]
+            [% UNLESS pair.value.nodisplay %]
+        <tr>
+                <td><input type="checkbox" onClick="dojo.byId('nptoolkit_is_modified').value='1'" dojoType="dijit.form.CheckBox" value="on" id="[% pair.key %]" name="[% pair.key %]" [% IF pair.value.enabled %] checked="checked" [% END %] /></td>
+                <td>[% pair.value.name %]</td>
+                <td>[% pair.value.description %]</td>
+        </tr>
+            [% END %]
+        [% END %]
+</table>
+</form>
+
+<input class="button" type="submit" name="select_bandwidth" id="select_bandwidth" value="Only Enable Bandwidth Services" onClick="select_bandwidth_services()">
+<input class="button" type="submit" name="select_latency" id="select_latency" value="Only Enable Latency Services" onClick="select_latency_services()">
+<br>
+<input class="button" type="submit" name="save" id="save" value="Save" onClick="handle_save()">
+<input class="button" type="submit" name="reset" id="reset" value="Reset" onClick="handle_reset()">
+
+</div>

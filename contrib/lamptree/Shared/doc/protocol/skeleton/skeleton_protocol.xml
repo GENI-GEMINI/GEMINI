@@ -1,0 +1,639 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN" "http://docbook.org/xml/4.2/docbookx.dtd">
+<article>
+
+  <articleinfo>
+    <title>perfSONAR XXX Protocol</title>
+
+    <author>
+      <firstname>XXX</firstname>
+      <surname>XXX</surname>
+      <affiliation>
+        <orgname>XXX</orgname>
+        <address>   
+          <email>XXX@XXX.XXX</email>
+        </address>
+      </affiliation>
+    </author>
+
+    <copyright>
+      <year>2008</year>
+      <holder>XXX</holder>
+    </copyright>
+
+  </articleinfo>
+
+  <section id="changes" xreflabel="Document Changes">
+    <title>Document Changes</title>
+
+    <table frame="all" align="center" halign="center" width="80%"  id="table.1">
+      <title>Change Log</title>
+      <tgroup cols="1" align="left" colsep="1" rowsep="1">
+        <colspec colnum="1" colname="c1" width="10%"/>
+        <colspec colnum="2" colname="c2" width="10%"/>
+        <colspec colnum="3" colname="c3" width="50%"/>
+        <colspec colnum="4" colname="c4" width="30%"/>
+        <thead>
+          <row>
+            <entry>Version</entry>
+            <entry>Date</entry>
+            <entry>Description</entry>
+            <entry>Author(s)</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>XXX</entry>
+            <entry>XX/XX/200X</entry>
+            <entry>Initial Preparation</entry>
+            <entry>XXX</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+   
+  </section>
+
+
+  <section id="introduction" xreflabel="Introduction">
+    <title>Introduction</title>
+
+    <para>
+      This work describes a blah blah blah...
+    </para>
+
+    <para>
+      ... Add some more introductory material about this particular protocol,
+      the service it may use, and set the stage for what you hope to talk
+      about ...
+    </para>
+    
+    <para>  
+      The remainder of this document will explain the origins of this command
+      protocol in <xref linkend="architecture" />, detailed descriptions
+      regarding syntax and semantics in <xref linkend="protocol" />, an overview
+      of status in <xref linkend="result_codes" />, and finally points of
+      extension will be discussed in <xref linkend="protocol_extension" />.
+    </para>
+
+
+  </section>
+
+  <section id="architecture" xreflabel="Architecture">
+    <title>System Architecture</title>
+    
+    <para>
+      ... Talk about the pS architecture in general, then get specific about
+      the particular service this protocol is being used for.  Don't go into
+      pages of detail, just enough to motivate why this protocol is needed for
+      ther service and a litt of what it does ...
+    </para>
+       
+  </section>
+
+  <section id="protocol" xreflabel="XXX Protocol">
+    <title>XXX Protocol</title>
+    
+    <para>
+      ... Start talking about the protocol in general.  There are probably
+      several message sets (requests, responses) that are in use, mention
+      those here first ...
+    </para>
+    
+    <section id="request_message" xreflabel="Request Message">
+      <title>Request Message</title>
+    
+      <para>
+        ...  use this to talk about a specific requet message, mention why
+        it is needed and what it accomplishes.  Then give an example of what
+        it looks like, then describe each part, then finally go into schema
+        details ...
+      </para>
+      
+      <section id="request_example" xreflabel="Request Example">
+        <title>Request Example</title>
+
+        <programlisting>
+          <![CDATA[
+            <?xml version="1.0" encoding="UTF-8"?>
+            <nmwg:message type="http://schemas.perfsonar.net/messages/Request/1.0"
+                          id="message.54957485"
+                          xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+ 
+              <!-- some message -->
+              
+            </nmwg:message>
+          ]]>
+        </programlisting>  
+    
+        <para>
+          ... set the stage to talk about the parts of this example ...
+        </para>
+
+        <section id="request_schema_message" xreflabel="Message Element">
+          <title>Message Element</title>
+
+          <programlisting>
+            <![CDATA[
+              <nmwg:message type="http://schemas.perfsonar.net/messages/Request/1.0"
+                            id="STRING"
+                            xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+
+              </nmwg:message>
+            ]]>
+          </programlisting>  
+
+          <itemizedlist mark='opencircle'>
+            <listitem>
+              <para><command>localname</command> - message</para>
+            </listitem>
+            <listitem>
+              <para><command>namespace</command> - http://ggf.org/ns/nmwg/base/2.0/</para>
+            </listitem>
+            <listitem>
+              <para><command>attributes</command> - id, type</para>
+            </listitem>
+            <listitem>
+              <para><command>nested elements</command> - N/A</para>
+            </listitem>
+            <listitem>
+              <para><command>required</command> - yes</para>
+            </listitem>
+          </itemizedlist>   
+          
+          <para>
+            ... talk about why we need this, and the stuff that makes it what
+            it is (elements, namespace, attributes, etc.).  Be detailed here, 
+            because this part matters the most ...
+          </para>
+         
+        </section>
+        
+      </section>
+
+      <section id="request_schema" xreflabel="Request Schema">
+        <title>Request Schema</title>
+
+        <para>
+          ... insert some VALID schema here.  Since we write these in 
+          RELAX-NG, use that always.  Sometimes it makes sense to include
+          XSD as well ...
+        </para>
+
+        <section id="request_schema_relax" xreflabel="RELAX-NG">
+          <title>RELAX-NG</title>        
+
+          <para>
+            ... talk about it a little ...
+          </para>
+
+          <programlisting>
+            <![CDATA[
+              namespace nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+
+              start = 
+                element nmwg:message { 
+                  attribute id { xsd:string } &
+                  attribute type {
+                    "Request" |
+                    "http://schemas.perfsonar.net/messages/Request/1.0"
+                  } &
+                }
+            ]]>
+          </programlisting>  
+
+        </section>
+
+        <section id="request_schema_xsd" xreflabel="XSD">
+          <title>XSD</title>        
+
+          <para>
+            ... talk about it a little ...
+          </para>
+
+          <programlisting>
+            <![CDATA[
+              <?xml version="1.0" encoding="UTF-8"?>
+              <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+                         elementFormDefault="qualified" 
+                         targetNamespace="http://ggf.org/ns/nmwg/base/2.0/" 
+                         xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+                <xs:element name="message">
+                  <xs:complexType>
+                    <xs:attribute name="id" use="required" type="xs:string"/>
+                    <xs:attribute name="type" use="required">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:token">
+                          <xs:enumeration value="Request"/>
+                          <xs:enumeration value="http://schemas.perfsonar.net/messages/Request/1.0"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:attribute>
+                  </xs:complexType>
+                </xs:element>
+              </xs:schema>
+            ]]>
+          </programlisting>  
+
+        </section>
+        
+      </section>
+
+    </section>
+
+    <section id="response_message" xreflabel="Response Message">
+      <title>Response Message</title>
+    
+      <para>
+        ...  use this to talk about a specific requet message, mention why
+        it is needed and what it accomplishes.  Then give an example of what
+        it looks like, then describe each part, then finally go into schema
+        details ...
+      </para>
+      
+      <section id="response_example" xreflabel="Response Example">
+        <title>Response Example</title>
+
+        <programlisting>
+          <![CDATA[
+            <?xml version="1.0" encoding="UTF-8"?>
+            <nmwg:message type="http://schemas.perfsonar.net/messages/Response/1.0"
+                          id="message.54957485"
+                          xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+ 
+              <!-- some message -->
+              
+            </nmwg:message>
+          ]]>
+        </programlisting>  
+    
+        <para>
+          ... set the stage to talk about the parts of this example ...
+        </para>
+
+        <section id="response_schema_message" xreflabel="Message Element">
+          <title>Message Element</title>
+
+          <programlisting>
+            <![CDATA[
+              <nmwg:message type="http://schemas.perfsonar.net/messages/Response/1.0"
+                            id="STRING"
+                            xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+
+              </nmwg:message>
+            ]]>
+          </programlisting>  
+
+          <itemizedlist mark='opencircle'>
+            <listitem>
+              <para><command>localname</command> - message</para>
+            </listitem>
+            <listitem>
+              <para><command>namespace</command> - http://ggf.org/ns/nmwg/base/2.0/</para>
+            </listitem>
+            <listitem>
+              <para><command>attributes</command> - id, type</para>
+            </listitem>
+            <listitem>
+              <para><command>nested elements</command> - N/A</para>
+            </listitem>
+            <listitem>
+              <para><command>required</command> - yes</para>
+            </listitem>
+          </itemizedlist>   
+          
+          <para>
+            ... talk about why we need this, and the stuff that makes it what
+            it is (elements, namespace, attributes, etc.).  Be detailed here, 
+            because this part matters the most ...
+          </para>
+         
+        </section>
+        
+      </section>
+
+      <section id="response_schema" xreflabel="Response Schema">
+        <title>Response Schema</title>
+
+        <para>
+          ... insert some VALID schema here.  Since we write these in 
+          RELAX-NG, use that always.  Sometimes it makes sense to include
+          XSD as well ...
+        </para>
+
+        <section id="response_schema_relax" xreflabel="RELAX-NG">
+          <title>RELAX-NG</title>        
+
+          <para>
+            ... talk about it a little ...
+          </para>
+
+          <programlisting>
+            <![CDATA[
+              namespace nmwg="http://ggf.org/ns/nmwg/base/2.0/"
+
+              start = 
+                element nmwg:message { 
+                  attribute id { xsd:string } &
+                  attribute type { 
+                    "Response" |
+                    "http://schemas.perfsonar.net/messages/Response/1.0"
+                  } &
+                }
+            ]]>
+          </programlisting>  
+
+        </section>
+
+        <section id="response_schema_xsd" xreflabel="XSD">
+          <title>XSD</title>        
+
+          <para>
+            ... talk about it a little ...
+          </para>
+
+          <programlisting>
+            <![CDATA[
+              <?xml version="1.0" encoding="UTF-8"?>
+              <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+                         elementFormDefault="qualified" 
+                         targetNamespace="http://ggf.org/ns/nmwg/base/2.0/" 
+                         xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/">
+                <xs:element name="message">
+                  <xs:complexType>
+                    <xs:attribute name="id" use="required" type="xs:string"/>
+                    <xs:attribute name="type" use="required">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:token">
+                          <xs:enumeration value="Response"/>
+                          <xs:enumeration value="http://schemas.perfsonar.net/messages/Response/1.0"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:attribute>
+                  </xs:complexType>
+                </xs:element>
+              </xs:schema>
+            ]]>
+          </programlisting>  
+
+        </section>
+        
+      </section>
+
+    </section>
+
+    <section id="result_codes" xreflabel="Result Codes">
+      <title>Result Codes</title>
+      
+      <para>
+        Talk about the result codes, etc...
+      </para>
+          
+    </section>
+
+
+    <section id="protocol_extension" xreflabel="Extensions">
+      <title>Extensions</title>
+      
+      <para>
+        ...  this could be optional, but discuss optional (perhaps service
+        specific) recomendations that can be used to extend the base of the
+        protocol ...
+      </para>
+      
+    </section>  
+    
+  </section> 
+
+  <glossary id="glossary">
+    <title>Terms</title>
+
+    <glossdiv id="A">
+      <title>A</title>    
+    </glossdiv> 
+    
+    <glossdiv id="B">
+      <title>B</title>    
+    </glossdiv> 
+    
+    <glossdiv id="C">
+      <title>C</title>    
+      <glossentry id="characteristic" xreflabel="characteristics"><glossterm>characteristic</glossterm>
+        <glossdef>
+          <para>Taken on the context of networking, these describe the 
+          intrinsic properties of a portion of the network that are related 
+          to the performance and reliability of the network.  See 
+          <ulink url="http://www.ggf.org/documents/GFD.23.pdf">http://www.ggf.org/documents/GFD.23.pdf</ulink> 
+          for more information.</para>
+        </glossdef>
+      </glossentry> 
+    </glossdiv> 
+    
+    <glossdiv id="D">
+      <title>D</title>       
+    </glossdiv> 
+    
+    <glossdiv id="E">
+      <title>E</title>    
+    </glossdiv> 
+    
+    <glossdiv id="F">
+      <title>F</title>        
+    </glossdiv> 
+    
+    <glossdiv id="G">
+      <title>G</title>    
+    </glossdiv> 
+    
+    <glossdiv id="H">
+      <title>H</title>           
+    </glossdiv> 
+    
+    <glossdiv id="I">
+      <title>I</title>             
+    </glossdiv> 
+    
+    <glossdiv id="J">
+      <title>J</title>    
+    </glossdiv> 
+    
+    <glossdiv id="K">
+      <title>K</title>    
+    </glossdiv> 
+    
+    <glossdiv id="L">
+      <title>L</title>    
+    </glossdiv> 
+    
+    <glossdiv id="M">
+      <title>M</title>      
+    </glossdiv> 
+    
+    <glossdiv id="N">
+      <title>N</title>  
+      <glossentry id="NMWG"><glossterm>NM-WG</glossterm>
+        <glossdef>
+          <para>The performance of most grid applications is dependent on the 
+          performance of the networks forming the grid. The Network 
+          Measurements Working Group (NMWG) identifies network metrics 
+          (aka <xref linkend="characteristic" />) useful to grid applications 
+          and middleware, and develops standard mechanisms to describe and 
+          publish these characteristics to the Grid.</para>
+        </glossdef>
+      </glossentry>   
+    </glossdiv> 
+    
+    <glossdiv id="O">
+      <title>O</title>    
+    </glossdiv> 
+    
+    <glossdiv id="P">
+      <title>P</title>     
+    </glossdiv>
+    
+    <glossdiv id="Q">
+      <title>Q</title>    
+    </glossdiv> 
+    
+    <glossdiv id="R">
+      <title>R</title>  
+    </glossdiv> 
+    
+    <glossdiv id="S">
+      <title>S</title>  
+      <glossentry id="schema"><glossterm>schema</glossterm>
+        <glossdef>
+          <para>XML specification, normally written in XML.</para>
+        </glossdef>
+        <glossseealso otherterm="schemata">schemata</glossseealso>
+      </glossentry>   
+      <glossentry id="schemata"><glossterm>schemata</glossterm>
+        <glossdef>
+          <para>Plural of schema.</para>
+        </glossdef>
+        <glossseealso otherterm="schema">schema</glossseealso>
+      </glossentry>           
+    </glossdiv> 
+    
+    <glossdiv id="T">
+      <title>T</title>    
+    </glossdiv> 
+    
+    <glossdiv id="U">
+      <title>U</title>  
+    </glossdiv> 
+    
+    <glossdiv id="V">
+      <title>V</title>    
+    </glossdiv> 
+    
+    <glossdiv id="W">
+      <title>W</title>    
+    </glossdiv> 
+    
+    <glossdiv id="X">
+      <title>X</title>  
+    </glossdiv> 
+    
+    <glossdiv id="Y">
+      <title>Y</title>    
+    </glossdiv> 
+    
+    <glossdiv id="Z">
+      <title>Z</title>    
+    </glossdiv>
+     
+  </glossary>
+
+
+  <bibliography id="bibliography">
+    <title>References</title>
+
+    <biblioentry xreflabel="Multi-Schema XML Validator">
+      <abbrev>MSV</abbrev>
+      <title>
+        <ulink url="https://msv.dev.java.net/">Sun Multi-Schema XML Validator (MSV)</ulink>
+      </title>
+    </biblioentry>
+    
+    <biblioentry xreflabel="Trang">
+      <abbrev>Trang</abbrev>
+      <title>
+        <ulink url="http://www.thaiopensource.com/relaxng/trang.html">Multi-format schema converter based on RELAX NG</ulink>
+      </title>
+    </biblioentry>
+
+    <biblioentry xreflabel="NM-WG Schema">
+      <abbrev>NMWG-Schema</abbrev>
+      <title>
+        <ulink url="http://nmwg.internet2.edu/nm-schema-base.html">NMWG Base Schema</ulink>
+      </title>
+    </biblioentry>
+
+    <biblioentry xreflabel="RELAX-NG">
+      <abbrev>RELAX-NG</abbrev>
+      <title>
+        <ulink url="http://relaxng.org/">RELAX-NG Schema Language</ulink>
+      </title>
+    </biblioentry>
+
+    <biblioentry xreflabel="NM-WG">
+      <abbrev>NM-WG</abbrev>
+      <title>
+        <ulink url="http://nmwg.internet2.edu">Network Measurements Working Group</ulink>
+      </title>
+    </biblioentry>
+    
+    <biblioentry xreflabel="perfSONAR">
+      <abbrev>perfSONAR</abbrev>
+      <title>
+        <ulink url="http://www.perfsonar.net">perfSONAR</ulink>
+      </title>
+    </biblioentry>  
+    
+    <biblioentry xreflabel="XML">
+      <abbrev>XML</abbrev>
+      <title>
+        <ulink url="http://www.w3.org/XML">Extensible Markup Language (XML)</ulink>
+      </title>
+    </biblioentry>
+    
+    <biblioentry xreflabel="OGF">
+      <abbrev>OGF</abbrev>
+      <title>
+        <ulink url="http://www.ogf.org/">(Global|Open) Grid Forum</ulink>
+      </title>
+    </biblioentry>
+
+    <biblioentry xreflabel="A Scalable Framework for Representation and Exchange of Network Measurements">
+      <abbrev>Zurawski06Scalable</abbrev>
+      <title>A Scalable Framework for Representation and Exchange of Network Measurements</title>
+      <authorgroup>
+        <author><personname>
+          <firstname>J.</firstname><surname>Zurawski</surname>
+        </personname></author>
+        <author><personname>
+          <firstname>M.</firstname><surname>Swany</surname>
+        </personname></author>
+        <author><personname>
+          <firstname>D.</firstname><surname>Gunter</surname>
+        </personname></author>
+      </authorgroup>
+      <confgroup>
+        <confdates>March, 2006</confdates>
+        <conftitle>2nd International IEEE/Create-Net Conference on Testbeds and Research Infrastructures for the Development of Networks and Communities</conftitle>
+        <address>Barcelona, Spain</address>
+        <confsponsor>IEEE/Create-Net</confsponsor>
+      </confgroup>
+    </biblioentry>
+
+    <biblioentry xreflabel="XSD">
+      <abbrev>XSD</abbrev>
+      <title>
+        <ulink url="http://www.w3.org/XML/Schema">XML Schema</ulink>
+      </title>
+    </biblioentry> 
+
+  </bibliography>
+
+</article>

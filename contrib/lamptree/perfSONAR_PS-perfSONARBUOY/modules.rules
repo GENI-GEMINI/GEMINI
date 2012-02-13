@@ -1,0 +1,6 @@
+strict,ignore
+warnings,ignore
+lib,ignore
+constant,ignore
+Socket6,ignore
+FindBin,ignore
