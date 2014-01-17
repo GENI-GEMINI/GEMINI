@@ -1,0 +1,4 @@
+ACTIVE_SETUP.sh gets tarred into ACTIVE_SETUP.tgz and is
+the starting point of the active measurement setup, being
+invoked by the instrumentize scripts.  See UW repo to see
+how this is called.

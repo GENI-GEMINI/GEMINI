@@ -1,0 +1,14 @@
+Lovelock/x86_64		#Fedora Core 15 64 bit version
+Fedora_15/x86_64	#Fedora Core 15 64 bit version
+
+lucid/i686		#Ubuntu Lucid 10.04 32 bit version
+Ubuntu_10.04/i686	#Ubuntu Lucid 10.04 32 bit version
+
+CentOS_6.3/x86_64	#CentOS 6.3 64 bit version
+CentOS_6.4/x86_64	#CentOS 6.4 64 bit version
+
+Debian_6.0/x86_64	#Debian 6.0 64 bit version
+squeeze/x86_64		#Debian 6.0 64 bit version
+
+precise/x86_64		#Ubuntu Precise 12.04 64 bit version
+Ubuntu_12.04/x86_64	#Ubuntu Lucid 12.04 64 bit version
