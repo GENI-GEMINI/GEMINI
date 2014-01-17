@@ -1,3 +1,0 @@
-#!/bin/sh
-
-echo | /opt/perfsonar_ps/perfsonarbuoy_ma/bin/bwdb.pl -i root

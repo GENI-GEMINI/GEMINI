@@ -1,8 +1,0 @@
-### perfSONAR-PS perfAdmin Cache ###
-#
-# Run the following no faster than every 5 minutes, recommended
-# to run around 30 minutes (or more).
-#
-
-*/30 * * * *  root  perl /opt/perfsonar_ps/perfAdmin/bin/cache.pl >& /dev/null
-

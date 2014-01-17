@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<gmaps>
-  [%- IF ERROR -%]
-  <error>[% ERROR %]</error>
-  [%- ELSE -%]
-  <message>[% MESSAGE %]</message>
-  [%- END -%]
-</gmaps>

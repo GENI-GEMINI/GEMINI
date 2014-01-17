@@ -1,17 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<nmwg:message xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" 
-              xmlns:unis="http://ogf.org/schema/network/topology/unis/20100528/"
-              type="MeasurementRequest"
-              id="MeasurementRequestMessage1">
-
-  <nmwg:metadata id="metadata1" xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" >
-
-<!-- JZ 12/14/2010
- 
-Add in the content of the metadata element.  This will be passed to the service
-and matched against the store file.  The response message will indicate success
-or failure.
--->
-
-  </nmwg:metadata>      <nmwg:data id="data1" metadataIdRef="metadata1" xmlns:nmwg="http://ggf.org/ns/nmwg/base/2.0/" />
-</nmwg:message>

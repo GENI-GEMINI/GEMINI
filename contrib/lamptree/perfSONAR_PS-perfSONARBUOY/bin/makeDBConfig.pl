@@ -1,1 +1,0 @@
-../../Shared/scripts/makeDBConfig.pl

@@ -1,7 +1,0 @@
-#
-# This file contains a list of valid peers, one per line, identified by URN.
-# Use '*' (by itself) to allow all peers.
-#
-# Example:
-# urn:publicid:IDN+emulab.net+user+myusername
-#

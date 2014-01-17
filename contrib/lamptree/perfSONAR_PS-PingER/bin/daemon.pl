@@ -1,1 +1,0 @@
-../../Shared/scripts/perfsonar-daemon.pl
