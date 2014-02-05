@@ -53,7 +53,8 @@ chmod 776 $INSTOOLS_LOG;
 	TAR_BINARY="tar"
 	MAKE_BINARY="make"
 	CAT_BINARY="cat"
-	GEMINI_ACTIVE_PKG="gemini-active-mp-fedora15-20130701.tar.gz"
+	#GEMINI_ACTIVE_PKG="gemini-active-mp-fedora15-20130701.tar.gz"
+	GEMINI_ACTIVE_PKG="gemini-active-mp-fedora15-20130521-miao.tar.gz" #miaos idea
 	GEMINI_ACTIVE_URL="$DOWNLOAD_PATH/$TARBALL_DIR/$GEMINI_ACTIVE_PKG"
 
 	# Temp Directories and Log file creations
