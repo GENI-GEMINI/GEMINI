@@ -54,19 +54,12 @@ chmod 776 $INSTOOLS_LOG;
 	TAR_BINARY="tar"
 	MAKE_BINARY="make"
 	CAT_BINARY="cat"
-	GEMINI_ACTIVE_PKG="gemini-active-mp-centos-20130701.tar.gz"
+	GEMINI_ACTIVE_PKG="gemini-active-mp-centos-20140225.tar.gz"
 	GEMINI_ACTIVE_URL="$DOWNLOAD_PATH/$TARBALL_DIR/$GEMINI_ACTIVE_PKG"
 
 	# Temp Directories and Log file creations
 	$MKDIR_BINARY $TEMP_BASE
 	cd $TEMP_BASE
-
-if [ -e '/root/GEMINI_MP' ]; then
-	#restore some user ids that are destroyed when creating Disk images
-	echo 'mysql:x:27:' >>/etc/group
-	echo 'mysql:!!:15742::::::' >>/etc/shadow
-	echo 'mysql:x:27:27:MySQL Server:/var/lib/mysql:/bin/bash' >>/etc/passwd
-fi
 
         echo "Installing MP software on node"  >>$INSTOOLS_LOG 2>&1;
         $WGET_BINARY -q -P $TEMP_BASE $GEMINI_ACTIVE_URL >>$INSTOOLS_LOG 2>&1;
@@ -78,24 +71,12 @@ fi
         install -o root -g perfsonar -m 440 /var/emulab/boot/lampcert.pem /usr/local/etc/protogeni/ssl/  >>$INSTOOLS_LOG 2>&1;
         echo "   Running bootstrap"   >>$INSTOOLS_LOG 2>&1;
         /usr/local/etc/lamp/bootstrap.sh ${SLICEURN} ${USERURN} ${GNHOST} ${AUTH_UUID} ${UNIS_ID} >>$INSTOOLS_LOG 2>&1;
-        echo "   Installing mysql-Fedora.sh"   >>$INSTOOLS_LOG 2>&1;
-        ./mysql-Fedora.sh  >>$INSTOOLS_LOG 2>&1;
-        echo "   Installing perfSONAR_PS-ServiceWatcher-Fedora.sh"   >>$INSTOOLS_LOG 2>&1;
-        ./perfSONAR_PS-ServiceWatcher-Fedora.sh  >>$INSTOOLS_LOG 2>&1;
-        echo "   Installing perfSONAR_PS-psConfig-Fedora.sh"    >>$INSTOOLS_LOG 2>&1;
-        ./perfSONAR_PS-pSConfig-Fedora.sh  >>$INSTOOLS_LOG 2>&1;
-        echo "   Installing perfSONAR_PS-LSRegistrationDaemon-Fedora.sh"   >>$INSTOOLS_LOG 2>&1;
-        ./perfSONAR_PS-LSRegistrationDaemon-Fedora.sh  >>$INSTOOLS_LOG 2>&1;
-        echo "   Installing perfSONAR_PS-perfSONARBUOY-Fedora.sh"   >>$INSTOOLS_LOG 2>&1;
-        ./perfSONAR_PS-perfSONARBUOY-Fedora.sh  >>$INSTOOLS_LOG 2>&1;
-        echo "   Installing perfSONAR_PS-PingER-Fedora.sh"   >>$INSTOOLS_LOG 2>&1;
-        ./perfSONAR_PS-PingER-Fedora.sh  >>$INSTOOLS_LOG 2>&1;
+	echo "   Installing nl_wrapper.sh"  >>$INSTOOLS_LOG 2>&1;
+        ./nl_wrapper.sh >>$INSTOOLS_LOG 2>&1;
 	echo "   Installing BLiPP" >>$INSTOOLS_LOG 2>&1;
 	./blipp-centos.sh >>$INSTOOLS_LOG 2>&1;
 	# TODO: start this from a service checker
 	echo "   Starting BLiPP" >>$INSTOOLS_LOG 2>&1;
-	#GNIP=`ping -c 1 $GNHOST | awk 'NR==1{print $3}' | sed 's/(//;s/)//'`
-	#echo "$GNIP server" >> /etc/hosts;
 	blippd -c /usr/local/etc/blipp_default.json > /dev/null 2>&1 &
 	cd
 	echo "   Stared BLiPP" >>$INSTOOLS_LOG 2>&1;
