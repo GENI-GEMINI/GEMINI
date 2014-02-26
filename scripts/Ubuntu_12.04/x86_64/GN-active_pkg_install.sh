@@ -55,40 +55,33 @@ chmod 776 $INSTOOLS_LOG;
 	TAR_BINARY="tar"
 	MAKE_BINARY="make"
 	CAT_BINARY="cat"
-	GEMINI_ACTIVE_PKG="gemini-active-gn-ubuntu12-20130701.tar.gz"
+	GEMINI_ACTIVE_PKG="gemini-active-gn-ubuntu-20140225.tar.gz"
 	GEMINI_ACTIVE_URL="$DOWNLOAD_PATH/$TARBALL_DIR/$GEMINI_ACTIVE_PKG"
 
 	# Temp Directories and Log file creations
 	$MKDIR_BINARY $TEMP_BASE
 
-if [ -e '/root/GEMINI_GN' ]; then
-	#restore some user ids that are destroyed when creating Disk images
-	echo 'mongod:x:497:' >>/etc/group
-	echo 'mongod:!!:15742::::::' >>/etc/shadow
-	echo 'mongod:x:497:497:mongod:/var/lib/mongo:/bin/false' >>/etc/passwd
-fi
 	cd $TEMP_BASE
 	echo "Installing GN software" >>$INSTOOLS_LOG 2>&1;
         $WGET_BINARY -q -P $TEMP_BASE $GEMINI_ACTIVE_URL >>$INSTOOLS_LOG 2>&1;
         $TAR_BINARY -zxf $GEMINI_ACTIVE_PKG >>$INSTOOLS_LOG 2>&1;
-        echo "	 Installing Shared-Ubuntu.sh"  >>$INSTOOLS_LOG 2>&1;
-        ./Shared-fed.sh >>$INSTOOLS_LOG 2>&1;
+        echo "	 Installing shared-ubuntu.sh"  >>$INSTOOLS_LOG 2>&1;
+        ./shared-ubuntu.sh >>$INSTOOLS_LOG 2>&1;
         echo "   Installing LAMP certificate" >>$INSTOOLS_LOG 2>&1;
         install -o root -g perfsonar -m 440 /var/emulab/boot/lampcert.pem /usr/local/etc/protogeni/ssl/
         echo "   Running bootstrap" >>$INSTOOLS_LOG 2>&1;
         /usr/local/etc/lamp/bootstrap.sh ${SLICEURN} ${USERURN} ${GNHOST} ${AUTH_UUID} ${UNIS_ID} >> $INSTOOLS_LOG 2>&1;
-        echo "   Installing apache2-Ubuntu.sh"  >>$INSTOOLS_LOG 2>&1;
+	echo "   Installing nl_wrapper.sh"  >>$INSTOOLS_LOG 2>&1;
+        ./nl_wrapper.sh >>$INSTOOLS_LOG 2>&1;
+        echo "   Installing apache2-ubuntu.sh"  >>$INSTOOLS_LOG 2>&1;
 	adduser nobody 
 	groupadd perfsonar
 	usermod -aG perfsonar nobody
-	#rm -rf /etc/apache2/sites-enabled/ssl
-        ./apache2-Ubuntu.sh >>$INSTOOLS_LOG 2>&1;
-        echo "   Installing perfSONAR_PS-ServiceWatcher-Ubuntu.sh"  >>$INSTOOLS_LOG 2>&1;
-        ./perfSONAR_PS-ServiceWatcher-fed.sh >>$INSTOOLS_LOG 2>&1;
-        echo "   Installing perfSONAR_PS-Toolkit-Ubuntu.sh"  >>$INSTOOLS_LOG 2>&1;
-        ./perfSONAR_PS-Toolkit-fed.sh >>$INSTOOLS_LOG 2>&1;
+        ./apache2-ubuntu.sh >>$INSTOOLS_LOG 2>&1;
+        echo "   Installing perfSONAR_PS-Toolkit-ubuntu.sh"  >>$INSTOOLS_LOG 2>&1;
+        ./perfSONAR_PS-Toolkit-ubuntu.sh >>$INSTOOLS_LOG 2>&1;
 	echo "   Installng Measurement Store" >> $INSTOOLS_LOG 2>&1;
-	./peri-tornado-ms-Ubuntu.sh >>$INSTOOLS_LOG 2>&1;
+	./peri-ms-ubuntu.sh >>$INSTOOLS_LOG 2>&1;
 	echo "smallfiles = true" >> /etc/mongod.conf;
 	echo "nojournal = true" >> /etc/mongod.conf;
 	echo "   Starting Mongo DB" >>$INSTOOLS_LOG 2>&1;
@@ -102,6 +95,5 @@ fi
 	nohup periscoped &> /tmp/peri.log &
 	disown
 	cd
-
 	# Cleanup Temp Directories and report status as ready
 	rm -rf $TEMP_BASE

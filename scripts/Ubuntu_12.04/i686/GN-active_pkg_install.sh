@@ -24,6 +24,7 @@
 
 # Variable Definations
 source /usr/testbed/bin/measure-scripts/INSTALL_DEFS.sh
+export PATH=$PATH:/usr/sbin
 
 TOUCH_BINARY="touch"
 $TOUCH_BINARY $INSTOOLS_LOG;
@@ -33,7 +34,10 @@ chmod 776 $INSTOOLS_LOG;
 	TEMP_BASE=/tmp/GN-SETUP
 	SLICEURN=$1
 	USERURN=$2
-	
+	GNHOST=$3	
+	AUTH_UUID=$4
+	UNIS_ID=$5
+
 	#$WGET_BINARY -q -P $TEMP_BASE $DOWNLOAD_PATH/$TARBALL_DIR/shadownet_public_key.tgz >>$INSTOOLS_LOG 2>&1;
 	#BINARY PATHS
 	TARBALL_DIR="tarballs"
@@ -51,32 +55,45 @@ chmod 776 $INSTOOLS_LOG;
 	TAR_BINARY="tar"
 	MAKE_BINARY="make"
 	CAT_BINARY="cat"
-	GEMINI_ACTIVE_PKG="gemini-active-gn-ubuntu10-20120625.tar.gz"
-	GEMINI_ACTIVE_URL="https://github.com/downloads/GENI-GEMINI/GEMINI/"$GEMINI_ACTIVE_PKG
+	GEMINI_ACTIVE_PKG="gemini-active-gn-ubuntu-20140225.tar.gz"
+	GEMINI_ACTIVE_URL="$DOWNLOAD_PATH/$TARBALL_DIR/$GEMINI_ACTIVE_PKG"
 
 	# Temp Directories and Log file creations
 	$MKDIR_BINARY $TEMP_BASE
-
 
 	cd $TEMP_BASE
 	echo "Installing GN software" >>$INSTOOLS_LOG 2>&1;
         $WGET_BINARY -q -P $TEMP_BASE $GEMINI_ACTIVE_URL >>$INSTOOLS_LOG 2>&1;
         $TAR_BINARY -zxf $GEMINI_ACTIVE_PKG >>$INSTOOLS_LOG 2>&1;
-        echo "	 Installing Shared-Ubuntu.sh"  >>$INSTOOLS_LOG 2>&1;
-        ./Shared-Ubuntu.sh >>$INSTOOLS_LOG 2>&1;
+        echo "	 Installing shared-ubuntu.sh"  >>$INSTOOLS_LOG 2>&1;
+        ./shared-ubuntu.sh >>$INSTOOLS_LOG 2>&1;
         echo "   Installing LAMP certificate" >>$INSTOOLS_LOG 2>&1;
         install -o root -g perfsonar -m 440 /var/emulab/boot/lampcert.pem /usr/local/etc/protogeni/ssl/
         echo "   Running bootstrap" >>$INSTOOLS_LOG 2>&1;
-        /usr/local/etc/lamp/bootstrap.sh ${SLICEURN} ${USERURN} >>$INSTOOLS_LOG 2>&1;
-        echo "   Installing apache2-Ubuntu.sh"  >>$INSTOOLS_LOG 2>&1;
-	adduser nobody perfsonar
-	rm -rf /etc/apache2/sites-enabled/ssl
-        ./apache2-Ubuntu.sh >>$INSTOOLS_LOG 2>&1;
-        echo "   Installing perfSONAR_PS-ServiceWatcher-Ubuntu.sh"  >>$INSTOOLS_LOG 2>&1;
-        ./perfSONAR_PS-ServiceWatcher-Ubuntu.sh >>$INSTOOLS_LOG 2>&1;
-        echo "   Installing perfSONAR_PS-Toolkit-Ubuntu.sh"  >>$INSTOOLS_LOG 2>&1;
-        ./perfSONAR_PS-Toolkit-Ubuntu.sh >>$INSTOOLS_LOG 2>&1;
+        /usr/local/etc/lamp/bootstrap.sh ${SLICEURN} ${USERURN} ${GNHOST} ${AUTH_UUID} ${UNIS_ID} >> $INSTOOLS_LOG 2>&1;
+	echo "   Installing nl_wrapper.sh"  >>$INSTOOLS_LOG 2>&1;
+        ./nl_wrapper.sh >>$INSTOOLS_LOG 2>&1;
+        echo "   Installing apache2-ubuntu.sh"  >>$INSTOOLS_LOG 2>&1;
+	adduser nobody 
+	groupadd perfsonar
+	usermod -aG perfsonar nobody
+        ./apache2-ubuntu.sh >>$INSTOOLS_LOG 2>&1;
+        echo "   Installing perfSONAR_PS-Toolkit-ubuntu.sh"  >>$INSTOOLS_LOG 2>&1;
+        ./perfSONAR_PS-Toolkit-ubuntu.sh >>$INSTOOLS_LOG 2>&1;
+	echo "   Installng Measurement Store" >> $INSTOOLS_LOG 2>&1;
+	./peri-ms-ubuntu.sh >>$INSTOOLS_LOG 2>&1;
+	echo "smallfiles = true" >> /etc/mongod.conf;
+	echo "nojournal = true" >> /etc/mongod.conf;
+	echo "   Starting Mongo DB" >>$INSTOOLS_LOG 2>&1;
+	/etc/init.d/mongod start >>$INSTOOLS_LOG 2>&1;
+        # TODO: start this from a service checker
+	echo "   Starting the Measurement Store" >>$INSTOOLS_LOG 2>&1;
+	# wait to make sure mongod is running first
+	sleep 5
+	cd /tmp
+	export OPENSSL_ALLOW_PROXY_CERTS=1
+	nohup periscoped &> /tmp/peri.log &
+	disown
 	cd
-
 	# Cleanup Temp Directories and report status as ready
 	rm -rf $TEMP_BASE
