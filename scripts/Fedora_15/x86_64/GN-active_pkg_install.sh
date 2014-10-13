@@ -54,7 +54,7 @@ chmod 776 $INSTOOLS_LOG;
 	TAR_BINARY="tar"
 	MAKE_BINARY="make"
 	CAT_BINARY="cat"
-	GEMINI_ACTIVE_PKG="gemini-active-gn-fedora15-20140225.tar.gz"
+	GEMINI_ACTIVE_PKG="gemini-active-gn-fedora15-20141013.tar.gz"
 	GEMINI_ACTIVE_URL="$DOWNLOAD_PATH/$TARBALL_DIR/$GEMINI_ACTIVE_PKG"
 
 	# Temp Directories and Log file creations
@@ -92,6 +92,8 @@ fi
 	echo "nojournal = true" >> /etc/mongod.conf;
 	echo "   Starting Mongo DB" >>$INSTOOLS_LOG 2>&1;
 	/etc/init.d/mongod start >>$INSTOOLS_LOG 2>&1;
+        echo "   Starting Redis" >>$INSTOOLS_LOG 2>&1;
+        /etc/init.d/redis start >>$INSTOOLS_LOG 2>&1;
         # TODO: start this from a service checker
 	echo "   Starting the Measurement Store" >>$INSTOOLS_LOG 2>&1;
 	# wait to make sure mongod is running first
