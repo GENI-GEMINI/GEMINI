@@ -77,15 +77,15 @@ fi
         install -o root -g perfsonar -m 440 /var/emulab/boot/lampcert.pem /usr/local/etc/protogeni/ssl/
         echo "   Running bootstrap" >>$INSTOOLS_LOG 2>&1;
         /usr/local/etc/lamp/bootstrap.sh ${SLICEURN} ${USERURN} ${GNHOST} ${AUTH_UUID} >> $INSTOOLS_LOG 2>&1;
-        echo "   Installing apache2-fedora.sh"  >>$INSTOOLS_LOG 2>&1;
-	adduser nobody 
-	groupadd perfsonar
-	usermod -aG perfsonar nobody
-	rm -rf /etc/apache2/sites-enabled/ssl
+        #echo "   Installing apache2-fedora.sh"  >>$INSTOOLS_LOG 2>&1;
+	#adduser nobody 
+	#groupadd perfsonar
+	#usermod -aG perfsonar nobody
+	#rm -rf /etc/apache2/sites-enabled/ssl
         #./apache2-fedora.sh >>$INSTOOLS_LOG 2>&1;
         #echo "   Installing perfSONAR_PS-Toolkit-fedora.sh"  >>$INSTOOLS_LOG 2>&1;
         #./perfSONAR_PS-Toolkit-fedora.sh >>$INSTOOLS_LOG 2>&1;
-	#echo "   Installng Measurement Store" >> $INSTOOLS_LOG 2>&1;
+	echo "   Installng Measurement Store" >> $INSTOOLS_LOG 2>&1;
 	./peri-tornado-fedora.sh >>$INSTOOLS_LOG 2>&1;
 	echo "   Installing NL_WRAPPER" >> $INSTOOLS_LOG 2>&1;
 	./nl_wrapper.sh >> $INSTOOLS_LOG 2>&1;
