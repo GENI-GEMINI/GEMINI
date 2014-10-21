@@ -39,6 +39,7 @@ chmod 776 $INSTOOLS_LOG;
 	
 	#$WGET_BINARY -q -P $TEMP_BASE $DOWNLOAD_PATH/$TARBALL_DIR/shadownet_public_key.tgz >>$INSTOOLS_LOG 2>&1;
 	#BINARY PATHS
+	RPM_DIR="public/rpms"
 	TARBALL_DIR="tarballs"
 	PUBLIC_TGZ_DIR="public/tgz"
 	SCRIPTS_DIR="scripts"
@@ -81,10 +82,10 @@ fi
 	groupadd perfsonar
 	usermod -aG perfsonar nobody
 	rm -rf /etc/apache2/sites-enabled/ssl
-        ./apache2-fedora.sh >>$INSTOOLS_LOG 2>&1;
-        echo "   Installing perfSONAR_PS-Toolkit-fedora.sh"  >>$INSTOOLS_LOG 2>&1;
-        ./perfSONAR_PS-Toolkit-fedora.sh >>$INSTOOLS_LOG 2>&1;
-	echo "   Installng Measurement Store" >> $INSTOOLS_LOG 2>&1;
+        #./apache2-fedora.sh >>$INSTOOLS_LOG 2>&1;
+        #echo "   Installing perfSONAR_PS-Toolkit-fedora.sh"  >>$INSTOOLS_LOG 2>&1;
+        #./perfSONAR_PS-Toolkit-fedora.sh >>$INSTOOLS_LOG 2>&1;
+	#echo "   Installng Measurement Store" >> $INSTOOLS_LOG 2>&1;
 	./peri-tornado-fedora.sh >>$INSTOOLS_LOG 2>&1;
 	echo "   Installing NL_WRAPPER" >> $INSTOOLS_LOG 2>&1;
 	./nl_wrapper.sh >> $INSTOOLS_LOG 2>&1;
@@ -114,5 +115,20 @@ fi
 	cd
         echo "   end of blipp_logger" >>$INSTOOLS_LOG 2>&1;
 
+	echo " Setting up webGUI" >>$INSTOOLS_LOG 2>&1;
+	$WGET_BINARY -q -P $TEMP_BASE $DOWNLOAD_PATH/$RPM_DIR/nodejs-0.10.32-1.fc15.x86_64.rpm >>$INSTOOLS_LOG 2>&1;
+	$WGET_BINARY -q -P $TEMP_BASE $DOWNLOAD_PATH/$RPM_DIR/nodejs-binary-0.10.32-1.fc15.x86_64.rpm >>$INSTOOLS_LOG 2>&1;
+	$WGET_BINARY -q -P $TEMP_BASE $DOWNLOAD_PATH/$RPM_DIR/nodejs-npm-0.10.32-1.fc15.x86_64.rpm >>$INSTOOLS_LOG 2>&1;
+	$WGET_BINARY -q -P $TEMP_BASE $DOWNLOAD_PATH/$TARBALL_DIR/peri-js-fedora15.tar.gz >>$INSTOOLS_LOG 2>&1;
+	cd $TEMP_BASE
+	rpm -ivh nodejs*.rpm >>$INSTOOLS_LOG 2>&1;
+	$TAR_BINARY -zxf peri-js-fedora15.tar.gz -C /usr/local
+	cd /usr/local/peri-js
+	npm install -g bower
+	npm install -g forever
+	bower install --allow-root
+	forever start server.js
+	echo " End of webGUI setup" >>$INSTOOLS_LOG 2>&1;
+	cd
 	# Cleanup Temp Directories and report status as ready
 	rm -rf $TEMP_BASE
