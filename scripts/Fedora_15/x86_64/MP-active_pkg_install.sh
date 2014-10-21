@@ -80,7 +80,7 @@ chmod 776 $INSTOOLS_LOG;
 	#echo "$GNIP server" >> /etc/hosts;
 	blippd -c /usr/local/etc/blipp_default.json -n `hostname` > /dev/null 2>&1 &
         echo "   Starting iperf listener" >>$INSTOOLS_LOG 2>&1;
-        iperf -s > /dev/null 2>&1 &
+        iperf -p 6002 -s > /dev/null 2>&1 &
 	cd
 
 	# Cleanup Temp Directories and report status as ready
