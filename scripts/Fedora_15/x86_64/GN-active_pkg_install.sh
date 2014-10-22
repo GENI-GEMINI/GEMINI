@@ -124,10 +124,11 @@ fi
 	rpm -ivh nodejs*.rpm >>$INSTOOLS_LOG 2>&1;
 	$TAR_BINARY -zxf peri-js-fedora15.tar.gz -C /usr/local
 	cd /usr/local/peri-js
+	npm install
 	npm install -g bower
 	npm install -g forever
-	bower install --allow-root
-	forever start server.js
+	bower install --allow-root --config.interactive=false
+	sudo forever start server.js
 	echo " End of webGUI setup" >>$INSTOOLS_LOG 2>&1;
 	cd
 	# Cleanup Temp Directories and report status as ready
